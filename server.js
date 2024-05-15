@@ -15,4 +15,4 @@ app.get('/', function(req, res) {
 // Port
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
-});
+}); 
