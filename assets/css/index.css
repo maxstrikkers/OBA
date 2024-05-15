@@ -1,0 +1,157 @@
+@font-face {
+    font-family: 'Avenir Light';
+    src: local('Avenir Light');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Avenir Light', sans-serif;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.zoekContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+#zoekInput {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+}
+
+#zoekFormulier button,
+.filterKnoppen button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+}
+
+.filterKnoppen {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filterKnop {
+    background-color: white;
+}
+
+.filterKnop:not(.aktief):hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.filterKnop.aktief:hover {
+    background-color: white;
+    color: #4CAF50;
+}
+
+.filterKnop.aktief {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.filterKnop:not(.aktief) {
+    background-color: white;
+    color: #4CAF50;
+}
+
+#resultaten {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end; /* Uitlijnen aan de onderkant */
+}
+
+.resultatenRij {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end; /* Uitlijnen aan de onderkant */
+    justify-content: start;
+}
+
+.resultatenContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.resultaat {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.resultaat img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.resultaat a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.resultaat a:hover {
+    text-decoration: underline;
+}
+
+#direct,
+#vector,
+#hybride {
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid black !important; /* Randkleur */
+    color: black; /* Tekstkleur */
+    background-color: white; /* Achtergrondkleur */
+}
+
+#direct:not(.aktief),
+#vector:not(.aktief),
+#hybride:not(.aktief) {
+    color: black; /* Tekstkleur bij inactief */
+}
+
+#direct:hover,
+#vector:hover,
+#hybride:hover {
+    background-color: black; /* Achtergrondkleur bij hover */
+    color: white; /* Tekstkleur bij hover */
+}
+
+.zoekOptie.aktief {
+    background-color: black !important; /* Achtergrondkleur bij actief */
+    color: white !important; /* Tekstkleur bij actief */
+    border: 2px solid black !important; /* Randkleur bij actief */
+}
+
+#zoekOpties {
+    display: flex;
+    gap: 10px;
+    align-items: center; /* Centreren op de verticale as */
+}
+
+#zoekOpties button {
+    margin: 0; /* Verwijder verticale marges */
+}

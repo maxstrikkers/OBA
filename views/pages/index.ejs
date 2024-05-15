@@ -2,6 +2,34 @@
 <html lang="nl">
     <%- include('../partials/head'); %>
     <body>
-        <h1>hellow rold</h1>
+        <div class="zoekContainer">
+            <form id="zoekFormulier">
+                <label for="zoekInput">Waar wil je meer over weten?</label>
+                <input type="text" id="zoekInput" placeholder="Hoe bouw ik een robot?">
+                <button type="submit">Zoek het op!</button>
+                <button id="direct" class="zoekOptie aktief">Direct</button>
+                <button id="vector" class="zoekOptie">Vector/Semantisch</button>
+                <button id="hybride" class="zoekOptie">Hybride</button>
+            </form>
+            <div class="filterKnoppen">
+                <button class="filterKnop aktief" data-filter="alles">Alles</button>
+                <button class="filterKnop" data-filter="prentenboeken_baby">Prentenboeken Baby</button>
+                <button class="filterKnop" data-filter="prentenboeken_tot4">Prentenboeken 4-</button>
+                <button class="filterKnop" data-filter="prentenboeken_vanaf4">Prentenboeken 4+</button>
+                <button class="filterKnop" data-filter="leren_lezen">Leren Lezen</button>
+                <button class="filterKnop" data-filter="fictie_A_tot9">A</button>
+                <button class="filterKnop" data-filter="fictie_B_9tot12">B</button>
+                <button class="filterKnop" data-filter="fictie_C_12enouder">C</button>
+                <button class="filterKnop" data-filter="fictie_D_15enouder">D</button>
+                <button class="filterKnop" data-filter="fictie_volwassenen">Fictie Volwassenen</button>
+                <button class="filterKnop" data-filter="informatie_tot9">Info 9-</button>
+                <button class="filterKnop" data-filter="informatie_vanaf9">Info 9+</button>
+                <button class="filterKnop" data-filter="informatie_volwassenen">Info Volwassenen</button>
+            </div>
+        </div>
+        <h2 id="filterNaam"></h2>
+        <div id="resultaten"></div>
+    
+        <script src="../../assets/js/search.js"></script>
     </body>
 </html>
