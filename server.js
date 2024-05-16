@@ -9,7 +9,7 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get('/', function(req, res) {
-  res.render('pages/index');
+  res.render('pages/index', {pageName: 'index'});
 });
 
 // Port
