@@ -1,0 +1,25 @@
+header{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background-image: var(--linear-background);
+    padding: 0.5rem;
+}
+
+.openchatButton{
+    grid-column: 1;
+    justify-self: start;
+    margin: 0 1rem;
+}
+
+.obaLogo{
+    grid-column: 2;
+    height: 5rem;
+}
+
+.robotMetHanden{
+    grid-column: 3;
+    justify-self: end;
+    margin: 0 1rem -18px 1rem;
+}
