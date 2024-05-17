@@ -1,8 +1,10 @@
 :root{
     --primary-red: #E61C24;
+    --secondary-red: #D4B6B6;
     --primary-dark-gray: #D9D9D9;
     --primary-light-gray: #F2F2F2;
+    --primary-green: #4BAA32;
     --white: #fff;
-    --linear-background: linear-gradient(to left, #D4B6B6 0%, #FCEDED 100%);
+    --linear-background: linear-gradient(to left, var(--secondary-red) 0%, #FCEDED 100%);
 }
 

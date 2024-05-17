@@ -1,3 +1,14 @@
-h1{
-    color: orange;
+.chatbotWrapper{
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 60vh;
+    background-image: var(--linear-background);
+    padding: 2rem;
+}
+
+.fullscreenButton{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
 }
