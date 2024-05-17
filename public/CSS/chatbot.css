@@ -6,7 +6,7 @@
     padding: 1rem;
     border-radius: 1rem 1rem 0 0;
     background-color: var(--primary-red);
-    h2, p{
+    h3, p{
         font-weight: normal;
         color: var(--white);
     }

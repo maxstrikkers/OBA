@@ -12,3 +12,16 @@
     bottom: 1rem;
     right: 1rem;
 }
+
+.resultatenWrapper{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
+    h2{
+        grid-area: 1 / 1 / 2 / 2;
+    }
+
+    button{
+        grid-area: 1 / 2 / 2 / 3;
+    }
+}

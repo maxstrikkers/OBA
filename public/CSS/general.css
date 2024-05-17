@@ -2,6 +2,8 @@
 @import url(./chatbot.css);
 @import url(./header.css);
 @import url(./index.css);
+@import url(./resultaten.css);
+@import url(./filter.css);
 
 *{
     padding: 0;
