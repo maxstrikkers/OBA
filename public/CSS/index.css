@@ -5,14 +5,30 @@
     height: 60vh;
     background-image: var(--linear-background);
     padding: 2rem;
+    height: max-content;
+    img{
+        justify-self: center;
+        transition: transform 0.2s ease-in-out;
+    }
+    label{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        height: 3.5rem;
+        width: 3.5rem;
+        bottom: 1rem;
+        right: 1rem;
+        border-radius: 0.5rem;
+        background-color: var(--primary-red);
+    }
+    input[type='checkbox']{
+        appearance: none;
+    }
+    label:has(input[type='checkbox']:checked) img{
+        transform: rotate(180deg);
+    }
 }
-
-.fullscreenButton{
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-}
-
 .resultatenWrapper{
     display: grid;
     grid-template-columns: 3fr 1fr;
