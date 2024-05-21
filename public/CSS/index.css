@@ -1,16 +1,16 @@
 .chatbotWrapper{
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 60vh;
+    display: flex;
+    justify-content: space-around;
+    height: calc(100vh - 96px);
     background-image: var(--linear-background);
-    padding: 2rem;
-    height: max-content;
-    img{
-        justify-self: center;
+    padding: 3rem;
+    .robotImg {
+        height: 30rem;
+        align-self: flex-end;
         transition: transform 0.2s ease-in-out;
     }
-    label{
+    .fullScreenButtonLabel{
         display: flex;
         justify-content: center;
         align-items: center;

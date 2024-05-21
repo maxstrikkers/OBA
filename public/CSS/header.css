@@ -1,10 +1,14 @@
 .mainHeader{
+    position: sticky;
+    top: 0px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-items: center;
     background-image: var(--linear-background);
     padding: 0.5rem;
+    z-index: 5;
+    box-shadow: 2px 2px 200px 2px #FCEDED;
 }
 .openchatButton{
     grid-column: 1;

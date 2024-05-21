@@ -1,9 +1,11 @@
 .chatHeader{
+    height: 5rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
     padding: 1rem;
+    z-index: 1;
     border-radius: 1rem 1rem 0 0;
     background-color: var(--primary-red);
     h3, p{
@@ -19,7 +21,6 @@
     gap: 1.5rem;
     align-items: center;
     position: relative;
-
     p::before{
         content: '';
         background-color: var(--primary-green);
@@ -52,4 +53,96 @@
     color: var(--white);
     width: max-content;
     background-color: transparent;
+    cursor: pointer;
 }
+
+.chatbotMain {
+    height: calc(100% - 8.5rem);
+    overflow-y: scroll;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: var(--primary-light-gray);
+    padding: 2rem 0.5rem 2rem 0.5rem;
+    /* width */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: var(--white);
+  }
+  
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-red);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+  }
+
+}
+
+.bubble {
+    --r: 1em;  /* the radius */
+    --t: 1em; /* the size of the tail */
+    
+    max-width: 300px;
+    padding: 1em;
+    margin: 0.5rem;
+    border-inline: var(--t) solid #0000;
+    border-radius: calc(var(--r) + var(--t))/var(--r);
+    mask: 
+      radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
+        var(--_p) 100%/var(--t) var(--t) no-repeat,
+      linear-gradient(#000 0 0) padding-box;
+  }
+
+  .left {
+    --_p: 0;
+    border-bottom-left-radius: 0 0;
+    place-self: start;
+    background-color: var(--primary-red);
+    color: var(--white);
+  }
+
+  .right {
+    --_p: 100%;
+    border-bottom-right-radius: 0 0;
+    place-self: end;
+    background-color: var(--white);
+    color: var(--black);
+  }
+  .chat {
+    height: 100%;
+    width: 40%;
+    position: relative;
+    align-self: start;
+    justify-self: center;
+  }
+
+  form {
+    width: 100%;
+    height: 3.5rem;
+    display: flex;
+    button {
+        background-color: var(--primary-red);
+        border: none;
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 0 10px 10px 0;
+    }
+
+    input[type='text'] {
+        width: 100%;
+        border: none;
+        padding-left: 1rem;
+        font-size: 1.5rem;
+        border-radius: 10px 0 0 10px;
+    }
+  }
