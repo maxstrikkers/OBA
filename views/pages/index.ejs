@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="nl">
-    <%- include('../partials/head'); %>
+    <%- include('../components/head'); %>
     <body>
-        <%- include('../partials/header'); %>
+        <%- include('../components/header'); %>
         <section class="chatbotWrapper">
-            <%- include('../partials/chatbot'); %>
+            <%- include('../components/chatbot'); %>
             <img class="robotImg" src="./img/robotFullSize.svg">
             <label for="fullScreenCheckbox" class="fullScreenButtonLabel">
                 <img src="./img/chevron.svg" alt="Image description">
@@ -17,8 +17,8 @@
         <section class="resultatenWrapper">
             <h2>Resultaten</h2>
             <button class="hidden">filter</button>
-            <%- include('../partials/resultaten'); %>
-            <%- include('../partials/filter'); %>
+            <%- include('../components/resultaten'); %>
+            <%- include('../components/filter'); %>
         </section>
         <script src="./JS/chatbot.js"></script>
         <script src="./JS/resultaten.js"></script>
