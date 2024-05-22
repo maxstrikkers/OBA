@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
-    <%- include('../components/head'); %>
+    <%- include('../partials/head'); %>
     <body>
         <%- include('../partials/header'); %>
         <section class="chatbot-wrapper">
@@ -17,10 +17,10 @@
         <section class="resultaten-wrapper">
             <h2>Resultaten</h2>
             <button class="hidden">filter</button>
-            <%- include('../components/resultaten'); %>
-            <%- include('../components/filter'); %>
+            <%- include('../partials/resultaten'); %>
+            <%- include('../partials/filter'); %>
         </section>
-        <script src="./JS/chatbot.js"></script>
-        <script src="./JS/resultaten.js"></script>
+        <script src="../JS/chatbot.js"></script>
+        <script src="../JS/resultaten.js"></script>
     </body>
 </html>
