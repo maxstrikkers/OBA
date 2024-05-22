@@ -5,7 +5,7 @@
 @import url(./resultaten.css);
 @import url(./filter.css);
 
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -32,12 +32,12 @@
     font-style: normal;
 }
 
-body{
+body {
     font-family: "Avenir";
     font-weight: normal;
 }
 
-.button{
+.button {
     font-family: "Avenir";
     font-weight: bold;
     font-size: 1rem;
@@ -52,15 +52,15 @@ body{
     border: none;
     color: var(--white);
     background-color: var(--primary-red);
-    box-shadow: 11px 12px 18px -8px rgba(0,0,0,0.40);
+    box-shadow: 11px 12px 18px -8px rgba(0, 0, 0, 0.40);
     transition: 0.3s;
     cursor: pointer;
-
-    &:hover{
-       scale: 1.05;
-     }
 }
 
-.hidden{
+.button:hover {
+    scale: 1.05;
+}
+
+.hidden {
     display: none !important;
 }

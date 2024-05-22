@@ -2,19 +2,19 @@
 <html lang="nl">
     <%- include('../components/head'); %>
     <body>
-        <%- include('../components/header'); %>
-        <section class="chatbotWrapper">
-            <%- include('../components/chatbot'); %>
-            <img class="robotImg" src="./img/robotFullSize.svg">
-            <label for="fullScreenCheckbox" class="fullScreenButtonLabel">
-                <img src="./img/chevron.svg" alt="Image description">
-                <input id="fullScreenCheckbox" type="checkbox">
+        <%- include('../partials/header'); %>
+        <section class="chatbot-wrapper">
+            <%- include('../partials/chatbot'); %>
+            <img class="robot-img" src="./img/robot-full-size.svg">
+            <label for="full-screen-checkbox" class="full-screen-button-label">
+                <img src="./img/chevron.svg" alt="open/close fullscreen">
+                <input id="full-screen-checkbox" type="checkbox">
             </label>
         </section>
         
         <!-- praten met de server -->
 
-        <section class="resultatenWrapper">
+        <section class="resultaten-wrapper">
             <h2>Resultaten</h2>
             <button class="hidden">filter</button>
             <%- include('../components/resultaten'); %>

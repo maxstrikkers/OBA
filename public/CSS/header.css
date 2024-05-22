@@ -1,4 +1,4 @@
-.mainHeader{
+.main-header {
     position: sticky;
     top: 0px;
     display: grid;
@@ -10,16 +10,19 @@
     z-index: 5;
     box-shadow: 2px 2px 200px 2px #FCEDED;
 }
-.openchatButton{
+
+.open-chat-button {
     grid-column: 1;
     justify-self: start;
     margin: 0 1rem;
 }
-.obaLogo{
+
+.oba-logo {
     grid-column: 2;
     height: 5rem;
 }
-.robotMetHanden{
+
+.robot-met-handen {
     grid-column: 3;
     justify-self: end;
     margin: 0 1rem -18px 1rem;

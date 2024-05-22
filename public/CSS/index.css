@@ -1,47 +1,51 @@
-.chatbotWrapper{
+.chatbot-wrapper {
     position: relative;
     display: flex;
     justify-content: space-around;
     height: calc(100vh - 96px);
     background-image: var(--linear-background);
     padding: 3rem;
-    .robotImg {
-        height: 30rem;
-        align-self: flex-end;
-        transition: transform 0.2s ease-in-out;
-    }
-    .fullScreenButtonLabel{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        height: 3.5rem;
-        width: 3.5rem;
-        bottom: 1rem;
-        right: 1rem;
-        border-radius: 0.5rem;
-        background-color: var(--primary-red);
-    }
-    input[type='checkbox']{
-        appearance: none;
-    }
-    label:has(input[type='checkbox']:checked) img{
-        transform: rotate(180deg);
-    }
 }
-.resultatenWrapper{
+
+.chatbot-wrapper .robot-img {
+    height: 30rem;
+    align-self: flex-end;
+    transition: transform 0.2s ease-in-out;
+}
+
+.chatbot-wrapper .full-screen-button-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 3.5rem;
+    width: 3.5rem;
+    bottom: 1rem;
+    right: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary-red);
+}
+
+.chatbot-wrapper input[type='checkbox'] {
+    appearance: none;
+}
+
+.chatbot-wrapper label:has(input[type='checkbox']:checked) img {
+    transform: rotate(180deg);
+}
+
+.resultaten-wrapper {
     display: grid;
     grid-template-columns: 3fr 1fr;
     padding: 3rem;
     gap: 1rem 3rem;
+}
 
-    h2{
-        grid-area: 1 / 1 / 2 / 2;
-        font-size: 42px;
-    }
+.resultaten-wrapper h2 {
+    grid-area: 1 / 1 / 2 / 2;
+    font-size: 42px;
+}
 
-    h4 {
-        font-size: 34px;
-    }
-
+.resultaten-wrapper h4 {
+    font-size: 34px;
 }

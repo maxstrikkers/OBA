@@ -1,9 +1,8 @@
+const shiftButton = document.querySelector("#shift-button");
+const sectionArticle = document.querySelector("#section-article");
 
-    const shiftButton = document.querySelector("#shiftButton");
-    const sectionArticle = document.querySelector("#sectionArticle");
-  
-    function scrollFunc() {
-        sectionArticle.scrollTo = 200;
-    }
-  
-    shiftButton.addEventListener("click", scrollFunc);
+function scrollFunc() {
+    sectionArticle.scrollTo({ top: 200, behavior: 'smooth' });
+}
+
+shiftButton.addEventListener("click", scrollFunc);
