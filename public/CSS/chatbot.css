@@ -88,11 +88,11 @@
 }
 
 .bubble {
-    --r: 1em;  /* the radius */
-    --t: 1em; /* the size of the tail */
+    --r: 1rem;  /* the radius */
+    --t: 1rem; /* the size of the tail */
     
     max-width: 300px;
-    padding: 1em;
+    padding: 1rem;
     margin: 0.5rem;
     border-inline: var(--t) solid #0000;
     border-radius: calc(var(--r) + var(--t))/var(--r);
