@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const buttonGrid = document.querySelector(".chat-button-grid");
     const buttons = buttonGrid.querySelectorAll("button");
     const chatbotMain = document.getElementById('chatbot-main');
+    console.log("js loaded")
 
     buttons.forEach(button => {
         button.addEventListener("click", function(event) {
