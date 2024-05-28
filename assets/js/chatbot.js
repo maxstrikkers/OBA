@@ -47,6 +47,7 @@
 //     });
 // });
 
+
 document.querySelectorAll('form.suggested-form, form.search-form').forEach(form => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -56,7 +57,6 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
         bubbles.forEach(bubble => {
             const isRight = bubble.classList.contains('right');
             const isLeft = bubble.classList.contains('left');
-            // Voeg de bubble data toe met de juiste class
             if (isRight || isLeft) {
                 bubbleData.push({
                     content: bubble.innerText,

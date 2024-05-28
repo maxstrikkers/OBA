@@ -61,6 +61,7 @@
 .chatbot-main {
     height: calc(100% - 14.5rem);
     overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     background-color: var(--primary-light-gray);
@@ -98,6 +99,10 @@
       radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
         var(--_p) 100%/var(--t) var(--t) no-repeat,
       linear-gradient(#000 0 0) padding-box;
+ 
+      p {
+        overflow-wrap: break-word;
+      }
 }
 
 .bubble.left {

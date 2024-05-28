@@ -11,6 +11,10 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 0.8rem;
+}
+
 @font-face {
     font-family: "Avenir", Arial, sans-serif;
     src: url("../fonts/AvenirLTStd-Bold.ttf") format("truetype");
