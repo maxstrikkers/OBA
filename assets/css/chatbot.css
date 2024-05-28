@@ -1,17 +1,11 @@
 .chat-header {
-    height: 5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+    display: flex;
     align-items: center;
-    padding: 1rem;
-    z-index: 1;
-    border-radius: 1rem 1rem 0 0;
-    background-color: var(--primary-red);
+    justify-content: space-between;
+    padding: 10px 15px;
 }
 
-.chat-header h3, 
-.chat-header p {
+.chat-header h3 {
     font-weight: normal;
     color: var(--white);
 }
@@ -25,7 +19,7 @@
     position: relative;
 }
 
-.profile-group p::before {
+.profile-group h3::before {
     content: '';
     background-color: var(--primary-green);
     width: 10px;
@@ -44,18 +38,24 @@
 }
 
 .new-chat-button {
+    font-family: "Avenir", Arial, sans-serif;
+    font-size: 14px;
     justify-self: end;
     grid-column: 3;
     display: flex;
+    gap: 5px;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     appearance: none;
     border: none;
     color: var(--white);
     width: max-content;
     background-color: transparent;
     cursor: pointer;
+
+    img {
+        height: 15px;
+    }
 }
 
 .chatbot-main {
@@ -126,47 +126,54 @@
 
 .suggested-form {
     display: flex;
+    gap: 20px;
+
+    button {
+        padding: 10px 20px;
+        background-color: var(--primary-light-gray);
+        border: none;
+        font-family: "Avenir", Arial, sans-serif;
+        font-size: 0.9rem;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+    }
 }
 
-.chat-button-grid {
-    padding: 0.5rem 1rem 1rem;
-    background-color: var(--primary-light-gray);
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-}
 
-.chat-button-grid button {
-    padding: 0.8rem 0;
-    background-color: var(--primary-light-gray);
-    border: none;
-    font-size: 1rem;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-}
 
 .search-form {
-    width: 100%;
-    height: 3.5rem;
+    position: relative;
     display: flex;
-    border-radius: 1rem;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    height: 100%;
 }
 
 .search-form button {
-    background-color: var(--primary-red);
+    position: absolute;
+    right: 0;
+    background-color: var(--white); 
+    transform: scale(1.1);
     border: none;
-    height: 3.5rem;
-    width: 3.5rem;
-    border-radius: 0 0 10px 0;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50px;
+    box-shadow: -1px 0px 4px rgba(0, 0, 0, 25%);
+
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 16px;
+    }
 }
 
 .search-form input[type='text'] {
+    font-family: "Avenir", Arial, sans-serif;
     width: 100%;
-    border: none;
-    padding-left: 1rem;
-    font-size: 1.5rem;
-    border-radius: 0 0 0 10px;
+    border: 1px solid var(--primary-dark-gray);
+    padding: 15px 20px;
+    margin: -5px 0px;
+    font-size: 1.13rem;
+    border-radius: 50px;
     outline: none;
 }

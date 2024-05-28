@@ -1,8 +1,33 @@
 <header class="main-header">
-    <button id="open-chat-button" class="hidden button open-chat-button">
-        <img src="./img/chat-icon.svg">
-        Open Chat
-    </button>
-    <img class="oba-logo" src="./img/oba-logo.svg">
-    <img class="hidden robot-met-handen" src="./img/robot-with-hands.svg">
+    <div>
+        <section class="chat-header">
+            <div class="profile-group">
+                <img class="chatbot-icon" src="./img/robot-profile-picture.svg">
+                <h3>B1EB-BOT</h3>
+            </div>
+            <button class="new-chat-button">
+                <img class="new-chat-button-icon" src="./img/new-chat-icon.svg">
+                Nieuwe Chat
+            </button>
+        </section>
+
+        <form class="search-form" method="post" action="/search">
+            <input type="text" name="query" placeholder="Ik zoek..." required>
+            <label>
+                <button type="submit">
+                    <img src="./img/send-icon.svg" alt="Submit Icon">
+                </button>
+            </label>
+        </form>
+        <button class="filter-button"><img src="./img/filter-icon.svg"> Filter / Sorteren</button>
+    </div>
+    <div>
+        <form class="suggested-form" method="post" action="/search">
+            <button type="submit" name="category" value="Boeken">Boeken</button>
+            <button type="submit" name="category" value="Films">Films</button>
+            <button type="submit" name="category" value="Activiteiten">Activiteiten</button>
+            <button type="submit" name="category" value="CD's">CD's</button>
+        </form>
+    </div>
 </header>
+
