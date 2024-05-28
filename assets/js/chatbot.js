@@ -64,6 +64,7 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const data = {};
+        console.log(form)
 
         if (form.classList.contains('suggested-form')) {
             const formData = event.submitter.value;
