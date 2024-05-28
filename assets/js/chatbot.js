@@ -85,7 +85,22 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
         .then(response => response.text())
         .then(html => {
             document.getElementById('chatbot-main').innerHTML = html;
+            scrollToBottom('chatbot-main')
         })
         .catch(error => console.error('Error:', error));
     });
 });
+
+
+function scrollToBottom(elementId) {
+    var element = document.getElementById(elementId);
+    if (!element) return;
+
+    var scrollTo = element.scrollHeight - element.clientHeight;
+
+    // Smooth scroll
+    element.scrollTo({
+        top: scrollTo,
+        behavior: 'smooth'
+    });
+}
