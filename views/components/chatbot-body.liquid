@@ -1,0 +1,5 @@
+<div class="bubble left"><p>Welkom. Ik ben de B1EB-BOT en ik ben hier om je te begeleiden. Begin door hieronder je zoekopdracht in te typen.</p></div>
+<div class="bubble left"><p>Tip: Je kunt ook hieronder een knop aanklikken!</p></div>
+{% for message in messages %}
+    <div class="bubble right"><p>{{ message }}</p></div>
+    {% endfor %}
