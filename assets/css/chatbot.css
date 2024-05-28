@@ -175,3 +175,6 @@
     border-radius: 0 0 0 10px;
     outline: none;
 }
+input:disabled {
+    background-color :var(--disabled-gray);
+}

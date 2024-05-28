@@ -3,7 +3,8 @@
 function showTypingBubble() {
     const typingBubble = document.createElement('div');
     typingBubble.className = 'bubble typing';
-
+    const searchBar = document.getElementById('search-bar');
+    searchBar.disabled = true;
     // Voeg de SVG rechtstreeks toe aan de typingBubble
     typingBubble.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -23,6 +24,7 @@ function showTypingBubble() {
 
     setTimeout(() => {
         typingBubble.remove();
+        searchBar.disabled = false;
     }, 2000);
 
     return typingBubble;
@@ -52,7 +54,6 @@ function showWelcomeMessage() {
     });
 }
 
-
 // Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
 document.addEventListener("DOMContentLoaded", function() {
     showWelcomeMessage()
@@ -62,7 +63,19 @@ document.addEventListener("DOMContentLoaded", function() {
 document.querySelectorAll('form.suggested-form, form.search-form').forEach(form => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
+        const data = {};
 
+        if (form.classList.contains('suggested-form')) {
+            const formData = event.submitter.value;
+            data['query'] = formData;
+            form.classList.add('hidden');
+        } else if (form.classList.contains('search-form')) {
+            const formData = new FormData(this);
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            document.getElementById('search-bar').value = ''
+        }
         const bubbles = document.querySelectorAll('.bubble');
         let bubbleData = [];
         bubbles.forEach(bubble => {
@@ -75,14 +88,7 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
                 });
             }
         });
-
-        const formData = new FormData(this);
         const url = this.action;
-
-        const data = {};
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
 
         data.bubbles = bubbleData;
 
@@ -101,6 +107,7 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
         .catch(error => console.error('Error:', error));
     });
 });
+
 
 
 function scrollToBottom(elementId) {
