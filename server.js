@@ -31,16 +31,18 @@ app.get('/', function(req, res) {
 
 // Search route
 app.post('/search', function(req, res) {  
-  console.log(res)
-  let clientMesssages = req.body
-  console.log(clientMesssages)
-  let messages = []
-
+  let conversation = req.body.bubbles
+  const message = {
+    content: req.body.query,
+    class: 'right'
+  }
   
+  conversation.push(message)
 
-  messages.push(req.body.query)
+  console.log(conversation)
 
-  res.render('components/chatbot-body', { messages: messages });
+
+  res.render('components/chatbot-body', { messages: conversation });
 });
 
 // Start server

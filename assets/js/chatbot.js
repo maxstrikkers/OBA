@@ -1,51 +1,62 @@
-// function addChatBubble(text, side) {
-//     const chat = document.getElementById('chatbot-main');
-//     const newBubble = document.createElement("div");
-//     newBubble.className = `bubble ${side}`;
-//     newBubble.innerHTML = text;
-//     chat.appendChild(newBubble);
-// }
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     const buttonGrid = document.querySelector(".chat-button-grid");
-//     const buttons = buttonGrid.querySelectorAll("button");
-//     const chatbotMain = document.getElementById('chatbot-main');
-//     console.log("js loaded")
+// Functie om er voor te zorgen dat er een aan het typen indicatie verschijnt.
+function showTypingBubble() {
+    const typingBubble = document.createElement('div');
+    typingBubble.className = 'bubble typing';
 
-//     buttons.forEach(button => {
-//         button.addEventListener("click", function(event) {
-//             const buttonGridHeight = buttonGrid.offsetHeight;
-//             document.querySelector(".chat-button-grid").classList.add('hidden');
-            
-//             // Add the height of the buttonGrid to chatbotMain
-//             chatbotMain.style.height = (chatbotMain.offsetHeight + buttonGridHeight) + 'px';
+    // Voeg de SVG rechtstreeks toe aan de typingBubble
+    typingBubble.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+            <circle cx="4" cy="12" r="3" fill="currentColor">
+                <animate id="svgSpinners3DotsBounce0" attributeName="cy" begin="0;svgSpinners3DotsBounce1.end+0.25s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
+            </circle>
+            <circle cx="12" cy="12" r="3" fill="currentColor">
+                <animate attributeName="cy" begin="svgSpinners3DotsBounce0.begin+0.1s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
+            </circle>
+            <circle cx="20" cy="12" r="3" fill="currentColor">
+                <animate id="svgSpinners3DotsBounce1" attributeName="cy" begin="svgSpinners3DotsBounce0.begin+0.2s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
+            </circle>
+        </svg>
+    `;
 
-//             console.log(button.value);
-//             addChatBubble(button.value, "right");
-            
-//         });
-//     });
+    document.getElementById('chatbot-main').appendChild(typingBubble);
 
-//     const searchForm = document.querySelector(".search-form");
-//     const searchInput = searchForm.querySelector("input");
+    setTimeout(() => {
+        typingBubble.remove();
+    }, 2000);
 
-//     searchForm.addEventListener("submit", function(event) {
-//         console.log(searchInput.value);
-//         addChatBubble(searchInput.value, "right");
-//         searchInput.value = "";
-//     });
+    return typingBubble;
+}
 
-//     searchInput.addEventListener("keydown", function(event) {
-//         if (event.key === "Enter") {
-//             event.preventDefault();
-//             if (searchInput.value) {
-//                 console.log(searchInput.value);
-//                 addChatBubble(searchInput.value, "right");
-//                 searchInput.value = "";
-//             }
-//         }
-//     });
-// });
+// Functie om de standaard berichten te genereren (Welkom bij... en Tip: je...)
+function createBubble(content, className) {
+    const bubble = document.createElement('div');
+    bubble.className = `bubble ${className}`;
+    bubble.textContent = content;
+    return bubble;
+}
+
+function showWelcomeMessage() {
+    let delay = 0;
+    const welcomeMessages = ['Welkom. Ik ben de B1EB-BOT en ik ben hier om je te begeleiden. Begin door hieronder je zoekopdracht in te typen.', 'Tip: Je kunt ook hieronder een knop aanklikken!' ]
+    
+    welcomeMessages.forEach(message => {
+        setTimeout(() => {
+            const typingBubble = showTypingBubble();
+            setTimeout(() => {
+                const bubble = createBubble(message, 'left');
+                document.getElementById('chatbot-main').appendChild(bubble);
+            }, 2000);
+        }, delay);
+        delay += 3000;
+    });
+}
+
+
+// Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
+document.addEventListener("DOMContentLoaded", function() {
+    showWelcomeMessage()
+});
 
 
 document.querySelectorAll('form.suggested-form, form.search-form').forEach(form => {
