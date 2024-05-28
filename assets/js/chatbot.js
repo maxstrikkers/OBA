@@ -1,10 +1,22 @@
+// Indicator om te kijken wanneer de chat gecleared is, zodat asynchrone functies stoppen wanneer de chat gecleared wordt
+let chatCleared = false;
+let timeouts = []; // Array om timeouts bij te houden
 
-// Functie om er voor te zorgen dat er een aan het typen indicatie verschijnt.
+// Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
+document.addEventListener("DOMContentLoaded", function() {
+    showWelcomeMessage();
+});
+
+// Functie om een typende indicatie te tonen
 function showTypingBubble() {
     const typingBubble = document.createElement('div');
     typingBubble.className = 'bubble typing';
-    const searchBar = document.getElementById('search-bar');
-    searchBar.disabled = true;
+    // Maakt de searchbar en de suggested knoppen disabled als de bot aan het typen is
+    document.getElementById('search-bar').disabled = true;
+    Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button =>{
+        button.disabled = true;
+    })
+    
     // Voeg de SVG rechtstreeks toe aan de typingBubble
     typingBubble.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -19,18 +31,29 @@ function showTypingBubble() {
             </circle>
         </svg>
     `;
+    
+    const chatbotMain = document.getElementById('chatbot-main');
+    chatbotMain.appendChild(typingBubble);
 
-    document.getElementById('chatbot-main').appendChild(typingBubble);
-
-    setTimeout(() => {
+    // Verwijder de typende indicatie na een bepaalde tijd en zet de buttons samen met search bar weer op enabled
+    const timeout = setTimeout(() => {
+        document.getElementById('search-bar').disabled = false;
+        Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button =>{
+            button.disabled = false;
+        })
+        if (chatCleared) {
+            chatCleared = false;
+            return;
+        }
         typingBubble.remove();
-        searchBar.disabled = false;
-    }, 2000);
+    }, 1500);
+    
+    timeouts.push(timeout); // Voeg de timeout toe aan de array
 
     return typingBubble;
 }
 
-// Functie om de standaard berichten te genereren (Welkom bij... en Tip: je...)
+// Functie om bubbles te genereren
 function createBubble(content, className) {
     const bubble = document.createElement('div');
     bubble.className = `bubble ${className}`;
@@ -38,45 +61,54 @@ function createBubble(content, className) {
     return bubble;
 }
 
+// Functie om welkomsberichten weer te geven
 function showWelcomeMessage() {
     let delay = 0;
-    const welcomeMessages = ['Welkom. Ik ben de B1EB-BOT en ik ben hier om je te begeleiden. Begin door hieronder je zoekopdracht in te typen.', 'Tip: Je kunt ook hieronder een knop aanklikken!' ]
-    
+    const welcomeMessages = [
+        'Welkom. Ik ben de B1EB-BOT en ik ben hier om je te begeleiden. Begin door boven in je zoekopdracht in te typen.',
+        'Tip: Je kunt ook boven in een knop aanklikken!'
+    ];
+
     welcomeMessages.forEach(message => {
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
+            if (chatCleared) {
+                chatCleared = false;
+                return;
+            }
             const typingBubble = showTypingBubble();
-            setTimeout(() => {
+            const innerTimeout = setTimeout(() => {
+                if (chatCleared) {
+                    chatCleared = false;
+                    return;
+                }
                 const bubble = createBubble(message, 'left');
                 document.getElementById('chatbot-main').appendChild(bubble);
-            }, 2000);
+            }, 1500);
+            timeouts.push(innerTimeout); // Voeg de inner timeout toe aan de array
         }, delay);
-        delay += 3000;
+        timeouts.push(timeout); // Voeg de timeout toe aan de array
+        delay += 2000;
     });
 }
 
-// Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
-document.addEventListener("DOMContentLoaded", function() {
-    showWelcomeMessage()
-});
-
-
+// Event listener voor het versturen van de formulieren
 document.querySelectorAll('form.suggested-form, form.search-form').forEach(form => {
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         const data = {};
-        console.log(form)
 
         if (form.classList.contains('suggested-form')) {
             const formData = event.submitter.value;
             data['query'] = formData;
-            form.classList.add('hidden');
         } else if (form.classList.contains('search-form')) {
             const formData = new FormData(this);
             formData.forEach((value, key) => {
                 data[key] = value;
             });
-            document.getElementById('search-bar').value = ''
+            document.getElementById('search-bar').value = '';
         }
+
+        // Verzamelen van bestaande chatbubbels
         const bubbles = document.querySelectorAll('.bubble');
         let bubbleData = [];
         bubbles.forEach(bubble => {
@@ -89,10 +121,11 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
                 });
             }
         });
-        const url = this.action;
 
         data.bubbles = bubbleData;
+        const url = this.action;
 
+        // Versturen van de gegevens via een fetch-aanroep
         fetch(url, {
             method: 'POST',
             headers: {
@@ -103,19 +136,20 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
         .then(response => response.text())
         .then(html => {
             document.getElementById('chatbot-main').innerHTML = html;
-            scrollToBottom('chatbot-main')
+            scrollToBottom('chatbot-main');
         })
         .catch(error => console.error('Error:', error));
+
+        document.getElementById('suggested-form').classList.add('hidden');
     });
 });
 
-
-
+// Functie om naar de onderkant van het chatvenster te scrollen
 function scrollToBottom(elementId) {
-    var element = document.getElementById(elementId);
+    const element = document.getElementById(elementId);
     if (!element) return;
 
-    var scrollTo = element.scrollHeight - element.clientHeight;
+    const scrollTo = element.scrollHeight - element.clientHeight;
 
     // Smooth scroll
     element.scrollTo({
@@ -123,3 +157,19 @@ function scrollToBottom(elementId) {
         behavior: 'smooth'
     });
 }
+
+// Event listener voor de "new chat"-knop om de chat te wissen en opnieuw welkomsberichten te tonen
+const newChatButton = document.getElementById('new-chat-button');
+newChatButton.addEventListener('click', function() {
+    document.getElementById('chatbot-main').innerHTML = '';
+    chatCleared = true;
+    
+    // Annuleer alle timeouts
+    timeouts.forEach(timeout => clearTimeout(timeout));
+    timeouts = []; // Leeg de array
+
+    // Reset chatCleared en start welkomsberichten opnieuw
+    chatCleared = false;
+    document.getElementById('suggested-form').classList.remove('hidden');
+    showWelcomeMessage();
+});

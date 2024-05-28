@@ -5,7 +5,7 @@
                 <img class="chatbot-icon" src="./img/robot-profile-picture.svg">
                 <h3>B1EB-BOT</h3>
             </div>
-            <button class="new-chat-button">
+            <button class="new-chat-button" id="new-chat-button">
                 <img class="new-chat-button-icon" src="./img/new-chat-icon.svg">
                 Nieuwe Chat
             </button>
@@ -21,12 +21,12 @@
         <button class="filter-button"><img src="./img/filter-icon.svg"> Filter / Sorteren</button>
     </div>
     <div>
-        <form class="suggested-form" method="post" action="/search">
+        <form id="suggested-form" class="suggested-form" method="post" action="/search">
             <div class="chat-button-grid">
-                <button type="submit" name="category" value="Boeken">Boeken</button>
-                <button type="submit" name="category" value="Films">Films</button>
-                <button type="submit" name="category" value="Activiteiten">Activiteiten</button>
-                <button type="submit" name="category" value="CD's">CD's</button>
+                <button type="submit" name="category" value="Ik zoek boeken">Boeken</button>
+                <button type="submit" name="category" value="Ik zoek films">Films</button>
+                <button type="submit" name="category" value="Ik zoek activiteiten">Activiteiten</button>
+                <button type="submit" name="category" value="Ik zoek CD's">CD's</button>
             </div>
         </form>
     </div>
