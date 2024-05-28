@@ -1,3 +1,10 @@
+.body-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.25rem;
+    margin-left: 1.25rem;
+}
+
 .chatbot-wrapper {
     position: relative;
     display: flex;

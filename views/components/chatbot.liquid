@@ -2,20 +2,4 @@
     <section class="chatbot-main" id="chatbot-main">
         {% include './components/chatbot-body' %}
     </section>
-    <form class="suggested-form" method="post" action="/search">
-        <div class="chat-button-grid">
-            <button type="submit" name="category" value="Boeken">Boeken</button>
-            <button type="submit" name="category" value="Films">Films</button>
-            <button type="submit" name="category" value="Activiteiten">Activiteiten</button>
-            <button type="submit" name="category" value="CD's">CD's</button>
-        </div>
-    </form>
-    <form class="search-form" method="post" action="/search">
-        <input type="text" name="query" placeholder="Ik zoek..." required>
-        <label>
-            <button type="submit">
-                <img src="./img/send-icon.svg" alt="Submit Icon">
-            </button>
-        </label>
-    </form>
 </section>

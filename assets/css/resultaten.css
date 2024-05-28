@@ -58,7 +58,7 @@ main button {
     width: 7rem;
     height: 10rem;
     background-color: var(--primary-dark-gray);
-    background: linear-gradient(47deg, rgba(255,255,255,0) 0%, rgba(217,217,217,1) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(217,217,217,1) 100%);
 }
 
 .shift-right {

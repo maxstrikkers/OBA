@@ -3,23 +3,13 @@
 
         <section class="body-wrapper">
             {% include './components/chatbot' %}
+            <section class="resultaten">
+                <h2>Resultaten</h2>
+                {% include './components/resultaten' %}
+            </section>
         </section>
 
-        <section class="chatbot-wrapper">
-            {% include './components/chatbot' %}
-            <img class="robot-img" src="{{ './img/robot-full-size.svg' | asset_url }}">
-            <label for="full-screen-checkbox" class="full-screen-button-label">
-                <img src="{{ './img/chevron.svg' | asset_url }}" alt="open/close fullscreen">
-                <input id="full-screen-checkbox" type="checkbox">
-            </label>
-        </section>
-        
-        <section class="resultaten-wrapper">
-            <h2>Resultaten</h2>
-            <button class="hidden">filter</button>
-            {% include './components/resultaten' %}
-            {% include './components/filter' %}
-        </section>
+       
 
     {% include './includes/scripts' %}
 {% include './includes/footer' %}
