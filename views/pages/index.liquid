@@ -1,15 +1,15 @@
 {% include './includes/head' %}
-        {% include './includes/header' %}
+    {% include './includes/header' %}
 
-        <section class="body-wrapper">
-            {% include './components/chatbot' %}
-            <section class="resultaten">
-                <h2>Resultaten</h2>
-                {% include './components/resultaten' %}
-            </section>
+    <section class="body-wrapper">
+        {% include './components/chatbot' %}
+        <section class="resultaten">
+            <h2>Resultaten</h2>
+            {% include './components/resultaten' %}
         </section>
+    </section>
 
-       
+    {% include './includes/filter' %}
 
     {% include './includes/scripts' %}
 {% include './includes/footer' %}

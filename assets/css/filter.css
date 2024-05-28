@@ -1,3 +1,49 @@
-aside{
-    grid-area: 2 / 2 / 3 / 3;
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: absolute;
+    top: 130px;
+    right: 20px;
+    padding: 1.25rem;
+    background-color: var(--white);
+    border: 1px solid var(--primary-dark-gray);
+    border-radius: 10px;
+    width: 360px;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    select {
+        padding: 5px 15px;
+        border-radius: 5px;
+    }
+
+    fieldset {
+        border: none;
+
+        legend {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}
+
+.checkbox-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+    
+    label {
+        display: flex;
+        flex-direction: row;
+        font-size: 1rem;
+        font-weight: normal;
+    }
 }
