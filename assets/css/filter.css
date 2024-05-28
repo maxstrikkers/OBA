@@ -40,6 +40,13 @@
     }
 }
 
+.bieb-bot {
+    position: absolute;
+    right: 20px;
+    bottom: -5px;
+    width: 70px;
+}
+
 .checkbox-section {
     display: flex;
     flex-direction: column;
