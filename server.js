@@ -3,6 +3,8 @@ const { Liquid } = require('liquidjs');
 const path = require('path');
 
 
+const { searchTypesense } = require('./server-functies');
+
 const app = express();
 const port = 3000;
 
@@ -36,11 +38,9 @@ app.post('/search', function(req, res) {
     content: req.body.query,
     class: 'right'
   }
-  
   conversation.push(message)
 
-  console.log(conversation)
-
+  searchTypesense(message.content)
 
   res.render('components/chatbot-body', { messages: conversation });
 });
