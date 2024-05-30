@@ -135,6 +135,7 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
         })
         .then(response => response.text())
         .then(html => {
+            console.log(html)
             document.getElementById('chatbot-main').innerHTML = html;
             scrollToBottom('chatbot-main');
         })

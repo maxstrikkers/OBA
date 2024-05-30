@@ -39,11 +39,10 @@ app.post('/search', function(req, res) {
     class: 'right'
   }
   conversation.push(message)
-
   searchTypesense(message.content)
-
-  res.render('components/chatbot-body', { messages: conversation });
+  res.render('components/chatbot-body', { messages: conversation, results: 'boekenresults' });
 });
+
 
 // Start server
 app.listen(port, () => {
