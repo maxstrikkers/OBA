@@ -10,6 +10,28 @@
     border: 1px solid var(--primary-dark-gray);
     border-radius: 10px;
     width: 22.5rem;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: var(--white);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: var(--primary-red);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+    }
+    
 
     label {
         display: flex;
@@ -42,8 +64,9 @@
 
 .bieb-bot {
     position: absolute;
-    right: 20px;
-    bottom: -5px;
+    top: 250px;
+    right: -5px;
+    transform: rotate(-90deg);
     width: 70px;
 }
 

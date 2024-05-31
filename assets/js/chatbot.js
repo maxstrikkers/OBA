@@ -13,6 +13,8 @@ function showTypingBubble() {
     typingBubble.className = 'bubble typing';
     // Maakt de searchbar en de suggested knoppen disabled als de bot aan het typen is
     document.getElementById('search-bar').disabled = true;
+    document.querySelector('.search-form').classList.add("disabled");
+
     Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button =>{
         button.disabled = true;
     })
@@ -38,6 +40,7 @@ function showTypingBubble() {
     // Verwijder de typende indicatie na een bepaalde tijd en zet de buttons samen met search bar weer op enabled
     const timeout = setTimeout(() => {
         document.getElementById('search-bar').disabled = false;
+        document.querySelector('.search-form').classList.remove("disabled");
         Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button =>{
             button.disabled = false;
         })
