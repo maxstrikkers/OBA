@@ -68,8 +68,8 @@ function createBubble(content, className) {
 function showWelcomeMessage() {
     let delay = 0;
     const welcomeMessages = [
-        'Welkom. Ik ben de B1EB-BOT en ik ben hier om je te begeleiden. Begin door boven in je zoekopdracht in te typen.',
-        'Tip: Je kunt ook boven in een knop aanklikken!'
+        'Welkom bij de zoekassistent van de OBA. Begin door uw zoekopdracht onderaan het scherm te typen.',
+        // 'Tip: Je kunt ook boven in een knop aanklikken!'
     ];
 
     welcomeMessages.forEach(message => {
