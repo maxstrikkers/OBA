@@ -144,11 +144,12 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
         })
         .then(response => response.json())
         .then(data => {
+            // Verwijder bestaande chatbubbels
             const existingChats = document.querySelectorAll('.bubble');
-            existingChats.forEach(chat => {
-                chat.remove();
-            })
-            const messageData = data.messages
+            existingChats.forEach(chat => chat.remove());
+
+            // Voeg nieuwe berichten toe
+            const messageData = data.messages;
             messageData.forEach(message => {
                 const chatbotMain = document.getElementById('chatbot-main');
                 const bubble = document.createElement('div');
@@ -156,17 +157,44 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
                 bubble.innerHTML = `<p>${message.content}</p>`;
                 chatbotMain.appendChild(bubble);
             });
+
+            // Verwijder tijdelijke elementen
             const temporaryElements = document.querySelectorAll('.temporaryBubble');
-            temporaryElements.forEach(element => {
-                element.remove();
-            });
+            temporaryElements.forEach(element => element.remove());
+
+            // Scroll naar onderaan de chatbot
             scrollToBottom('chatbot-main');
+
+            // Voeg resultaten toe aan de results section
+            const resultData = data.results;
+            const resultsSection = document.getElementById('results-section');
+            resultsSection.innerHTML = ''; // Maak de results section leeg voordat je nieuwe resultaten toevoegt
+            resultData.forEach(result => {
+                console.log(result.document);
+            
+                // Maak een nieuw article element
+                const article = document.createElement('article');
+            
+                // Maak en voeg de img toe
+                const img = document.createElement('img');
+                img.src = "./book-covers/book-cover-test.jpg";
+                img.alt = "book cover";
+                article.appendChild(img);
+            
+                // Maak en voeg de h5 toe
+                const h5 = document.createElement('h5');
+                h5.textContent = result.document.titel;
+                article.appendChild(h5);
+            
+                // Voeg het article toe aan de results section
+                resultsSection.appendChild(article);
+            });
         })
         .catch(error => console.error('Error:', error));
-
         document.getElementById('suggested-form').classList.add('hidden');
     });
 });
+
 
 // Functie om naar de onderkant van het chatvenster te scrollen
 function scrollToBottom(elementId) {

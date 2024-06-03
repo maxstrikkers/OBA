@@ -48,8 +48,8 @@ app.post('/search', async function(req, res) {
   };
   conversation.push(answerMessage);
   
-  console.log(chatResult.conversation.answer);
-  res.json({messages: conversation, results: 'test'});
+  console.log(chatResult.results[0].hits);
+  res.json({messages: conversation, results: chatResult.results[0].hits});
 });
 
 
