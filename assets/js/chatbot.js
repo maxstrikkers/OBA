@@ -108,6 +108,12 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
             formData.forEach((value, key) => {
                 data[key] = value;
             });
+
+            const chatbotMain = document.getElementById('chatbot-main');
+            const bubble = document.createElement('div');
+            bubble.className = `right temporaryBubble`;
+            bubble.innerHTML = `<p>${document.getElementById('search-bar').value}</p>`;
+            chatbotMain.appendChild(bubble);
             document.getElementById('search-bar').value = '';
         }
 
@@ -136,10 +142,24 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.text())
-        .then(html => {
-            console.log(html)
-            document.getElementById('chatbot-main').innerHTML = html;
+        .then(response => response.json())
+        .then(data => {
+            const existingChats = document.querySelectorAll('.bubble');
+            existingChats.forEach(chat => {
+                chat.remove();
+            })
+            const messageData = data.messages
+            messageData.forEach(message => {
+                const chatbotMain = document.getElementById('chatbot-main');
+                const bubble = document.createElement('div');
+                bubble.className = `bubble ${message.class}`;
+                bubble.innerHTML = `<p>${message.content}</p>`;
+                chatbotMain.appendChild(bubble);
+            });
+            const temporaryElements = document.querySelectorAll('.temporaryBubble');
+            temporaryElements.forEach(element => {
+                element.remove();
+            });
             scrollToBottom('chatbot-main');
         })
         .catch(error => console.error('Error:', error));

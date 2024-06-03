@@ -32,16 +32,26 @@ app.get('/', function(req, res) {
 });
 
 // Search route
-app.post('/search', function(req, res) {  
-  let conversation = req.body.bubbles
+app.post('/search', async function(req, res) {  
+  let conversation = req.body.bubbles;
   const message = {
     content: req.body.query,
     class: 'right'
-  }
-  conversation.push(message)
-  searchTypesense(message.content)
-  res.render('components/chatbot-body', { messages: conversation, results: 'boekenresults' });
+  };
+  conversation.push(message);
+
+  const chatResult = await searchTypesense(message.content);
+  
+  const answerMessage = {
+    content: chatResult.conversation.answer,
+    class: 'left'
+  };
+  conversation.push(answerMessage);
+  
+  console.log(chatResult.conversation.answer);
+  res.json({messages: conversation, results: 'test'});
 });
+
 
 
 // Start server

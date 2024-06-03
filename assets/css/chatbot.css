@@ -26,7 +26,7 @@
     cursor: pointer;
 }
 
-.bubble {
+.bubble, .temporaryBubble {
     --r: 1rem;  /* the radius */
     --t: 1rem; /* the size of the tail */
     
@@ -39,7 +39,7 @@
     word-break: break-all;
 }
 
-.bubble.left {
+.bubble.left, .temporaryBubble.left {
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
@@ -47,7 +47,7 @@
     color: var(--white);
 }
 
-.bubble.right {
+.bubble.right, .temporaryBubble.right {
     --_p: 100%;
     border-bottom-right-radius: 0 0;
     place-self: end;

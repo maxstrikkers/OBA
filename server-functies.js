@@ -43,7 +43,7 @@ async function searchTypesense(query) {
       }
   
       const data = await response.json();
-      console.log(data.results[0]. hits)
+      return data
     } catch (error) {
       console.error('Error searching Typesense:', error);
     }
