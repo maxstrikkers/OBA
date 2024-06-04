@@ -8,50 +8,55 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Functie om een typende indicatie te tonen
-function showTypingBubble() {
+
+function showTypingBubble(isWelcomeMessage) {
     const typingBubble = document.createElement('div');
     typingBubble.className = 'bubble typing';
-    // Maakt de searchbar en de suggested knoppen disabled als de bot aan het typen is
+
+    // Disable elements while typing bubble is shown
     document.getElementById('search-bar').disabled = true;
     document.querySelector('.search-form').classList.add("disabled");
-
-    Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button =>{
+    Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button => {
         button.disabled = true;
-    })
-    
-    // Voeg de SVG rechtstreeks toe aan de typingBubble
+    });
+
+    // Add SVG to the typingBubble
     typingBubble.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-            <circle cx="4" cy="12" r="3" fill="#E61C24">
-                <animate id="svgSpinners3DotsBounce0" attributeName="cy" begin="0;svgSpinners3DotsBounce1.end+0.25s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
-            </circle>
-            <circle cx="12" cy="12" r="3" fill="#E61C24">
-                <animate attributeName="cy" begin="svgSpinners3DotsBounce0.begin+0.1s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
-            </circle>
-            <circle cx="20" cy="12" r="3" fill="#E61C24">
-                <animate id="svgSpinners3DotsBounce1" attributeName="cy" begin="svgSpinners3DotsBounce0.begin+0.2s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
-            </circle>
-        </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+        <circle cx="4" cy="12" r="3" fill="#E61C24">
+            <animate id="svgSpinners3DotsBounce0" attributeName="cy" begin="0;svgSpinners3DotsBounce1.end+0.25s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
+        </circle>
+        <circle cx="12" cy="12" r="3" fill="#E61C24">
+            <animate attributeName="cy" begin="svgSpinners3DotsBounce0.begin+0.1s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
+        </circle>
+        <circle cx="20" cy="12" r="3" fill="#E61C24">
+            <animate id="svgSpinners3DotsBounce1" attributeName="cy" begin="svgSpinners3DotsBounce0.begin+0.2s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
+        </circle>
+    </svg>
     `;
-    
+
     const chatbotMain = document.getElementById('chatbot-main');
     chatbotMain.appendChild(typingBubble);
 
-    // Verwijder de typende indicatie na een bepaalde tijd en zet de buttons samen met search bar weer op enabled
-    const timeout = setTimeout(() => {
-        document.getElementById('search-bar').disabled = false;
-        document.querySelector('.search-form').classList.remove("disabled");
-        Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button =>{
-            button.disabled = false;
-        })
-        if (chatCleared) {
-            chatCleared = false;
-            return;
-        }
-        typingBubble.remove();
-    }, 1500);
-    
-    timeouts.push(timeout); // Voeg de timeout toe aan de array
+    if (isWelcomeMessage == "true") {
+        // Remove typing indication after a certain time and enable the buttons along with search bar
+        const timeout = setTimeout(() => {
+            typingBubble.remove();
+
+            // Enable elements back after removing typing bubble
+            document.getElementById('search-bar').disabled = false;
+            document.querySelector('.search-form').classList.remove("disabled");
+            Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button => {
+                button.disabled = false;
+            });
+        }, 1500);
+        timeouts.push(timeout); // Add timeout to the array
+    } 
+
+    if (chatCleared) {
+        chatCleared = false;
+        return;
+    }
 
     return typingBubble;
 }
@@ -78,7 +83,7 @@ function showWelcomeMessage() {
                 chatCleared = false;
                 return;
             }
-            const typingBubble = showTypingBubble();
+            const typingBubble = showTypingBubble("true"); 
             const innerTimeout = setTimeout(() => {
                 if (chatCleared) {
                     chatCleared = false;
@@ -115,7 +120,17 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
             bubble.innerHTML = `<p>${document.getElementById('search-bar').value}</p>`;
             chatbotMain.appendChild(bubble);
             document.getElementById('search-bar').value = '';
-        }
+        } 
+
+        const typingBubble = showTypingBubble();
+        document.querySelector(".empty-state").classList.add("hidden");
+
+        document.getElementById('results-section').innerHTML = `
+        <article class="placeholder-loading-img"></article>
+        <article class="placeholder-loading-img"></article>
+        <article class="placeholder-loading-img"></article>
+        <article class="placeholder-loading-img"></article>
+        <article class="placeholder-loading-img"></article>`
 
         // Verzamelen van bestaande chatbubbels
         const bubbles = document.querySelectorAll('.bubble');
@@ -162,12 +177,19 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
             const temporaryElements = document.querySelectorAll('.temporaryBubble');
             temporaryElements.forEach(element => element.remove());
 
+            // Enable elements back after removing typing bubble
+            document.getElementById('search-bar').disabled = false;
+            document.querySelector('.search-form').classList.remove("disabled");
+            Array.from(document.getElementsByClassName('chat-button-grid')[0].children).forEach(button => {
+                button.disabled = false;
+            });
+
             // Scroll naar onderaan de chatbot
             scrollToBottom('chatbot-main');
 
             // Voeg resultaten toe aan de results section
             const resultData = data.results;
-            const resultsSection = document.getElementById('results-section');
+            const resultsSection =  document.getElementById('results-section');
             resultsSection.innerHTML = ''; // Maak de results section leeg voordat je nieuwe resultaten toevoegt
             resultData.forEach(result => {
                 console.log(result.document);
@@ -195,7 +217,6 @@ document.querySelectorAll('form.suggested-form, form.search-form').forEach(form 
     });
 });
 
-
 // Functie om naar de onderkant van het chatvenster te scrollen
 function scrollToBottom(elementId) {
     const element = document.getElementById(elementId);
@@ -214,6 +235,10 @@ function scrollToBottom(elementId) {
 const newChatButton = document.getElementById('new-chat-button');
 newChatButton.addEventListener('click', function() {
     document.getElementById('chatbot-main').innerHTML = '';
+    document.getElementById('results-section').innerHTML = '';
+    document.querySelector(".empty-state").classList.remove("hidden");
+
+
     chatCleared = true;
     
     // Annuleer alle timeouts
