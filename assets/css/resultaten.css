@@ -67,6 +67,7 @@ main button {
 
 .placeholder-loading-img {
     height: 17rem;
+    width: 10rem;
     background-color: var(--primary-dark-gray);
     opacity: 0.5;
     animation: wave 2s infinite;
