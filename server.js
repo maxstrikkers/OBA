@@ -27,12 +27,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Index page
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.render('pages/index', { pageName: 'index' });
 });
 
 // Search route
-app.post('/search', async function(req, res) {  
+app.post('/search', async function (req, res) {
   let conversation = req.body.bubbles;
   const message = {
     content: req.body.query,
@@ -41,15 +41,15 @@ app.post('/search', async function(req, res) {
   conversation.push(message);
 
   const chatResult = await searchTypesense(message.content);
-  
+
   const answerMessage = {
     content: chatResult.conversation.answer,
     class: 'left'
   };
   conversation.push(answerMessage);
-  
+
   console.log(chatResult.results[0].hits);
-  res.json({messages: conversation, results: chatResult.results[0].hits});
+  res.json({ messages: conversation, results: chatResult.results[0].hits });
 });
 
 
