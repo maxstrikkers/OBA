@@ -7,7 +7,7 @@ async function searchTypesense(query) {
         const params = new URLSearchParams({
             q: query,
             conversation: "true",
-            conversation_model_id: "0aa6ecfe-dcd7-469c-ba9f-cb407d0a9499",
+            conversation_model_id: "b613dc1e-fda4-4863-a9ba-ae2ae044080d",
             searches: JSON.stringify([
                 {
                     collection: "obadbx",
