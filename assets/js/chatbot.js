@@ -210,7 +210,7 @@ document
 
             // Maak en voeg de img toe
             const img = document.createElement("img");
-            img.src = "./book-covers/book-cover-test.jpg";
+            img.src = result.document.coverUrl;
             img.alt = "book cover";
             article.appendChild(img);
 

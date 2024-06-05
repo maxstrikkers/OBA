@@ -51,7 +51,9 @@ async function searchTypesense(query) {
 
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
-  finalResults.forEach((item) => {
+
+  // Maak een array van fetch promises
+  const fetchPromises = finalResults.map((item) =>
     fetch(
       `https://cover.biblion.nl/coverlist.dll/?doctype=morebutton&bibliotheek=oba&style=0&ppn=${item.document.ppn}&isbn=&lid=&aut=&ti=&size=150`
     )
@@ -61,13 +63,16 @@ async function addCoverImageToDocuments(searchResults) {
       })
       .catch((error) => {
         console.error("Er is een fout opgetreden:", error);
-      });
-  });
-  await new Promise((resolve) => {
-    console.log(finalResults);
-    resolve();
-  });
+      })
+  );
+
+  // Wacht tot alle fetch promises zijn voltooid
+  await Promise.all(fetchPromises);
+
+  // Return de resultaten
+  return finalResults;
 }
+
 
 module.exports = {
   searchTypesense,

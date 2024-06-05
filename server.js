@@ -44,9 +44,7 @@ app.post("/search", async function (req, res) {
 
   const chatResult = await searchTypesense(message.content);
 
-  const finalBookInfo = await addCoverImageToDocuments(
-    chatResult.results[0].hits
-  );
+  const finalBookInfo = await addCoverImageToDocuments(chatResult.results[0].hits);
 
   const answerMessage = {
     content: chatResult.conversation.answer,
@@ -54,7 +52,7 @@ app.post("/search", async function (req, res) {
   };
   conversation.push(answerMessage);
 
-  res.json({ messages: conversation, results: chatResult.results[0].hits });
+  res.json({ messages: conversation, results: finalBookInfo });
 });
 
 // Start server
