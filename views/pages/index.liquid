@@ -12,17 +12,17 @@
         <section class="details", id="details">
             <h2 class="detail-resultaten">Resultaten</h2>
             <button class="terug">
-                <img src="./Img/arrow-black.svg" alt="">
+                <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="">
                 Terug
             </button>
             <h3 class="titel">Harry potter</h3>
             <h4 class="auteur">Auteur</h4>
             <a class="bekijk-detail" href="">
-                <img src="./Img/angle-black.svg" alt="">
+                <img src="{{ './img/angle-black.svg' | asset_url }}" alt="">
                 Bekijk details
             </a>
             <p class="samenvatting">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe minus alias minima, corrupti ex voluptas consectetur inventore ipsa et iure similique impedit officia rem error necessitatibus! Laudantium nesciunt alias soluta!</p>
-            <img class="img book-detail-cover" src="./img/no-cover.jpeg" alt="">
+            <img class="img book-detail-cover" src="{{ './img/no-cover.jpeg' | asset_url }}" alt="">
         </section>
 
         {% include './includes/filter' %}

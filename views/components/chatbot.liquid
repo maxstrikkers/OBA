@@ -5,14 +5,14 @@
     <form class="search-form" method="post" action="/search">
             <label>
                 <button type="button" class="new-chat-button" id="new-chat-button">
-                    <img src="./img/new-chat.svg" alt="new chat Icon">
+                    <img src="{{ './img/new-chat.svg' | asset_url }}" alt="new chat Icon">
                 </button>
                 {% comment %} <div class="new-chat-popup">Nieuwe Chat</div> {% endcomment %}
             </label>
             <input id='search-bar' type="text" name="query" placeholder="Ik zoek..." required>
             <label>
                 <button type="submit">
-                    <img src="./img/send-icon.svg" alt="Submit Icon">
+                    <img src="{{ './img/send-icon.svg' | asset_url }}" alt="Submit Icon">
                 </button>
             </label>
         </form>
