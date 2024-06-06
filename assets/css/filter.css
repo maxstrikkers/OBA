@@ -2,14 +2,11 @@
     display: flex;
     flex-direction: column;
     gap: 1.88rem;
-    position: absolute;
-    top: 8.13rem;
-    right: 1.25rem;
     padding: 1.25rem;
+    margin-right: 2rem;
     background-color: var(--white);
     border: 1px solid var(--primary-dark-gray);
     border-radius: 10px;
-    width: 22.5rem;
     max-height: 80vh;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -63,9 +60,6 @@
 }
 
 .bieb-bot {
-    position: absolute;
-    top: 250px;
-    right: -5px;
     transform: rotate(-90deg);
     width: 70px;
 }

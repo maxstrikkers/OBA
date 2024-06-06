@@ -2,14 +2,6 @@
     <section class="chatbot-main" id="chatbot-main">
         {% include './components/chatbot-body' %}
     </section>
-    <form id="suggested-form" class="suggested-form" method="post" action="/search">
-        <div class="chat-button-grid">
-            <button type="submit" name="category" value="Ik zoek boeken">Boeken</button>
-            <button type="submit" name="category" value="Ik zoek films">Films</button>
-            <button type="submit" name="category" value="Ik zoek activiteiten">Activiteiten</button>
-            <button type="submit" name="category" value="Ik zoek CD's">CD's</button>
-        </div>
-    </form>
     <form class="search-form" method="post" action="/search">
             <label>
                 <button type="button" class="new-chat-button" id="new-chat-button">
@@ -18,12 +10,6 @@
                 {% comment %} <div class="new-chat-popup">Nieuwe Chat</div> {% endcomment %}
             </label>
             <input id='search-bar' type="text" name="query" placeholder="Ik zoek..." required>
-            <label>
-                <button type="button" class="filter-button">
-                    <img src="./img/filter-icon.svg" alt="Filter Icon">
-                    Filter
-                </button>
-            </label>
             <label>
                 <button type="submit">
                     <img src="./img/send-icon.svg" alt="Submit Icon">

@@ -17,11 +17,14 @@ main button {
 }
 
 .resultaten {
-    padding: 2rem;
+    padding: 2rem 0;
     width: fit-content;
+    /* display: none; */
+
 
     h2 {
         margin-bottom: 1rem;
+        font-size: 2rem;
     }
 }
 
@@ -40,6 +43,7 @@ main button {
 
 .section-article article img {
     height: 17rem;
+    width: 100%;
     object-fit: cover;
 }
 
@@ -47,7 +51,6 @@ main button {
     font-size: 1rem;
     font-weight: normal;
     text-align: center;
-    width: 10rem;
 }
 
 .overlay {
