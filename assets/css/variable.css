@@ -11,4 +11,5 @@
     /* Bepaal hiermee de hoogte van de header en de margin. De rest van de pagina zal dan mee scalen */
     --header-height: 130px;
     --header-margin: 1em;
+    
 }
