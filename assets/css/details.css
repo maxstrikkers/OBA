@@ -1,0 +1,71 @@
+.details {
+    display: grid;
+    grid-column: 2 / 3;
+    grid-template-columns: 0.5fr 2fr;
+    grid-template-rows: repeat(5, min-content);
+    gap: 1rem 2rem;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "detail-resultaten detail-resultaten"
+        "terug ..."
+        "img titel"
+        "img samenvatting"
+        "bekijk-detail samenvatting";
+    display: none;
+}
+
+.detail-resultaten {
+    grid-area: detail-resultaten;
+    font-size: 2rem;
+}
+
+.terug {
+    grid-area: terug;
+    display: flex;
+    gap: 0.5rem;
+    width: min-content;
+    height: min-content;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    background-color: var(--white);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+    font-family: "Avenir", Arial, sans-serif;
+
+    img {
+        height: 1.5rem;
+    }
+
+
+
+}
+
+.img {
+    grid-area: img;
+    width: 200px;
+}
+
+.bekijk-detail {
+    grid-area: bekijk-detail;
+    display: flex;
+    gap: .8rem;
+    align-items: center;
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: var(--black);
+    font-weight: bold;
+
+    img {
+        height: 1.3rem;
+    }
+}
+
+
+.titel {
+    grid-area: titel;
+}
+
+.samenvatting {
+    grid-area: samenvatting;
+}

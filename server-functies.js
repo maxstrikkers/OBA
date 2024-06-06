@@ -12,7 +12,7 @@ async function searchTypesense(query) {
         {
           collection: "obadbx",
           query_by: "embedding",
-          "per page": "6",
+          "per page": "50",
           prefix: "false",
           include_fields: "titel,beschrijving,auteur,ppn",
         },
@@ -30,7 +30,7 @@ async function searchTypesense(query) {
           {
             collection: "obadbx",
             query_by: "embedding",
-            "per page": "6",
+            "per page": "50",
             prefix: "false",
             include_fields: "titel,beschrijving,auteur,ppn",
           },

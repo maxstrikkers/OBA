@@ -3,13 +3,32 @@
 
     <section class="body-wrapper">
         {% include './components/chatbot' %}
+
         <section class="resultaten">
             <h2>Resultaten</h2>
             {% include './components/resultaten' %}
         </section>
+
+        <section class="details">
+            <h2 class="detail-resultaten">Resultaten</h2>
+            <button class="terug">
+                <img src="./Img/arrow-black.svg" alt="">
+                Terug
+            </button>
+            <h3 class="titel">Harry potter</h3>
+            <a class="bekijk-detail" href="">
+                <img src="./Img/angle-black.svg" alt="">
+                Bekijk details
+            </a>
+            <p class="samenvatting">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe minus alias minima, corrupti ex voluptas consectetur inventore ipsa et iure similique impedit officia rem error necessitatibus! Laudantium nesciunt alias soluta!</p>
+            <img class="img" src="./img/no-cover.jpeg" alt="">
+        </section>
+
+        {% include './includes/filter' %}
+
     </section>
 
-    {% include './includes/filter' %}
+    
 
     {% include './includes/scripts' %}
 {% include './includes/footer' %}
