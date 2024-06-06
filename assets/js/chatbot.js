@@ -14,7 +14,7 @@ const chatbot = {
 
 // Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
 document.addEventListener("DOMContentLoaded", function () {
-    showWelcomeMessage();
+  showWelcomeMessage();
 });
 
 // Functie om een typende indicatie te tonen
@@ -32,8 +32,8 @@ function showTypingBubble(isWelcomeMessage) {
         button.disabled = true;
     });
 
-    // Add SVG to the typingBubble
-    typingBubble.innerHTML = `
+  // Add SVG to the typingBubble
+  typingBubble.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
         <circle cx="4" cy="12" r="3" fill="#E61C24">
             <animate id="svgSpinners3DotsBounce0" attributeName="cy" begin="0;svgSpinners3DotsBounce1.end+0.25s" calcMode="spline" dur="0.6s" keySplines=".33,.66,.66,1;.33,0,.66,.33" values="12;6;12" />
@@ -50,10 +50,10 @@ function showTypingBubble(isWelcomeMessage) {
 
     chatbot.main.appendChild(typingBubble);
 
-    if (isWelcomeMessage == "true") {
-        // Remove typing indication after a certain time and enable the buttons along with search bar
-        const timeout = setTimeout(() => {
-            typingBubble.remove();
+  if (isWelcomeMessage == "true") {
+    // Remove typing indication after a certain time and enable the buttons along with search bar
+    const timeout = setTimeout(() => {
+      typingBubble.remove();
 
             // Enable elements back after removing typing bubble
             chatbot.searchbar.disabled = false;
@@ -67,12 +67,12 @@ function showTypingBubble(isWelcomeMessage) {
         timeouts.push(timeout); // Add timeout to the array
     }
 
-    if (chatCleared) {
-        chatCleared = false;
-        return;
-    }
+  if (chatCleared) {
+    chatCleared = false;
+    return;
+  }
 
-    return typingBubble;
+  return typingBubble;
 }
 
 // Functie om bubbles te genereren
@@ -170,7 +170,18 @@ function createTempBubbles(form, data) {
 }
 
 function placeholderResults() {
-    //Weghalen van geen resultaten text
+    // Weghalen van geen resultaten text
+    document.querySelector(".empty-state").classList.add("hidden");
+
+    document.getElementById("results-section").innerHTML = ``;
+    const chatbotMain = document.getElementById("chatbot-main");
+    const bubble = document.createElement("div");
+    bubble.className = `right temporaryBubble`;
+    bubble.innerHTML = `<p>${document.getElementById("search-bar").value}</p>`;
+    chatbotMain.appendChild(bubble);
+    document.getElementById("search-bar").value = "";
+
+    showTypingBubble();
     document.querySelector(".empty-state").classList.add("hidden");
 
     document.getElementById("results-section").innerHTML = `
@@ -179,9 +190,11 @@ function placeholderResults() {
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>`;
-}
+  }
 
-function submitFormData(url, data) {
+
+  function submitFormData(url, data) {
+    // Versturen van de gegevens via een fetch-aanroep
     fetch(url, {
         method: "POST",
         headers: {
@@ -189,57 +202,73 @@ function submitFormData(url, data) {
         },
         body: JSON.stringify(data),
     })
-        .then((response) => response.json())
-        .then((data) => {
-            const existingChats = document.querySelectorAll(".bubble");
-            existingChats.forEach((chat) => chat.remove());
+    .then((response) => response.json())
+    .then((data) => {
+        // Verwijder bestaande chatbubbels
+        const existingChats = document.querySelectorAll(".bubble");
+        existingChats.forEach((chat) => chat.remove());
 
-            const messageData = data.messages;
-            messageData.forEach((message) => {
-                const bubble = document.createElement("div");
-                bubble.className = `bubble ${message.class}`;
-                bubble.innerHTML = `<p>${message.content}</p>`;
-                chatbot.main.appendChild(bubble);
-            });
+        // Voeg nieuwe berichten toe
+        const messageData = data.messages;
+        messageData.forEach((message) => {
+            const chatbotMain = document.getElementById("chatbot-main");
+            const bubble = document.createElement("div");
+            bubble.className = `bubble ${message.class}`;
+            bubble.innerHTML = `<p>${message.content}</p>`;
+            chatbotMain.appendChild(bubble);
+        });
 
-            const temporaryElements =
-                document.querySelectorAll(".temporaryBubble");
-            temporaryElements.forEach((element) => element.remove());
+        // Verwijder tijdelijke elementen
+        const temporaryElements = document.querySelectorAll(".temporaryBubble");
+        temporaryElements.forEach((element) => element.remove());
 
-            chatbot.searchbar.disabled = false;
-            chatbot.searchForm.classList.remove("disabled");
-            Array.from(
-                document.getElementsByClassName("chat-button-grid")[0].children
-            ).forEach((button) => {
-                button.disabled = false;
-            });
+        // Enable elements back after removing typing bubble
+        document.getElementById("search-bar").disabled = false;
+        document.querySelector(".search-form").classList.remove("disabled");
+        Array.from(document.getElementsByClassName("chat-button-grid")[0].children).forEach((button) => {
+            button.disabled = false;
+        });
 
-            scrollToBottom("chatbot-main");
+        // Scroll naar onderaan de chatbot
+        scrollToBottom("chatbot-main");
 
-            const resultData = data.results;
-            const resultsSection = document.getElementById("results-section");
-            resultsSection.innerHTML = "";
-            resultData.forEach((result) => {
-                const article = document.createElement("article");
-                const img = document.createElement("img");
-                img.src = "./book-covers/book-cover-test.jpg";
-                img.alt = "book cover";
-                article.appendChild(img);
-                const h5 = document.createElement("h5");
-                h5.textContent = result.document.titel;
-                article.appendChild(h5);
-                resultsSection.appendChild(article);
-            });
-        })
-        .catch((error) => console.error("Error:", error));
+        // Voeg resultaten toe aan de results section
+        const resultData = data.results;
+        const resultsSection = document.getElementById("results-section");
+        resultsSection.innerHTML = ""; // Maak de results section leeg voordat je nieuwe resultaten toevoegt
+        resultData.forEach((result) => {
+            console.log(result.document);
+
+            // Maak een nieuw article element
+            const article = document.createElement("article");
+
+            // Maak en voeg de img toe
+            const img = document.createElement("img");
+            img.src = result.document.coverUrl;
+            img.alt = "book cover";
+            article.appendChild(img);
+
+            // Maak en voeg de h5 toe
+            const h5 = document.createElement("h5");
+            h5.textContent = result.document.titel;
+            article.appendChild(h5);
+
+            // Voeg het article toe aan de results section
+            resultsSection.appendChild(article);
+        });
+    })
+    .catch((error) => console.error("Error:", error));
+
+    document.getElementById("suggested-form").classList.add("hidden");
 }
+
 
 // Functie om naar de onderkant van het chatvenster te scrollen
 function scrollToBottom(elementId) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
+  const element = document.getElementById(elementId);
+  if (!element) return;
 
-    const scrollTo = element.scrollHeight - element.clientHeight;
+  const scrollTo = element.scrollHeight - element.clientHeight;
 
     // Smooth scroll
     element.scrollTo({
