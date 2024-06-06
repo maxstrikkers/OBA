@@ -12,11 +12,6 @@ const chatbot = {
     newchatButton: document.getElementById("new-chat-button")
 };
  
-// Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
-// document.addEventListener("DOMContentLoaded", function () {
-//     showWelcomeMessage();
-// });
- 
 // Functie om een typende indicatie te tonen
  
 function showTypingBubble() {
@@ -62,38 +57,34 @@ function createBubble(content, className) {
 }
  
 // Event listener voor het versturen van de formulieren
-document.getElementById("form.search-form")
-    .forEach((form) => {
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-            const data = {};
- 
-            createTempBubbles(form, data);
-            showTypingBubble();
- 
-            placeholderResults()
- 
-            // Verzamelen van bestaande chatbubbels
-            const bubbles = document.querySelectorAll(".bubble");
-            let bubbleData = [];
-            bubbles.forEach((bubble) => {
-                const isRight = bubble.classList.contains("right");
-                const isLeft = bubble.classList.contains("left");
-                if (isRight || isLeft) {
-                    bubbleData.push({
-                        content: bubble.innerText,
-                        class: isRight ? "right" : "left",
-                    });
-                }
+chatbot.searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const data = {};
+
+    createTempBubbles(chatbot.searchForm, data);
+    showTypingBubble();
+
+    placeholderResults()
+
+    // Verzamelen van bestaande chatbubbels
+    const bubbles = document.querySelectorAll(".bubble");
+    let bubbleData = [];
+    bubbles.forEach((bubble) => {
+        const isRight = bubble.classList.contains("right");
+        const isLeft = bubble.classList.contains("left");
+        if (isRight || isLeft) {
+            bubbleData.push({
+                content: bubble.innerText,
+                class: isRight ? "right" : "left",
             });
- 
-            data.bubbles = bubbleData;
-            const url = this.action;
- 
-            submitFormData(url, data);
-            // document.getElementById("suggested-form").classList.add("hidden");
-        });
+        }
     });
+
+    data.bubbles = bubbleData;
+    const url = this.action;
+
+    submitFormData(url, data);
+});
  
 function createTempBubbles(form, data) {
     if (form.classList.contains("suggested-form")) {
@@ -136,59 +127,59 @@ function submitFormData(url, data) {
         },
         body: JSON.stringify(data),
     })
-        .then((response) => response.json())
-        .then((data) => {
-            const existingChats = document.querySelectorAll(".bubble");
-            existingChats.forEach((chat) => chat.remove());
- 
-            const messageData = data.messages;
-            messageData.forEach((message) => {
-                const bubble = document.createElement("div");
-                bubble.className = `bubble ${message.class}`;
-                bubble.innerHTML = `<p>${message.content}</p>`;
-                chatbot.main.appendChild(bubble);
+    .then((response) => response.json())
+    .then((data) => {
+        const existingChats = document.querySelectorAll(".bubble");
+        existingChats.forEach((chat) => chat.remove());
+
+        const messageData = data.messages;
+        messageData.forEach((message) => {
+            const bubble = document.createElement("div");
+            bubble.className = `bubble ${message.class}`;
+            bubble.innerHTML = `<p>${message.content}</p>`;
+            chatbot.main.appendChild(bubble);
+        });
+
+        const temporaryElements = document.querySelectorAll(".temporaryBubble");
+        temporaryElements.forEach((element) => element.remove());
+
+        chatbot.searchbar.disabled = false;
+        chatbot.searchForm.classList.remove("disabled");
+
+        scrollToBottom("chatbot-main");
+
+        const resultData = data.results;
+        const resultsSection = document.getElementById("results-section");
+        resultsSection.innerHTML = "";
+        resultData.forEach((result) => {
+            const article = document.createElement("article");
+            article.classList.add('book-result');
+            const img = document.createElement("img");
+            img.src = result.document.coverUrl;
+            img.alt = "book cover";
+
+            img.addEventListener('load', function() {
+                if (img.naturalWidth == 1 && img.naturalHeight == 1) {
+                    img.src = "./img/no-cover.jpeg";
+                    result.document.coverUrl = "./img/no-cover.jpeg";
+                }
             });
- 
-            const temporaryElements =
-                document.querySelectorAll(".temporaryBubble");
-            temporaryElements.forEach((element) => element.remove());
- 
-            chatbot.searchbar.disabled = false;
-            chatbot.searchForm.classList.remove("disabled");
-            // Array.from(
-            //     document.getElementsByClassName("chat-button-grid")[0].children
-            // ).forEach((button) => {
-            //     button.disabled = false;
-            // });
- 
-            scrollToBottom("chatbot-main");
- 
-            const resultData = data.results;
-            const resultsSection = document.getElementById("results-section");
-            resultsSection.innerHTML = "";
-            resultData.forEach((result) => {
-                const article = document.createElement("article");
-                const img = document.createElement("img");
-                img.src = result.document.coverUrl;
-                img.alt = "book cover";
-                
-                img.addEventListener('load', function() {
-                    if (img.naturalWidth == 1) {
-                        img.src = "./img/no-cover.jpeg";
-                    }
-                });
-                
-                article.appendChild(img);
-                
-                const h5 = document.createElement("h5");
-                h5.textContent = result.document.titel;
-                article.appendChild(h5);
-                
-                resultsSection.appendChild(article);
+
+            article.appendChild(img);
+
+            const h5 = document.createElement("h5");
+            h5.textContent = result.document.titel;
+            article.appendChild(h5);
+
+            resultsSection.appendChild(article);
+            article.addEventListener('click', () => {
+                openDetail(result.document.coverUrl, result.document.titel, result.document.ppn, result.document.beschrijving, result.document.auteur);
             });
-        })
-        .catch((error) => console.error("Error:", error));
+        });
+    })
+    .catch((error) => console.error("Error:", error));
 }
+
 
 function placeholderImages() {
     const images = document.querySelectorAll('img');
@@ -221,6 +212,45 @@ function scrollToBottom(elementId) {
         behavior: "smooth",
     });
 }
+
+function openDetail(cover, titel, ppn, beschrijving, auteur) {
+    const resultaten = document.getElementById('resultaten');
+    const details = document.getElementById('details');
+    const filters = document.getElementById('filter');
+
+    // Zoek de bestaande elementen in de details sectie
+    const imgElement = details.querySelector('img.book-detail-cover');
+    const titleElement = details.querySelector('h3');
+    const descriptionElement = details.querySelector('p');
+    const authorElement = details.querySelector('h4');
+
+    // Pas de inhoud van de bestaande elementen aan
+    if (imgElement) {
+        imgElement.src = cover;
+        imgElement.alt = titel;
+    }
+
+    if (titleElement) {
+        titleElement.textContent = titel;
+    }
+
+    if (descriptionElement) {
+        descriptionElement.textContent = beschrijving;
+    }
+
+    if (authorElement) {
+        authorElement.textContent = auteur;
+    }
+
+    console.log(details);
+
+    // Display the details section and hide others
+    details.style.display = 'grid';
+    filters.style.display = 'none';
+    resultaten.style.display = 'none';
+}
+
+
  
 // Event listener voor de "new chat"-knop om de chat te wissen en opnieuw welkomsberichten te tonen
 chatbot.newchatButton.addEventListener("click", function () {
