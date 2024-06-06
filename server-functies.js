@@ -47,7 +47,7 @@ async function searchTypesense(query) {
   } catch (error) {
     console.error("Error searching Typesense:", error);
   }
-}
+} 
 
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
