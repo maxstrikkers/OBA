@@ -1,24 +1,8 @@
 
-main a {
-    grid-column-start: 2;
-    justify-self: end;
-    color: var(--black);
-}
-
-main button {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    grid-row-start: 2;
-    border: none;
-    background-color: transparent;
-    transform: rotate(-90deg);
-    z-index: 10;
-}
-
 .resultaten {
     padding: 2rem;
     width: fit-content;
+    max-width: 100%;
 
     h2 {
         margin-bottom: 1rem;

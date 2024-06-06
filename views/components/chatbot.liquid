@@ -2,14 +2,14 @@
     <section class="chatbot-main" id="chatbot-main">
         {% include './components/chatbot-body' %}
     </section>
-    <form id="suggested-form" class="suggested-form" method="post" action="/search">
+    {% comment %} <form id="suggested-form" class="suggested-form" method="post" action="/search">
         <div class="chat-button-grid">
             <button type="submit" name="category" value="Ik zoek boeken">Boeken</button>
             <button type="submit" name="category" value="Ik zoek films">Films</button>
             <button type="submit" name="category" value="Ik zoek activiteiten">Activiteiten</button>
             <button type="submit" name="category" value="Ik zoek CD's">CD's</button>
         </div>
-    </form>
+    </form> {% endcomment %}
     <form class="search-form" method="post" action="/search">
             <label>
                 <button type="button" class="new-chat-button" id="new-chat-button">

@@ -7,15 +7,15 @@ let timeouts = []; // Array om timeouts bij te houden
 const chatbot = {
     main: document.getElementById("chatbot-main"),
     searchbar: document.getElementById("search-bar"),
-    suggestedForm: document.getElementById("suggested-form"),
+    // suggestedForm: document.getElementById("suggested-form"),
     searchForm: document.querySelector(".search-form"),
     newchatButton: document.getElementById("new-chat-button")
 };
 
 // Event listener om te zorgen dat de functies worden aangeroepen wanneer de DOM is geladen
-document.addEventListener("DOMContentLoaded", function () {
-    showWelcomeMessage();
-});
+// document.addEventListener("DOMContentLoaded", function () {
+//     showWelcomeMessage();
+// });
 
 // Functie om een typende indicatie te tonen
 
@@ -26,11 +26,11 @@ function showTypingBubble(isWelcomeMessage) {
     // Disable elements while typing bubble is shown
     chatbot.searchbar.disabled = true;
     chatbot.searchForm.classList.add("disabled");
-    Array.from(
-        document.getElementsByClassName("chat-button-grid")[0].children
-    ).forEach((button) => {
-        button.disabled = true;
-    });
+    // Array.from(
+    //     document.getElementsByClassName("chat-button-grid")[0].children
+    // ).forEach((button) => {
+    //     button.disabled = true;
+    // });
 
     // Add SVG to the typingBubble
     typingBubble.innerHTML = `
@@ -58,11 +58,11 @@ function showTypingBubble(isWelcomeMessage) {
             // Enable elements back after removing typing bubble
             chatbot.searchbar.disabled = false;
             chatbot.searchForm.classList.remove("disabled");
-            Array.from(
-                document.getElementsByClassName("chat-button-grid")[0].children
-            ).forEach((button) => {
-                button.disabled = false;
-            });
+            // Array.from(
+            //     document.getElementsByClassName("chat-button-grid")[0].children
+            // ).forEach((button) => {
+            //     button.disabled = false;
+            // });
         }, 1500);
         timeouts.push(timeout); // Add timeout to the array
     }
@@ -97,7 +97,7 @@ function showWelcomeMessage() {
                 chatCleared = false;
                 return;
             }
-            const typingBubble = showTypingBubble("true");
+            const typingbubble = showTypingBubble("true");
             const innerTimeout = setTimeout(() => {
                 if (chatCleared) {
                     chatCleared = false;
@@ -144,7 +144,7 @@ document
             const url = this.action;
 
             submitFormData(url, data);
-            document.getElementById("suggested-form").classList.add("hidden");
+            // document.getElementById("suggested-form").classList.add("hidden");
         });
     });
 
@@ -208,11 +208,11 @@ function submitFormData(url, data) {
 
             chatbot.searchbar.disabled = false;
             chatbot.searchForm.classList.remove("disabled");
-            Array.from(
-                document.getElementsByClassName("chat-button-grid")[0].children
-            ).forEach((button) => {
-                button.disabled = false;
-            });
+            // Array.from(
+            //     document.getElementsByClassName("chat-button-grid")[0].children
+            // ).forEach((button) => {
+            //     button.disabled = false;
+            // });
 
             scrollToBottom("chatbot-main");
 
@@ -262,6 +262,21 @@ chatbot.newchatButton.addEventListener("click", function () {
 
     // Reset chatCleared en start welkomsberichten opnieuw
     chatCleared = false;
-    chatbot.suggestedForm.classList.remove("hidden");
+    // chatbot.suggestedForm.classList.remove("hidden");
     showWelcomeMessage();
 });
+
+function toggleSearchHeight(state) {
+    if (state == "open") {
+        chatbot.main.style.height = "100%"
+    } else if (state == "close") {
+        chatbot.main.style.height = "0"
+    } else {
+        console.log("state is not defined properly: " + state)
+    }
+}
+
+chatbot.searchForm.addEventListener("submit", function() {
+    toggleSearchHeight("open")
+    // showWelcomeMessage();
+})
