@@ -1,3 +1,79 @@
-aside{
-    grid-area: 2 / 2 / 3 / 3;
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 1.88rem;
+    padding: 1.25rem;
+    margin-right: 2rem;
+    background-color: var(--white);
+    border: 1px solid var(--primary-dark-gray);
+    border-radius: 10px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: var(--white);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: var(--primary-red);
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+    }
+    
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.63rem;
+        font-weight: bold;
+    }
+
+    select {
+        padding: 0.63rem 1rem;
+        border-radius: 5px;
+
+        -webkit-appearance: none;
+        appearance: none;
+        position: relative;
+        background: url(../img/chevron-black.svg) no-repeat 95% center;
+        background-size: 10px 10px;
+    }
+
+    fieldset {
+        border: none;
+
+        legend {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    }
+}
+
+.bieb-bot {
+    transform: rotate(-90deg);
+    width: 70px;
+}
+
+.checkbox-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 0.63rem;
+    
+    label {
+        display: flex;
+        flex-direction: row;
+        font-size: 1rem;
+        font-weight: normal;
+    }
 }

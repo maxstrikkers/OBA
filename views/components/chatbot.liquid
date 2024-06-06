@@ -1,33 +1,19 @@
 <section class="chat">
-    <header class="chat-header">
-        <div class="profile-group">
-            <img class="chatbot-icon" src="./img/robot-profile-picture.svg">
-            <p>Online</p>
-        </div>
-        <h3>B1EB-BOT</h3>
-        <button class="new-chat-button">
-            <img class="new-chat-button-icon" src="./img/new-chat-icon.svg">
-            Nieuwe Chat
-        </button>
-    </header>
     <section class="chatbot-main" id="chatbot-main">
-        <div class="bubble left">Welkom. Ik ben de B1EB-BOT en ik ben hier om je te begeleiden. Begin door hieronder je zoekopdracht in te typen.</div>
-        <div class="bubble left">Tip: Je kunt ook hieronder een knop aanklikken!</div>
+        {% include './components/chatbot-body' %}
     </section>
-    <form class="suggested-form">
-        <div class="chat-button-grid">
-            <button type="submit" value="Ik zoek Boeken">Boeken</button>
-            <button type="submit" value="Ik zoek Films">Films</button>
-            <button type="submit" value="Ik zoek Activiteiten">Activiteiten</button>
-            <button type="submit" value="Ik zoek CD's">CD's</button>
-        </div>
-    </form>
-    <form class="search-form">
-        <input type="text" placeholder="Ik zoek..." required>
-        <label>
-            <button type="submit">
-                <img src="./img/send-icon.svg" alt="Submit Icon">
-              </button>
-        </label>
-    </form>
+    <form class="search-form" method="post" action="/search">
+            <label>
+                <button type="button" class="new-chat-button" id="new-chat-button">
+                    <img src="./img/new-chat.svg" alt="new chat Icon">
+                </button>
+                {% comment %} <div class="new-chat-popup">Nieuwe Chat</div> {% endcomment %}
+            </label>
+            <input id='search-bar' type="text" name="query" placeholder="Ik zoek..." required>
+            <label>
+                <button type="submit">
+                    <img src="./img/send-icon.svg" alt="Submit Icon">
+                </button>
+            </label>
+        </form>
 </section>

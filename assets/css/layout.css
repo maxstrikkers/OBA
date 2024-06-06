@@ -4,11 +4,17 @@
 @import url(./index.css);
 @import url(./resultaten.css);
 @import url(./filter.css);
+@import url(./details.css);
+
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+html {
+    font-size: 0.8rem;
 }
 
 @font-face {

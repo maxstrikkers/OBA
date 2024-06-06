@@ -1,29 +1,30 @@
 .main-header {
-    position: sticky;
-    top: 0px;
+    position: relative;
+    background-image: url(../Img/header-background-temporary.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    justify-items: center;
-    background-image: var(--linear-background);
+    grid-template-columns: 1fr 2fr 0.7fr;
+    height: var(--header-height);
+    margin-bottom: var(--header-margin);
+}
+
+
+.chatbot-icon {
+    background-color: var(--secondary-red);
     padding: 0.5rem;
-    z-index: 5;
-    box-shadow: 2px 2px 200px 2px #FCEDED;
+    border-radius: 50%;
 }
 
-.open-chat-button {
-    grid-column: 1;
-    justify-self: start;
-    margin: 0 1rem;
+
+
+
+
+
+.search-form {
+    position: relative;
+    display: flex;
+    height: 100%;
 }
 
-.oba-logo {
-    grid-column: 2;
-    height: 5rem;
-}
-
-.robot-met-handen {
-    grid-column: 3;
-    justify-self: end;
-    margin: 0 1rem -18px 1rem;
-}

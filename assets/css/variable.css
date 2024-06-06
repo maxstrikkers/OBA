@@ -7,4 +7,8 @@
     --white: #fff;
     --black: #000;
     --linear-background: linear-gradient(to left, var(--secondary-red) 0%, #FCEDED 100%);
+    --disabled-gray: #cccccc;
+    /* Bepaal hiermee de hoogte van de header en de margin. De rest van de pagina zal dan mee scalen */
+    --header-height: 130px;
+    --header-margin: 1em;
 }
