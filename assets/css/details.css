@@ -67,3 +67,11 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.titel {
+    font-size: 18px;
+}
+
+.auteur {
+    font-size: 16px;
+}

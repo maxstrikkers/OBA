@@ -1,30 +1,31 @@
 {% include './includes/head' %}
     {% include './includes/header' %}
-
+    <h1 class="visually-hidden">Oba  chatbot functie</h1>
     <section class="body-wrapper">
+        <h2 class="visually-hidden">Chat en resultaten</h2>
         {% include './components/chatbot' %}
 
         <section class="resultaten" id="resultaten">
-            <h2>Resultaten</h2>
+            <h3>Resultaten</h3>
             {% include './components/resultaten' %}
         </section>
 
-        <section class="details", id="details">
-            <h2 class="detail-resultaten">Resultaten</h2>
+        <section class="details" id="details">
+            <h3 class="detail-resultaten">Resultaten</h3>
             <button class="terug" id="terugbutton">
-                <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="">
+                <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="Terug pijl">
                 Terug
             </button>
             <section class="text">
-                <h3 class="titel">Titel</h3>
-                <h4 class="auteur">Auteur</h4>
+                <h4 class="titel">Titel</h4>
+                <h5 class="auteur">Auteur</h5>
                 <p class="samenvatting">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe minus alias minima, corrupti ex voluptas consectetur inventore ipsa et iure similique impedit officia rem error necessitatibus! Laudantium nesciunt alias soluta!</p>
             </section>
             <a class="bekijk-detail" href="">
                 <img src="{{ './img/angle-black.svg' | asset_url }}" alt="">
                 Bekijk details
             </a>
-            <img class="img book-detail-cover" src="{{ './img/no-cover.jpeg' | asset_url }}" alt="">
+            <img class="img book-detail-cover" src="{{ './img/no-cover.jpeg' | asset_url }}" alt="Geen boeken cover">
         </section>
 
         {% include './includes/filter' %}
