@@ -46,6 +46,7 @@
     place-self: start;
     background-color: var(--primary-dark-gray);
     color: var(--black);
+    box-shadow: none;
 }
 
 .bubble.right, .temporaryBubble.right {
@@ -205,6 +206,7 @@
 }
 
 .new-chat-button {
+    font-family: "Avenir", Arial, sans-serif;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     border: 1px solid var(--primary-dark-gray);
