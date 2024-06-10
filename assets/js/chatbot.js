@@ -1,27 +1,31 @@
 // Indicator om te kijken wanneer de chat gecleared is, zodat asynchrone functies stoppen wanneer de chat gecleared wordt
 let chatCleared = false;
 let timeouts = []; // Array om timeouts bij te houden
- 
- 
+
+
 //chatbot component variables
 const chatbot = {
     main: document.getElementById("chatbot-main"),
     searchbar: document.getElementById("search-bar"),
     // suggestedForm: document.getElementById("suggested-form"),
     searchForm: document.querySelector(".search-form"),
-    newchatButton: document.getElementById("new-chat-button")
+    newchatButton: document.getElementById("new-chat-button"),
+    detailterugbutton: document.getElementById("terugbutton"),
+    resultaten: document.getElementById('resultaten'),
+    details: document.getElementById('details'),
+    filter: document.getElementById('filter')
 };
- 
+
 // Functie om een typende indicatie te tonen
- 
+
 function showTypingBubble() {
     const typingBubble = document.createElement("div");
     typingBubble.className = "bubble typing";
- 
+
     // Disable elements while typing bubble is shown
     chatbot.searchbar.disabled = true;
     chatbot.searchForm.classList.add("disabled");
- 
+
     // Add SVG to the typingBubble
     typingBubble.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
@@ -36,18 +40,18 @@ function showTypingBubble() {
         </circle>
     </svg>
     `;
- 
- 
+
+
     chatbot.main.appendChild(typingBubble);
- 
+
     if (chatCleared) {
         chatCleared = false;
         return;
     }
- 
+
     return typingBubble;
 }
- 
+
 // Functie om bubbles te genereren
 function createBubble(content, className) {
     const bubble = document.createElement("div");
@@ -55,7 +59,7 @@ function createBubble(content, className) {
     bubble.textContent = content;
     return bubble;
 }
- 
+
 // Event listener voor het versturen van de formulieren
 chatbot.searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -85,7 +89,7 @@ chatbot.searchForm.addEventListener("submit", function (event) {
 
     submitFormData(url, data);
 });
- 
+
 function createTempBubbles(form, data) {
     if (form.classList.contains("suggested-form")) {
         const formData = form.querySelector("[type=submit]").value;
@@ -106,11 +110,11 @@ function createTempBubbles(form, data) {
         chatbot.searchbar.value = "";
     }
 }
- 
+
 function placeholderResults() {
     //Weghalen van geen resultaten text
     document.querySelector(".empty-state").classList.add("hidden");
- 
+
     document.getElementById("results-section").innerHTML = `
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
@@ -118,7 +122,7 @@ function placeholderResults() {
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>`;
 }
- 
+
 function submitFormData(url, data) {
     fetch(url, {
         method: "POST",
@@ -127,57 +131,57 @@ function submitFormData(url, data) {
         },
         body: JSON.stringify(data),
     })
-    .then((response) => response.json())
-    .then((data) => {
-        const existingChats = document.querySelectorAll(".bubble");
-        existingChats.forEach((chat) => chat.remove());
+        .then((response) => response.json())
+        .then((data) => {
+            const existingChats = document.querySelectorAll(".bubble");
+            existingChats.forEach((chat) => chat.remove());
 
-        const messageData = data.messages;
-        messageData.forEach((message) => {
-            const bubble = document.createElement("div");
-            bubble.className = `bubble ${message.class}`;
-            bubble.innerHTML = `<p>${message.content}</p>`;
-            chatbot.main.appendChild(bubble);
-        });
-
-        const temporaryElements = document.querySelectorAll(".temporaryBubble");
-        temporaryElements.forEach((element) => element.remove());
-
-        chatbot.searchbar.disabled = false;
-        chatbot.searchForm.classList.remove("disabled");
-
-        scrollToBottom("chatbot-main");
-
-        const resultData = data.results;
-        const resultsSection = document.getElementById("results-section");
-        resultsSection.innerHTML = "";
-        resultData.forEach((result) => {
-            const article = document.createElement("article");
-            article.classList.add('book-result');
-            const img = document.createElement("img");
-            img.src = result.document.coverUrl;
-            img.alt = "book cover";
-
-            img.addEventListener('load', function() {
-                if (img.naturalWidth == 1 && img.naturalHeight == 1) {
-                    img.src = "./img/no-cover.jpeg";
-                    result.document.coverUrl = "./img/no-cover.jpeg";
-                }
+            const messageData = data.messages;
+            messageData.forEach((message) => {
+                const bubble = document.createElement("div");
+                bubble.className = `bubble ${message.class}`;
+                bubble.innerHTML = `<p>${message.content}</p>`;
+                chatbot.main.appendChild(bubble);
             });
 
-            article.appendChild(img);
+            const temporaryElements = document.querySelectorAll(".temporaryBubble");
+            temporaryElements.forEach((element) => element.remove());
 
-            const h5 = document.createElement("h5");
-            h5.textContent = result.document.titel;
-            article.appendChild(h5);
+            chatbot.searchbar.disabled = false;
+            chatbot.searchForm.classList.remove("disabled");
 
-            resultsSection.appendChild(article);
-            article.addEventListener('click', () => {
-                openDetail(result.document.coverUrl, result.document.titel, result.document.ppn, result.document.beschrijving, result.document.auteur);
+            scrollToBottom("chatbot-main");
+
+            const resultData = data.results;
+            const resultsSection = document.getElementById("results-section");
+            resultsSection.innerHTML = "";
+            resultData.forEach((result) => {
+                const article = document.createElement("article");
+                article.classList.add('book-result');
+                const img = document.createElement("img");
+                img.src = result.document.coverUrl;
+                img.alt = "book cover";
+
+                img.addEventListener('load', function () {
+                    if (img.naturalWidth == 1 && img.naturalHeight == 1) {
+                        img.src = "./img/no-cover.jpeg";
+                        result.document.coverUrl = "./img/no-cover.jpeg";
+                    }
+                });
+
+                article.appendChild(img);
+
+                const h5 = document.createElement("h5");
+                h5.textContent = result.document.titel;
+                article.appendChild(h5);
+
+                resultsSection.appendChild(article);
+                article.addEventListener('click', () => {
+                    openDetail(result.document.coverUrl, result.document.titel, result.document.ppn, result.document.beschrijving, result.document.auteur);
+                });
             });
-        });
-    })
-    .catch((error) => console.error("Error:", error));
+        })
+        .catch((error) => console.error("Error:", error));
 }
 
 
@@ -198,14 +202,14 @@ function placeholderImages() {
 }
 
 
- 
+
 // Functie om naar de onderkant van het chatvenster te scrollen
 function scrollToBottom(elementId) {
     const element = document.getElementById(elementId);
     if (!element) return;
- 
+
     const scrollTo = element.scrollHeight - element.clientHeight;
- 
+
     // Smooth scroll
     element.scrollTo({
         top: scrollTo,
@@ -214,15 +218,13 @@ function scrollToBottom(elementId) {
 }
 
 function openDetail(cover, titel, ppn, beschrijving, auteur) {
-    const resultaten = document.getElementById('resultaten');
-    const details = document.getElementById('details');
-    const filters = document.getElementById('filter');
 
     // Zoek de bestaande elementen in de details sectie
-    const imgElement = details.querySelector('img.book-detail-cover');
-    const titleElement = details.querySelector('h3');
-    const descriptionElement = details.querySelector('p');
-    const authorElement = details.querySelector('h4');
+    const imgElement = chatbot.details.querySelector('img.book-detail-cover');
+    const titleElement = chatbot.details.querySelector('h3');
+    const descriptionElement = chatbot.details.querySelector('p');
+    const authorElement = chatbot.details.querySelector('h4');
+    const bekijkDetail = document.querySelector('.bekijk-detail');
 
     // Pas de inhoud van de bestaande elementen aan
     if (imgElement) {
@@ -242,34 +244,50 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
         authorElement.textContent = auteur;
     }
 
-    console.log(details);
+    if (bekijkDetail) {
+        bekijkDetail.href = `https://zoeken.oba.nl/?itemid=%7Coba-catalogus%7C${ppn}`;
+    }
+
+    console.log(chatbot.details);
 
     // Display the details section and hide others
-    details.style.display = 'grid';
-    filters.style.display = 'none';
-    resultaten.style.display = 'none';
+    chatbot.details.style.display = 'grid';
+    chatbot.filter.style.display = 'none';
+    chatbot.resultaten.style.display = 'none';
+
+    chatbot.detailterugbutton.addEventListener("click", closeDetail)
+}
+
+function closeDetail() {
+    chatbot.details.style.display = 'none';
+    chatbot.filter.style.display = 'flex';
+    chatbot.resultaten.style.display = 'block';
 }
 
 
- 
 // Event listener voor de "new chat"-knop om de chat te wissen en opnieuw welkomsberichten te tonen
 chatbot.newchatButton.addEventListener("click", function () {
+    chatbot.newchatButton.style.display = "none";
+
+    if(chatbot.details.display = "grid") {
+        closeDetail()
+    }
+
+    toggleSearchHeight("close");
     chatbot.main.innerHTML = "";
     document.getElementById("results-section").innerHTML = "";
     document.querySelector(".empty-state").classList.remove("hidden");
- 
+
     chatCleared = true;
- 
+
     // Annuleer alle timeouts
     timeouts.forEach((timeout) => clearTimeout(timeout));
     timeouts = []; // Leeg de array
- 
+
     // Reset chatCleared en start welkomsberichten opnieuw
     chatCleared = false;
-    // chatbot.suggestedForm.classList.remove("hidden");
-    showWelcomeMessage();
 });
- 
+
 function toggleSearchHeight(state) {
     if (state == "open") {
         chatbot.main.style.height = "100%"
@@ -279,8 +297,10 @@ function toggleSearchHeight(state) {
         console.log("state is not defined properly: " + state)
     }
 }
- 
-chatbot.searchForm.addEventListener("submit", function() {
-    toggleSearchHeight("open")
-    // showWelcomeMessage();
+
+chatbot.searchForm.addEventListener("submit", function () {
+    toggleSearchHeight("open");
+    if (chatbot.newchatButton.style.display = "none") {
+        chatbot.newchatButton.style.display = "flex";
+    }
 })

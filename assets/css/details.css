@@ -2,15 +2,13 @@
     display: grid;
     grid-column: 2 / 3;
     grid-template-columns: 0.5fr 2fr;
-    grid-template-rows: repeat(5, min-content);
+    grid-template-rows: repeat(3, min-content);
     gap: 1rem 2rem;
     grid-auto-flow: row;
     grid-template-areas:
-        "detail-resultaten detail-resultaten"
-        "terug ..."
-        "img titel"
-        "img samenvatting"
-        "bekijk-detail samenvatting";
+        "terug detail-resultaten"
+        "img text"
+        "bekijk-detail text";
     display: none;
 }
 
@@ -20,6 +18,7 @@
 }
 
 .terug {
+    align-self: center;
     grid-area: terug;
     display: flex;
     gap: 0.5rem;
@@ -62,10 +61,9 @@
 }
 
 
-.titel {
-    grid-area: titel;
-}
-
-.samenvatting {
-    grid-area: samenvatting;
+.text {
+    grid-area: text;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

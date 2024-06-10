@@ -1,14 +1,14 @@
 <section class="chat">
+    <label>
+        <button type="button" class="new-chat-button" id="new-chat-button">
+            <img src="{{ './img/new-chat.svg' | asset_url }}" alt="new chat Icon">
+            Nieuwe Chat
+        </button>
+    </label>
     <section class="chatbot-main" id="chatbot-main">
         {% include './components/chatbot-body' %}
     </section>
     <form class="search-form" method="post" action="/search">
-            <label>
-                <button type="button" class="new-chat-button" id="new-chat-button">
-                    <img src="{{ './img/new-chat.svg' | asset_url }}" alt="new chat Icon">
-                </button>
-                {% comment %} <div class="new-chat-popup">Nieuwe Chat</div> {% endcomment %}
-            </label>
             <input id='search-bar' type="text" name="query" placeholder="Ik zoek..." required>
             <label>
                 <button type="submit">

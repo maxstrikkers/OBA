@@ -44,8 +44,8 @@
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background-color: var(--primary-red);
-    color: var(--white);
+    background-color: var(--primary-dark-gray);
+    color: var(--black);
 }
 
 .bubble.right, .temporaryBubble.right {
@@ -90,7 +90,7 @@
             position: relative;
             margin: 0 1rem;
             border: none;
-            height: 100%;
+            height: 90%;
             outline: none;
             
         }
@@ -202,4 +202,16 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+.new-chat-button {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--primary-dark-gray);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    display: none;
+    margin-bottom: 0.5rem;
+    background-color: white;
 }
