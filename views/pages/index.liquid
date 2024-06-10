@@ -1,7 +1,8 @@
 {% include './includes/head' %}
     {% include './includes/header' %}
-
+    <h1 class="visually-hidden">Oba zoek functie</h1>
     <section class="body-wrapper">
+        <h2 class="visually-hidden">Chatbot en resultaten sectie</h2>
         {% include './components/chatbot' %}
 
         <section class="resultaten" id="resultaten">
@@ -12,7 +13,7 @@
         <section class="details", id="details">
             <h2 class="detail-resultaten">Resultaten</h2>
             <button class="terug" id="terugbutton">
-                <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="">
+                <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="Zwarte pijl naar links">
                 Terug
             </button>
             <section class="text">
@@ -21,10 +22,10 @@
                 <p class="samenvatting">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe minus alias minima, corrupti ex voluptas consectetur inventore ipsa et iure similique impedit officia rem error necessitatibus! Laudantium nesciunt alias soluta!</p>
             </section>
             <a class="bekijk-detail" href="">
-                <img src="{{ './img/angle-black.svg' | asset_url }}" alt="">
+                <img src="{{ './img/angle-black.svg' | asset_url }}" alt="Zwarte driehoek naar rechts">
                 Bekijk details
             </a>
-            <img class="img book-detail-cover" src="{{ './img/no-cover.jpeg' | asset_url }}" alt="">
+            <img class="img book-detail-cover" src="{{ './img/no-cover.jpeg' | asset_url }}" alt="Geen cover plaatje">
         </section>
 
         {% include './includes/filter' %}
