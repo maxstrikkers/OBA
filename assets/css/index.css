@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+.body-grid {
+    grid-template-columns: 3fr 5fr;
+}
+
 .chatbot-wrapper {
     position: relative;
     display: flex;

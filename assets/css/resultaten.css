@@ -29,6 +29,10 @@ main button {
     }
 }
 
+.resultaten-grid {
+    grid-row-start: 1;
+}
+
 .section-article {
     width: 100%;
     display: grid;
