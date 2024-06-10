@@ -1,7 +1,8 @@
 <section class="chat">
+    <h3 class="visually-hidden">Chat sectie</h3>
     <label>
-        <button type="button" class="new-chat-button" id="new-chat-button">
-            <img src="{{ './img/new-chat.svg' | asset_url }}" alt="new chat Icon">
+        <button aria-level="Nieuwe chat knop" type="button" class="new-chat-button" id="new-chat-button">
+            <img src="{{ './img/new-chat.svg' | asset_url }}" alt="Nieuwe chat icoon">
             Nieuwe Chat
         </button>
     </label>
@@ -11,8 +12,8 @@
     <form class="search-form" method="post" action="/search">
             <input id='search-bar' type="text" name="query" placeholder="Ik zoek..." required>
             <label>
-                <button type="submit">
-                    <img src="{{ './img/send-icon.svg' | asset_url }}" alt="Submit Icon">
+                <button aria-label="Verstuur bericht knop" type="submit">
+                    <img src="{{ './img/send-icon.svg' | asset_url }}" alt="Versturen icoon">
                 </button>
             </label>
         </form>
