@@ -8,8 +8,8 @@
     border: 1px solid var(--primary-dark-gray);
     border-radius: 10px;
     max-height: 80vh;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    position: relative;
+    transition: 2s ease-in-out;
 
     &::-webkit-scrollbar {
         width: 10px;
@@ -75,5 +75,22 @@
         flex-direction: row;
         font-size: 1rem;
         font-weight: normal;
+    }
+}
+
+.fold-filter {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    height: 4rem;
+    position: absolute;
+    left: -1.9rem;
+    border: none;
+    background-color: red;
+    border-radius: 10px 0 0 10px;
+    svg {
+        transform: rotate(-90deg);
+        height: 1em;
+        fill: white;
     }
 }

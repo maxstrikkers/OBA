@@ -20,6 +20,7 @@ main button {
     padding: 2rem 0;
     width: fit-content;
     /* display: none; */
+    grid-column: 2 / 3;
 
 
     h2 {

@@ -254,7 +254,6 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
     chatbot.details.style.display = 'grid';
     chatbot.filter.style.display = 'none';
     chatbot.resultaten.style.display = 'none';
-
     chatbot.detailterugbutton.addEventListener("click", closeDetail)
 }
 
@@ -277,7 +276,6 @@ chatbot.newchatButton.addEventListener("click", function () {
     chatbot.main.innerHTML = "";
     document.getElementById("results-section").innerHTML = "";
     document.querySelector(".empty-state").classList.remove("hidden");
-
     chatCleared = true;
 
     // Annuleer alle timeouts
@@ -304,3 +302,28 @@ chatbot.searchForm.addEventListener("submit", function () {
         chatbot.newchatButton.style.display = "flex";
     }
 })
+
+const filterToggleButton = document.querySelector(".fold-filter");
+
+filterToggleButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    toggleFilterFold()
+})
+
+
+let filterfold = 0;
+
+function toggleFilterFold() {
+    const filterToggleButton = document.getElementById('filterToggleButton');
+    const svgElement = filterToggleButton.querySelector('svg');
+
+    if (filterfold === 0) {
+        svgElement.style.transform = 'rotate(90deg)';
+        filterfold = 1;
+    } else if (filterfold === 1) {
+        svgElement.style.transform = 'rotate(-90deg)';
+        filterfold = 0;
+    } else {
+        console.log("failed toggleFilterFold");
+    }
+}

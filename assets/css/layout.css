@@ -43,6 +43,10 @@ body {
     font-weight: normal;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 .button {
     font-family: "Avenir";
     font-weight: bold;
