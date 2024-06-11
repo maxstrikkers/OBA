@@ -221,9 +221,9 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
 
     // Zoek de bestaande elementen in de details sectie
     const imgElement = chatbot.details.querySelector('img.book-detail-cover');
-    const titleElement = chatbot.details.querySelector('h3');
+    const titleElement = chatbot.details.querySelector('h2');
     const descriptionElement = chatbot.details.querySelector('p');
-    const authorElement = chatbot.details.querySelector('h4');
+    const authorElement = chatbot.details.querySelector('h3');
     const bekijkDetail = document.querySelector('.bekijk-detail');
 
     // Pas de inhoud van de bestaande elementen aan
@@ -241,7 +241,7 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
     }
 
     if (authorElement) {
-        authorElement.textContent = auteur;
+        authorElement.textContent = "Auteur(s): " + auteur;
     }
 
     if (bekijkDetail) {

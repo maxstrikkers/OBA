@@ -142,15 +142,7 @@
                     img {
                         height: 1rem;
                     }
-                }
-    
-                &.new-chat-button {
-                    width: 3.5rem;
-    
-                    img {
-                        height: 1rem;
-                    }
-                }
+                } 
             }
         }
 
@@ -214,6 +206,10 @@
     align-items: center;
     gap: 1rem;
     display: none;
-    margin-bottom: 0.5rem;
+    margin: 1rem 0;
     background-color: white;
+    &:hover {
+        outline: 1px solid black;
+        cursor: pointer;
+    }
 }

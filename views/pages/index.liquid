@@ -11,14 +11,14 @@
         </section>
 
         <section class="details", id="details">
-            <h2 class="detail-resultaten">Resultaten</h2>
+            {% comment %} <h2 class="detail-resultaten">Resultaten</h2> {% endcomment %}
             <button aria-label="Terug knop" class="terug" id="terugbutton">
                 <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="Zwarte pijl naar links">
                 Terug
             </button>
             <section class="text">
-                <h3 class="titel">Titel</h3>
-                <h4 class="auteur">Auteur</h4>
+                <h2 class="titel">Titel</h2>
+                <h3 class="auteur">Auteur</h3>
                 <p class="samenvatting">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe minus alias minima, corrupti ex voluptas consectetur inventore ipsa et iure similique impedit officia rem error necessitatibus! Laudantium nesciunt alias soluta!</p>
             </section>
             <a aria-label="Bekijk details knop" class="bekijk-detail" href="">
