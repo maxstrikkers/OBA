@@ -62,7 +62,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 0rem 2rem;
+    padding-left: 2rem;
     max-height: calc(100vh - var(--header-height) - var(--header-margin) - 1vh);
 
     form.search-form {
