@@ -1,13 +1,12 @@
-// const filterForm = document.querySelector(".filter");
+const filterForm = document.querySelector(".filter");
 // const bodyWrapper = document.querySelector(".body-wrapper")
-// const filterButton = document.getElementById("filterToggleButton");
+const filterButton = document.querySelector(".filter-button");
 // const resultatenSec = document.getElementById("resultaten");
 
-// function showFilter() {
-//     filterForm.classList.toggle("hide-filter");
-//     bodyWrapper.classList.toggle("body-grid");
-//     resultatenSec.classList.toggle("resultaten-grid");
+
+function showFilter() {
+    filterForm.classList.toggle("show");
 
 
-// }
-// filterButton.addEventListener("click", showFilter);
+}
+filterButton.addEventListener("click", showFilter);

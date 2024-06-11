@@ -125,3 +125,20 @@ main button {
     font-size: 1.2rem;
 }
 
+.filter-button {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-left: auto;
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    font-family: "Avenir", Arial, sans-serif;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid var(--black);
+    border-radius: 50px;
+    display: none;
+}

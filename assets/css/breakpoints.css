@@ -39,7 +39,9 @@
     }
 
     .body-wrapper {
+        grid-template-rows: max-content calc(100vh - var(--header-height) - var(--header-margin));
         height: 100%;
+        /* height: calc(100vh - var(--header-height) - var(--header-margin)); */
     }
 
     .main-header {
@@ -63,7 +65,14 @@
 
 @media (max-width: 1200px) {  
     .filter {
-        display: none;
+       position: absolute;
+       right: 0;
+       top: 6rem;
+       display: none;
+    }
+
+    .filter-button {
+        display: flex;
     }
 
     .resultaten {
@@ -72,7 +81,10 @@
 
     .body-wrapper {
         grid-template-columns: 1fr 2fr;
+        position: relative;
     }
+
+
 }
 
 @media (max-width: 1400px) {  

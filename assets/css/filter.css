@@ -68,6 +68,10 @@
     grid-column-start: 3;
 }
 
+.show {
+    display: flex !important;
+}
+
 .bieb-bot {
     transform: rotate(-90deg);
     width: 70px;
