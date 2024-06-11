@@ -303,6 +303,7 @@ chatbot.searchForm.addEventListener("submit", function () {
     }
 })
 
+/*
 const filterToggleButton = document.querySelector(".fold-filter");
 
 filterToggleButton.addEventListener("click", function (event) {
@@ -327,3 +328,4 @@ function toggleFilterFold() {
         console.log("failed toggleFilterFold");
     }
 }
+*/
