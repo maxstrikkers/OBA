@@ -11,12 +11,13 @@
     margin-bottom: 8rem;
   }
 
-.details {
-  grid-template-areas:
-    "terug terug"
-    "img img"
-    "bekijk-detail bekijk-detail"
-    "text text";
+  .details {
+    grid-template-areas:
+      "terug terug"
+      "img img"
+      "bekijk-detail bekijk-detail"
+      "text text";
+  }
 }
 
 
