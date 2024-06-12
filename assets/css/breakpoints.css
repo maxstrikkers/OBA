@@ -94,6 +94,7 @@
         margin-right: 0;
         width: 100vw;
         max-width: 20rem;
+        z-index: 10;
     }
 
     .closefilterbutton {
