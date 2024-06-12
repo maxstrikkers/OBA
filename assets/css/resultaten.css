@@ -1,4 +1,3 @@
-
 main a {
     grid-column-start: 2;
     justify-self: end;
@@ -18,7 +17,7 @@ main button {
 
 .resultaten {
     padding: 2rem 0;
-    width: fit-content;
+    width: 100%;
     /* display: none; */
     grid-column: 2 / 3;
 
@@ -75,7 +74,7 @@ main button {
 
 .placeholder-loading-img {
     height: 17rem;
-    width: 10rem;
+    width: 100%;
     background-color: var(--primary-dark-gray);
     opacity: 0.5;
     animation: wave 2s infinite;
