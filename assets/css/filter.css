@@ -8,7 +8,6 @@
     background-color: var(--white);
     border: 1px solid var(--primary-dark-gray);
     border-radius: 10px;
-    max-height: 80vh;
     position: relative;
     transition: 1s ease-in-out;
     transform: translateX(0%);
@@ -16,18 +15,22 @@
     &::-webkit-scrollbar {
         width: 10px;
     }
-    
+
     &::-webkit-scrollbar-track {
         background: var(--white);
     }
-    
+
     &::-webkit-scrollbar-thumb {
         background: var(--primary-red);
         border-radius: 10px;
         cursor: pointer;
     }
-    
+
     &::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+    }
+
+    input:hover {
         cursor: pointer;
     }
     
@@ -38,6 +41,9 @@
         gap: 1rem;
         font-size: 1.63rem;
         font-weight: bold;
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     select {
@@ -49,6 +55,10 @@
         position: relative;
         background: url(../img/chevron-black.svg) no-repeat 95% center;
         background-size: 10px 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     fieldset {
@@ -82,7 +92,7 @@
     flex-direction: column;
     gap: 5px;
     margin-top: 0.63rem;
-    
+
     label {
         display: flex;
         flex-direction: row;
@@ -101,6 +111,7 @@
     border: none;
     background-color: red;
     border-radius: 10px 0 0 10px;
+
     svg {
         transform: rotate(-90deg);
         height: 1em;
@@ -108,8 +119,8 @@
     }
 }
 
-.filterbutton {
-    background-color: var(--primary-red); 
+.filtersearchbutton {
+    background-color: var(--primary-red);
     color: white;
     border: none;
     border-radius: 50px;
@@ -122,5 +133,19 @@
     cursor: pointer;
     transition: 0.4s;
     padding: 1rem 0;
-   margin-top: auto;
+    margin-top: auto;
+
+    &:hover {
+        cursor: pointer;
+        scale: 1.05;
+    }
+}
+
+.closefilterbutton {
+    display: none;
+    transition: 0.4s;
+    &:hover {
+        cursor: pointer;
+        scale: 1.05;
+    }
 }

@@ -260,11 +260,10 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
 }
 
 function closeDetail() {
-    chatbot.details.style.display = 'none';
-    chatbot.filter.style.display = 'flex';
-    chatbot.resultaten.style.display = 'block';
+    chatbot.details.style.display = "";
+    chatbot.filter.style.display = "";
+    chatbot.resultaten.style.display = "";
 }
-
 
 // Event listener voor de "new chat"-knop om de chat te wissen en opnieuw welkomsberichten te tonen
 chatbot.newchatButton.addEventListener("click", function () {
