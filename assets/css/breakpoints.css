@@ -11,14 +11,14 @@
     margin-bottom: 8rem;
   }
 
-  .details {
-    grid-template-areas:
-      "terug terug"
-      "img img"
-      "bekijk-detail bekijk-detail"
-      "text text";
-  }
+.details {
+  grid-template-areas:
+    "terug terug"
+    "img img"
+    "bekijk-detail bekijk-detail"
+    "text text";
 }
+
 
 @media (max-width: 768px) {
   .chat,
@@ -37,6 +37,7 @@
     }
   }
 
+
   .body-wrapper {
     grid-template-rows: max-content calc(
         100vh - var(--header-height) - var(--header-margin)
@@ -45,16 +46,30 @@
     /* height: calc(100vh - var(--header-height) - var(--header-margin)); */
   }
 
-  .main-header {
-    /* background-image: url("../img/header-background-mobile-temporary.jpg") */
-    /* Dit gedeelte staat in index.liquid als style tag. Anders werkt het niet */
-  }
+    .chat {
+        form.search-form {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--white);
+            z-index: 1;
+        }
+    }
+
 
   .details {
     grid-column: 1 / 3;
     padding: 2rem;
     margin-bottom: 8rem;
   }
+
+    .main-header {
+        background-image: url("../img/header-background-mobile-temporary.jpg")
+    }
+
+
+
 }
 
 @media (max-width: 992px) {
