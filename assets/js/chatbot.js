@@ -243,9 +243,9 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
         descriptionElement.textContent = "geen beschrijving gevonden"
     }
 
-    if (auteur) {
-        authorElement.textContent = "Auteur(s): " + auteur;
-    }
+    // if (auteur) {
+    //     authorElement.textContent = "Auteur(s): " + auteur;
+    // }
 
     if (bekijkDetail) {
         bekijkDetail.href = `https://zoeken.oba.nl/?itemid=%7Coba-catalogus%7C${ppn}`;
