@@ -154,6 +154,7 @@ function submitFormData(url, data) {
 
             const resultData = data.results;
             const resultsSection = document.getElementById("results-section");
+
             resultsSection.innerHTML = "";
             resultData.forEach((result) => {
                 const article = document.createElement("article");
@@ -232,15 +233,17 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
         imgElement.alt = titel;
     }
 
-    if (titleElement) {
+    if (titel) {
         titleElement.textContent = titel;
     }
 
-    if (descriptionElement) {
+    if (beschrijving) {
         descriptionElement.textContent = beschrijving;
+    } else {
+        descriptionElement.textContent = "geen beschrijving gevonden"
     }
 
-    if (authorElement) {
+    if (auteur) {
         authorElement.textContent = "Auteur(s): " + auteur;
     }
 
@@ -249,7 +252,6 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
     }
 
     console.log(chatbot.details);
-
     // Display the details section and hide others
     chatbot.details.style.display = 'grid';
     chatbot.filter.style.display = 'none';
@@ -268,7 +270,7 @@ function closeDetail() {
 chatbot.newchatButton.addEventListener("click", function () {
     chatbot.newchatButton.style.display = "none";
 
-    if(chatbot.details.display = "grid") {
+    if (chatbot.details.display = "grid") {
         closeDetail()
     }
 
