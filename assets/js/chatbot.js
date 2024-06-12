@@ -120,7 +120,9 @@ function placeholderResults() {
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
-        <article class="placeholder-loading-img"></article>`;
+        <article class="placeholder-loading-img"></article>
+        <p class="placeholder-loading-p">Ik ben bezig met zoeken. Een momentje alsjeblieft...</p>
+    `;
 }
 
 function submitFormData(url, data) {

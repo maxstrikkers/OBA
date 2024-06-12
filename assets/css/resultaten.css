@@ -80,6 +80,13 @@ main button {
     animation: wave 2s infinite;
 }
 
+.placeholder-loading-p {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    grid-column: 1 / 6;
+}
+
 .section-article {
     .placeholder-loading-img:nth-of-type(1){
         animation-delay: 0s;   
