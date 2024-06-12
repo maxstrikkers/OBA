@@ -6,45 +6,27 @@
             C-0.2,3.4-0.3,1.7,0.7,0.8z"/>
         </svg>
     </button> {% endcomment %}
-    <label>
-        Sorteren
-        <select name="sorteren" id="sorteren">
-            <option>Aanbevolen</option>
-            <option>Meest populair</option>
-            <option>Datum: Oud - Nieuw</option>
-            <option>Datum: Nieuw - Oud</option>
-        </select>
-    </label>
 
     <label>
         Filter
         <select name="categorie" id="categorie">
             <option>Boeken</option>
-            <option>Films</option>
-            <option>Adtiviteiten</option>
-            <option>CD's</option>
+            <option>DVD</option>
+            <option>Blu-ray</option>
+            <option>CD</option>
+            <option>Activiteiten</option>
+            <option>Over OBA</option>
         </select>
     </label>
-    <fieldset>
-        <legend>Fictie / Non Fictie</legend>
-        <section class="checkbox-section">
-            <h3 class="visually-hidden">Fictie non fictie sectie</h3>
-            <label>
-                <input type="checkbox">
-                Fictie
-            </label>
-            <label>
-                <input type="checkbox">
-                Non-Fictie
-            </label>
-
-        </section>
-    </fieldset>
 
     <fieldset>
         <legend>Leesniveau</legend>
         <section class="checkbox-section">
             <h3 class="visually-hidden">Leesniveau sectie</h3>
+            <label>
+                <input type="checkbox">
+                Leren lezen
+            </label>
             <label>
                 <input type="checkbox">
                 A
@@ -60,6 +42,22 @@
             <label>
                 <input type="checkbox">
                 D
+            </label>
+            <label>
+                <input type="checkbox">
+                Fictie Volwassenen
+            </label>
+            <label>
+                <input type="checkbox">
+                Info tot 9 Jaar
+            </label>
+            <label>
+                <input type="checkbox">
+                Info ouder dan 9 Jaar
+            </label>
+            <label>
+                <input type="checkbox">
+                Info volwassenen
             </label>
         </section>
     </fieldset>
@@ -82,5 +80,7 @@
             </label>
         </section>
     </fieldset>
+
+    <button class="filterbutton" type="submit">Filter nu!</button>
 
 </form>
