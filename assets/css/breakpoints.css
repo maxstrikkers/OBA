@@ -1,92 +1,89 @@
+@media (max-width: 576px) {
+  .section-article {
+    gap: 1rem;
+  }
 
-@media (max-width: 576px) {  
-    .section-article {
-        gap: 1rem;
-    }
+  .section-article article img {
+    height: 8rem !important;
+  }
 
-    .section-article article img {
-        height: 8rem !important;
-    }
+  .body-wrapper {
+    margin-bottom: 8rem;
+  }
 
-    .body-wrapper {
-        margin-bottom: 8rem;
-    }
-
-    .details {
-        grid-template-areas:
-        "terug terug"
-        "img img"
-        "bekijk-detail bekijk-detail"
-        "text text";
-    }
+  .details {
+    grid-template-areas:
+      "terug terug"
+      "img img"
+      "bekijk-detail bekijk-detail"
+      "text text";
+  }
 }
 
+@media (max-width: 768px) {
+  .chat,
+  .resultaten {
+    grid-column: 1 / 3;
+    padding: 0px 2rem;
+  }
 
-@media (max-width: 768px) {  
-    .chat, .resultaten {
-        grid-column: 1 / 3;
-        padding: 0px 2rem;
+  .chat {
+    form.search-form {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--white);
     }
+  }
 
-    .chat {
-        form.search-form {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: var(--white);
-        }
-    }
+  .body-wrapper {
+    grid-template-rows: max-content calc(
+        100vh - var(--header-height) - var(--header-margin)
+      );
+    height: 100%;
+    /* height: calc(100vh - var(--header-height) - var(--header-margin)); */
+  }
 
-    .body-wrapper {
-        grid-template-rows: max-content calc(100vh - var(--header-height) - var(--header-margin));
-        height: 100%;
-        /* height: calc(100vh - var(--header-height) - var(--header-margin)); */
-    }
+  .main-header {
+    /* background-image: url("../img/header-background-mobile-temporary.jpg") */
+    /* Dit gedeelte staat in index.liquid als style tag. Anders werkt het niet */
+  }
 
-    .main-header {
-        background-image: url("../img/header-background-mobile-temporary.jpg")
-    }
-
-    .details {
-        grid-column: 1 / 3;
-        padding: 2rem;
-        margin-bottom: 8rem;
-    }
+  .details {
+    grid-column: 1 / 3;
+    padding: 2rem;
+    margin-bottom: 8rem;
+  }
 }
 
-
-@media (max-width: 992px) {  
-    .section-article article img {
-        height: 10rem;
-    }
+@media (max-width: 992px) {
+  .section-article article img {
+    height: 10rem;
+  }
 }
 
+@media (max-width: 1200px) {
+  .filter {
+    position: absolute;
+    right: 0;
+    top: 6rem;
+    display: none;
+  }
 
-@media (max-width: 1200px) {  
-    .filter {
-       position: absolute;
-       right: 0;
-       top: 6rem;
-       display: none;
-    }
+  .filter-button {
+    display: flex;
+  }
 
-    .filter-button {
-        display: flex;
-    }
+  .resultaten {
+    padding-right: 2rem;
+  }
 
-    .resultaten {
-        padding-right: 2rem;
-    }
-
-    .body-wrapper {
-        grid-template-columns: 1fr 2fr;
-        position: relative;
-    }
-
-
+  .body-wrapper {
+    grid-template-columns: 1fr 2fr;
+    position: relative;
+  }
 }
 
-@media (max-width: 1400px) {  
-
+@media (max-width: 1400px) {
 }
