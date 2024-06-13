@@ -1,7 +1,8 @@
-// Indicator om te kijken wanneer de chat gecleared is, zodat asynchrone functies stoppen wanneer de chat gecleared wordt
-let chatCleared = false;
-let timeouts = []; // Array om timeouts bij te houden
-
+// Wis de sessionStorage bij het laden van de pagina
+window.onload = function() {
+    sessionStorage.removeItem('conversationId');
+  };
+  
 
 //chatbot component variables
 const chatbot = {
@@ -40,15 +41,7 @@ function showTypingBubble() {
         </circle>
     </svg>
     `;
-
-
     chatbot.main.appendChild(typingBubble);
-
-    if (chatCleared) {
-        chatCleared = false;
-        return;
-    }
-
     return typingBubble;
 }
 
@@ -126,6 +119,10 @@ function placeholderResults() {
 }
 
 function submitFormData(url, data) {
+    const conversationId = sessionStorage.getItem('conversationId'); // Haal de conversationId op uit sessionStorage
+    if (conversationId) {
+        data.conversationId = conversationId; // Voeg conversationId toe aan het data object
+    }
     fetch(url, {
         method: "POST",
         headers: {
@@ -183,10 +180,12 @@ function submitFormData(url, data) {
                     openDetail(result.document.coverUrl, result.document.titel, result.document.ppn, result.document.beschrijving, result.document.auteur);
                 });
             });
+            if (data.conversationId) {
+                sessionStorage.setItem('conversationId', data.conversationId);
+            }
         })
         .catch((error) => console.error("Error:", error));
 }
-
 
 function placeholderImages() {
     const images = document.querySelectorAll('img');
@@ -274,19 +273,11 @@ chatbot.newchatButton.addEventListener("click", function () {
     if (chatbot.details.display = "grid") {
         closeDetail()
     }
-
+    sessionStorage.removeItem('conversationId');
     toggleSearchHeight("close");
     chatbot.main.innerHTML = "";
     document.getElementById("results-section").innerHTML = "";
     document.querySelector(".empty-state").classList.remove("hidden");
-    chatCleared = true;
-
-    // Annuleer alle timeouts
-    timeouts.forEach((timeout) => clearTimeout(timeout));
-    timeouts = []; // Leeg de array
-
-    // Reset chatCleared en start welkomsberichten opnieuw
-    chatCleared = false;
 });
 
 function toggleSearchHeight(state) {
