@@ -1,24 +1,20 @@
 require("dotenv").config();
 process.env.TYPESENSEAPIKEY;
 
-async function searchTypesense(query) {
+async function searchTypesense(query, conversationId = null) {
   const url = `https://j6wg7ln8zo0ity15p-1.a1.typesense.net/multi_search`;
-  try {
-    const params = new URLSearchParams({
-      q: query,
-      conversation: "true",
-      conversation_model_id: "0aa6ecfe-dcd7-469c-ba9f-cb407d0a9499",
-      searches: JSON.stringify([
-        {
-          collection: "obadbx",
-          query_by: "embedding",
-          "per page": "50",
-          prefix: "false",
-          include_fields: "titel,beschrijving,auteur,ppn",
-        },
-      ]),
-    });
 
+  const params = new URLSearchParams({
+    q: query,
+    conversation: "true",
+    conversation_model_id: "0aa6ecfe-dcd7-469c-ba9f-cb407d0a9499",
+  });
+
+  if (conversationId) {
+    params.append('conversation_id', conversationId);
+  }
+
+  try {
     const response = await fetch(`${url}?${params}`, {
       method: "POST",
       headers: {
@@ -42,12 +38,12 @@ async function searchTypesense(query) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data;
+    return await response.json();
   } catch (error) {
     console.error("Error searching Typesense:", error);
   }
-} 
+}
+
 
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;

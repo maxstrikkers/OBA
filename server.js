@@ -41,8 +41,9 @@ app.post('/search', async function (req, res) {
     class: "right",
   };
   conversation.push(message);
-
-  const chatResult = await searchTypesense(message.content);
+  const chatResult = await searchTypesense(message.content, req.body.conversationId);
+  
+  const id = chatResult.conversation.conversation_history.id;
 
   const finalBookInfo = await addCoverImageToDocuments(chatResult.results[0].hits);
 
@@ -52,7 +53,7 @@ app.post('/search', async function (req, res) {
   };
   conversation.push(answerMessage);
 
-  res.json({ messages: conversation, results: finalBookInfo });
+  res.json({ messages: conversation, results: finalBookInfo, conversationId: id });
 });
 
 // Start server
