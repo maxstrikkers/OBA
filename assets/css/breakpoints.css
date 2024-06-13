@@ -3,9 +3,8 @@
         gap: 1rem;
     }
 
-
     .section-article article img {
-        height: 8rem !important;
+        height: 12rem !important;
     }
 
     .body-wrapper {
@@ -78,8 +77,13 @@
 
 
 @media (max-width: 992px) {
-    .section-article article img {
-        height: 10rem;
+    .section-article {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
+    .placeholder-loading-img {
+        height: 15rem;
     }
 }
 
