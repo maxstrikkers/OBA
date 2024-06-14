@@ -29,12 +29,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Index page
-app.get('/', function (req, res) {
-  res.render('pages/index', { pageName: 'index' });
+app.get("/", function (req, res) {
+  res.render("pages/index", { pageName: "index" });
 });
 
 // Search route
-app.post('/search', async function (req, res) {
+app.post("/search", async function (req, res) {
   let conversation = req.body.bubbles;
   const message = {
     content: req.body.query,
@@ -44,7 +44,11 @@ app.post('/search', async function (req, res) {
 
   const chatResult = await searchTypesense(message.content);
 
-  const finalBookInfo = await addCoverImageToDocuments(chatResult.results[0].hits);
+  const finalBookInfo = await addCoverImageToDocuments(
+    chatResult.results[0].hits
+  );
+
+  // console.log(chatResult.results[0].hits);
 
   const answerMessage = {
     content: chatResult.conversation.answer,
@@ -53,6 +57,33 @@ app.post('/search', async function (req, res) {
   conversation.push(answerMessage);
 
   res.json({ messages: conversation, results: finalBookInfo });
+});
+
+app.post("/filter", async (req, res) => {
+  const { checkbox9, checkbox18 } = req.body;
+  const message = {
+    content: req.body.query,
+    class: "right",
+  };
+  const chatResult = await searchTypesense(message.content);
+
+  let finalBookInfo = await addCoverImageToDocuments(
+    chatResult.results[0].hits
+  );
+
+  // Filter the results based on the checkboxes
+  finalBookInfo = finalBookInfo.filter((result) => {
+    if (checkbox9 && result.document.indeling === "info volwassenen") {
+      return true;
+    }
+    if (checkbox18 && result.document.indeling === "18 +") {
+      return true;
+    }
+    return false;
+  });
+
+  res.json(finalBookInfo);
+  console.log(finalBookInfo);
 });
 
 // Start server

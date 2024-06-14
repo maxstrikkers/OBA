@@ -12,7 +12,7 @@ async function searchTypesense(query) {
         {
           collection: "obadbx",
           query_by: "embedding",
-          "per page": "50",
+          per_page: "50",
           prefix: "false",
           include_fields: "titel,beschrijving,auteur,ppn",
         },
@@ -30,9 +30,9 @@ async function searchTypesense(query) {
           {
             collection: "obadbx",
             query_by: "embedding",
-            "per page": "50",
+            per_page: "50",
             prefix: "false",
-            include_fields: "titel,beschrijving,auteur,ppn",
+            include_fields: "titel,beschrijving,auteur,ppn,indeling",
           },
         ],
       }),
@@ -47,7 +47,7 @@ async function searchTypesense(query) {
   } catch (error) {
     console.error("Error searching Typesense:", error);
   }
-} 
+}
 
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
@@ -72,7 +72,6 @@ async function addCoverImageToDocuments(searchResults) {
   // Return de resultaten
   return finalResults;
 }
-
 
 module.exports = {
   searchTypesense,
