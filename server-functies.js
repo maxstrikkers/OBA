@@ -7,7 +7,8 @@ async function searchTypesense(query, conversationId = null) {
   const params = new URLSearchParams({
     q: query,
     conversation: "true",
-    conversation_model_id: "0aa6ecfe-dcd7-469c-ba9f-cb407d0a9499",
+    // conversation_model_id: "0aa6ecfe-dcd7-469c-ba9f-cb407d0a9499",
+    conversation_model_id: "aff860fa-dbb9-4260-82e0-3f50bcff9328",
   });
 
   if (conversationId) {
@@ -26,7 +27,7 @@ async function searchTypesense(query, conversationId = null) {
           {
             collection: "obadbx",
             query_by: "embedding",
-            "per page": "50",
+            per_page: "50",
             prefix: "false",
             include_fields: "titel,beschrijving,auteur,ppn",
           },

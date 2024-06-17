@@ -1,8 +1,8 @@
 // Wis de sessionStorage bij het laden van de pagina
-window.onload = function() {
+window.onload = function () {
     sessionStorage.removeItem('conversationId');
-  };
-  
+};
+
 
 //chatbot component variables
 const chatbot = {
@@ -162,6 +162,11 @@ function submitFormData(url, data) {
                 img.src = result.document.coverUrl;
                 img.alt = "book cover";
 
+
+                const ppn = result.document.ppn; // Replace with your actual ppn value
+                fetchId(ppn);
+                console.log("bookid = " + book)
+
                 img.addEventListener('load', function () {
                     if (img.naturalWidth == 1 && img.naturalHeight == 1) {
                         img.src = "./img/no-cover.jpeg";
@@ -176,8 +181,10 @@ function submitFormData(url, data) {
                 article.appendChild(h5);
 
                 resultsSection.appendChild(article);
+
                 article.addEventListener('click', () => {
-                    openDetail(result.document.coverUrl, result.document.titel, result.document.ppn, result.document.beschrijving, result.document.auteur);
+                    openDetail(result.document.coverUrl, result.document.titel, bookId, result.document.beschrijving, result.document.auteur);
+                    console.log('added eventlistener')
                 });
             });
             if (data.conversationId) {
@@ -185,6 +192,30 @@ function submitFormData(url, data) {
             }
         })
         .catch((error) => console.error("Error:", error));
+}
+
+
+async function fetchId(ppn) {
+    try {
+        const response = await fetch(`https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}`, {
+            method: "GET",
+            headers: {
+                "X-TYPESENSE-API-KEY": process.env.TYPESENSEAPIKEY,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const bookId = data.id; // Assuming the response contains an 'id' field
+        console.log(bookId);
+        return bookId;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
 }
 
 function placeholderImages() {
@@ -219,7 +250,7 @@ function scrollToBottom(elementId) {
     });
 }
 
-function openDetail(cover, titel, ppn, beschrijving, auteur) {
+function openDetail(cover, titel, bookId, beschrijving, auteur) {
 
     // Zoek de bestaande elementen in de details sectie
     const imgElement = chatbot.details.querySelector('img.book-detail-cover');
@@ -249,7 +280,7 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
     // }
 
     if (bekijkDetail) {
-        bekijkDetail.href = `https://zoeken.oba.nl/?itemid=%7Coba-catalogus%7C${ppn}`;
+        bekijkDetail.href = `https://zoeken.oba.nl/detail/?itemid=%7Coba-catalogus%7C${bookId}`;
     }
 
     console.log(chatbot.details);

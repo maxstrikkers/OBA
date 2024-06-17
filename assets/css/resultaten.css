@@ -16,7 +16,7 @@ main button {
 }
 
 .resultaten {
-    padding: 2rem 0;
+    padding: 0 0 0 2rem;
     width: 100%;
     /* display: none; */
     grid-column: 2 / 3;
