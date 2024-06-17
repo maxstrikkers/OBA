@@ -107,7 +107,7 @@ function placeholderResults() {
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
         <p class="placeholder-loading-p">Ik ben bezig met zoeken. Een momentje alsjeblieft...</p>
-        <svg class="placeholder-loading-svg" xmlns="http://www.w3.org/2000/svg" width="10em" height="10em" viewBox="0 0 24 24"><path fill="var(--primary-dark-gray" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5"/><path fill="var(--primary-red)" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
+        <svg class="placeholder-loading-svg" xmlns="http://www.w3.org/2000/svg" width="10em" height="10em" viewBox="0 0 24 24"><path fill="var(--primary-dark-gray" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5"/><path fill="var(--primary-purple)" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
     `;
 }
 
@@ -148,7 +148,7 @@ function submitFormData(url, data) {
                 if (anyChecked) {
                     addToDataObject(rating);
                 } else {
-                    console.log("No star checked");
+                    // console.log("No star checked");
                 }
             }
             captureRating()
@@ -317,7 +317,7 @@ function addToDataObject(rating) {
         rating: rating.toString() 
     };
 
-    console.log(`New prompt ${promptName} added at ${currentTimestamp} with rating ${rating}`);
+    // console.log(`New prompt ${promptName} added at ${currentTimestamp} with rating ${rating}`);
     console.log(dataObject);
 
     nextPromptIndex++; 
@@ -328,7 +328,7 @@ function createNewTimestamp() {
     currentTimestamp = new Date().toLocaleString('en-GB'); 
     dataObject[currentTimestamp] = {}; 
     nextPromptIndex = 1; 
-    console.log(`New timestamp created: ${currentTimestamp}`);
+    // console.log(`New timestamp created: ${currentTimestamp}`);
 }
 
 

@@ -5,8 +5,8 @@
 	--outline-fieldset:dodgerblue;
 	
 	--clr-star-default:#848484;
-	--clr-star-checked: var(--primary-red);
-	--clr-star-hover:coral;	
+	--clr-star-checked: var(--primary-purple);
+	--clr-star-hover:var(--secondary-purple);	
 }
 
 
