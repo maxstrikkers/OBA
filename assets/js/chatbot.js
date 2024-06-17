@@ -45,13 +45,6 @@ function showTypingBubble() {
     return typingBubble;
 }
 
-// Functie om bubbles te genereren
-function createBubble(content, className) {
-    const bubble = document.createElement("div");
-    bubble.className = `bubble ${className}`;
-    bubble.textContent = content;
-    return bubble;
-}
 
 // Event listener voor het versturen van de formulieren
 chatbot.searchForm.addEventListener("submit", function (event) {
@@ -133,6 +126,55 @@ function submitFormData(url, data) {
     })
         .then((response) => response.json())
         .then((data) => {
+
+            //
+            //rating stars
+            //
+
+
+            // Example logic to capture user's rating
+            const ratingFormStars = document.querySelectorAll('.rating-form input[type="radio"]');
+
+            function captureRating() {
+                let rating = 0;
+                let anyChecked = false;
+
+                ratingFormStars.forEach((star, index) => {
+                    if (star.checked) {
+                        anyChecked = true;
+                        rating = index + 1; // Set rating to the position (index + 1) of the checked star
+                    }
+                });
+
+                if (anyChecked) {
+                    addToDataObject(rating);
+                } else {
+                    console.log("No star checked");
+                }
+            }
+            captureRating()
+
+            // Event listener for handling page unload (close, refresh, navigate away)
+            window.addEventListener('beforeunload', function (event) {
+                // Check if any star is checked before unloading
+                let anyChecked = false;
+                ratingFormStars.forEach(star => {
+                    if (star.checked) {
+                        anyChecked = true;
+                    }
+                });
+
+                // If any star is checked, add a new prompt before unloading
+                if (anyChecked) {
+                    addToDataObject(0); // Assuming a default rating of 0 if no star is selected
+                }
+            });
+
+
+            //
+            // existing chat removal
+            //
+
             const existingChats = document.querySelectorAll(".bubble");
             existingChats.forEach((chat) => chat.remove());
 
@@ -167,7 +209,7 @@ function submitFormData(url, data) {
                 const ppn = result.document.ppn; // Replace with your actual ppn value
 
                 const bookId = `https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}&authorization=ffbc1ededa6f23371bc40df1864843be`;
-                
+
 
                 img.addEventListener('load', function () {
 
@@ -176,7 +218,7 @@ function submitFormData(url, data) {
                         result.document.coverUrl = "./img/no-cover.jpeg";
                     }
 
-                    img.onerror = function() {
+                    img.onerror = function () {
                         img.src = "./img/no-cover.jpeg";
                     };
 
@@ -194,7 +236,14 @@ function submitFormData(url, data) {
                     openDetail(result.document.coverUrl, result.document.titel, bookId, result.document.beschrijving, result.document.auteur);
                     console.log('added eventlistener')
                 });
+
             });
+
+            showTypingBubble();
+            setTimeout(() => {
+                addLogging();
+            }, "3000");
+
             if (data.conversationId) {
                 sessionStorage.setItem('conversationId', data.conversationId);
             }
@@ -202,27 +251,87 @@ function submitFormData(url, data) {
         .catch((error) => console.error("Error:", error));
 }
 
-// async function fetchId(ppn) {
-//     try {
-//         const response = await fetch(`${corsProxyUrl}https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}&authorization=ffbc1ededa6f23371bc40df1864843be`, {
-//             method: "GET",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//         });
+//Add logging review stars in chat
 
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! status: ${response.status}`);
-//         }
+function addLogging() {
+    var form = document.createElement('form');
+    form.classList.add('rating-form', 'temporaryBubble', 'left');
+    var fieldset = document.createElement('fieldset');
+    var legend = document.createElement('legend');
+    legend.textContent = 'Geef dit antwoord een cijfer.';
 
-//         const data = await response.json();
-//         const bookId = data.id; // Assuming the response contains an 'id' field
-//         console.log(bookId);
-//         return bookId;
-//     } catch (error) {
-//         console.error('Error fetching data:', error);
-//     }
-// }
+    // Append legend to fieldset
+    fieldset.appendChild(legend);
+
+    // Create and append radio inputs and labels
+    for (var i = 1; i <= 5; i++) {
+        var input = document.createElement('input');
+        input.classList.add("rating-input");
+        input.type = 'radio';
+        input.name = 'rating';
+        input.id = 'rating' + i;
+        input.value = i + ' ster' + (i > 1 ? 'ren' : '');
+
+        var label = document.createElement('label');
+        label.htmlFor = 'rating' + i;
+        label.setAttribute('aria-label', i + ' ster' + (i > 1 ? 'ren' : ''));
+
+        fieldset.appendChild(input);
+        fieldset.appendChild(label);
+    }
+    form.appendChild(fieldset);
+
+    chatbot.main.appendChild(form);
+
+//
+// Remove typing bubble
+//
+    const typingBubble = document.querySelector(".bubble.typing");
+    if (typingBubble) {
+        typingBubble.remove();
+        chatbot.searchbar.disabled = false;
+        chatbot.searchForm.classList.remove("disabled");
+    }
+}
+
+//
+// Add to data object function
+//
+
+let dataObject = {}; 
+let currentTimestamp = ''; 
+let nextPromptIndex = 1;
+
+
+function addToDataObject(rating) {
+
+    if (!currentTimestamp) {
+        createNewTimestamp(); 
+    }
+
+    const promptName = `prompt ${nextPromptIndex}`;
+    dataObject[currentTimestamp][promptName] = {
+        date: new Date().toLocaleDateString('en-GB'), 
+        time: new Date().toLocaleTimeString('en-GB'), 
+        conversationhistory: [], 
+        results: [], 
+        rating: rating.toString() 
+    };
+
+    console.log(`New prompt ${promptName} added at ${currentTimestamp} with rating ${rating}`);
+    console.log(dataObject);
+
+    nextPromptIndex++; 
+}
+
+// Function to create a new timestamped object in dataObject
+function createNewTimestamp() {
+    currentTimestamp = new Date().toLocaleString('en-GB'); 
+    dataObject[currentTimestamp] = {}; 
+    nextPromptIndex = 1; 
+    console.log(`New timestamp created: ${currentTimestamp}`);
+}
+
 
 
 function placeholderImages() {
@@ -307,6 +416,7 @@ function closeDetail() {
 // Event listener voor de "new chat"-knop om de chat te wissen en opnieuw welkomsberichten te tonen
 chatbot.newchatButton.addEventListener("click", function () {
     chatbot.newchatButton.style.display = "none";
+    createNewTimestamp()
 
     if (chatbot.details.display = "grid") {
         closeDetail()
@@ -335,29 +445,3 @@ chatbot.searchForm.addEventListener("submit", function () {
     }
 })
 
-/*
-const filterToggleButton = document.querySelector(".fold-filter");
-
-filterToggleButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    toggleFilterFold()
-})
-
-
-let filterfold = 0;
-
-function toggleFilterFold() {
-    const filterToggleButton = document.getElementById('filterToggleButton');
-    const svgElement = filterToggleButton.querySelector('svg');
-
-    if (filterfold === 0) {
-        svgElement.style.transform = 'rotate(90deg)';
-        filterfold = 1;
-    } else if (filterfold === 1) {
-        svgElement.style.transform = 'rotate(-90deg)';
-        filterfold = 0;
-    } else {
-        console.log("failed toggleFilterFold");
-    }
-}
-*/
