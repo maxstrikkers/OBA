@@ -38,16 +38,42 @@ async function searchTypesense(query, conversationId = null) {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+    
+    let results = await response.json();
+    const uniqueResults = removeDuplicates(results.results[0].hits);
+    results.results[0].hits = uniqueResults;
+    return results;
 
-    return await response.json();
   } catch (error) {
     console.error("Error searching Typesense:", error);
   }
 }
 
+function removeDuplicates(searchResults) {
+  const uniqueResults = [];
+  const seenPPNs = new Set();
+  const seenTitles = new Set();
+  
+  searchResults.forEach(element => {
+    const ppn = element.document.ppn;
+    const title = element.document.titel.toLowerCase(); // Case-insensitive check for titles
+    
+    if (!seenPPNs.has(ppn) && !seenTitles.has(title)) {
+      seenPPNs.add(ppn);
+      seenTitles.add(title);
+      uniqueResults.push(element);
+    }
+  });
+
+  return uniqueResults;
+}
+
+
+
 
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
+  console.log(searchResults)
 
   // Maak een array van fetch promises
   const fetchPromises = finalResults.map((item) =>
