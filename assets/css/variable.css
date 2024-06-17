@@ -1,14 +1,13 @@
-:root{
-    --primary-red: #E61C24;
-    --secondary-red: #D4B6B6;
-    --primary-dark-gray: #D9D9D9;
-    --primary-light-gray: #F2F2F2;
-    --primary-green: #4BAA32;
-    --white: #fff;
-    --black: #000;
-    --linear-background: linear-gradient(to left, var(--secondary-red) 0%, #FCEDED 100%);
-    --disabled-gray: #cccccc;
-    /* Bepaal hiermee de hoogte van de header en de margin. De rest van de pagina zal dan mee scalen */
-    --header-height: 130px;
-    --header-margin: 1em;
+:root {
+  --primary-purple: #6d58b1;
+  --secondary-purple: #b3a4e6;
+  --primary-dark-gray: #d9d9d9;
+  --primary-light-gray: #f2f2f2;
+  --primary-green: #4baa32;
+  --white: #fff;
+  --black: #000;
+  --disabled-gray: #cccccc;
+  /* Bepaal hiermee de hoogte van de header en de margin. De rest van de pagina zal dan mee scalen */
+  --header-height: 100px;
+  --header-margin: 1em;
 }
