@@ -56,6 +56,7 @@ async function addCoverImageToDocuments(searchResults) {
     )
       .then((response) => {
         if (!response.ok) throw new Error("Netwerk respons was niet ok.");
+
         item.document.coverUrl = response.url;
       })
       .catch((error) => {

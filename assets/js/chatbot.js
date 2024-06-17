@@ -115,6 +115,7 @@ function placeholderResults() {
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
         <p class="placeholder-loading-p">Ik ben bezig met zoeken. Een momentje alsjeblieft...</p>
+        <svg class="placeholder-loading-svg" xmlns="http://www.w3.org/2000/svg" width="10em" height="10em" viewBox="0 0 24 24"><path fill="var(--primary-dark-gray" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5"/><path fill="var(--primary-red)" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
     `;
 }
 
@@ -164,14 +165,21 @@ function submitFormData(url, data) {
 
 
                 const ppn = result.document.ppn; // Replace with your actual ppn value
-                fetchId(ppn);
-                console.log("bookid = " + book)
+
+                const bookId = `https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}&authorization=ffbc1ededa6f23371bc40df1864843be`;
+                
 
                 img.addEventListener('load', function () {
+
                     if (img.naturalWidth == 1 && img.naturalHeight == 1) {
                         img.src = "./img/no-cover.jpeg";
                         result.document.coverUrl = "./img/no-cover.jpeg";
                     }
+
+                    img.onerror = function() {
+                        img.src = "./img/no-cover.jpeg";
+                    };
+
                 });
 
                 article.appendChild(img);
@@ -194,29 +202,28 @@ function submitFormData(url, data) {
         .catch((error) => console.error("Error:", error));
 }
 
+// async function fetchId(ppn) {
+//     try {
+//         const response = await fetch(`${corsProxyUrl}https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}&authorization=ffbc1ededa6f23371bc40df1864843be`, {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//             },
+//         });
 
-async function fetchId(ppn) {
-    try {
-        const response = await fetch(`https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}`, {
-            method: "GET",
-            headers: {
-                "X-TYPESENSE-API-KEY": process.env.TYPESENSEAPIKEY,
-                "Content-Type": "application/json",
-            },
-        });
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! status: ${response.status}`);
+//         }
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+//         const data = await response.json();
+//         const bookId = data.id; // Assuming the response contains an 'id' field
+//         console.log(bookId);
+//         return bookId;
+//     } catch (error) {
+//         console.error('Error fetching data:', error);
+//     }
+// }
 
-        const data = await response.json();
-        const bookId = data.id; // Assuming the response contains an 'id' field
-        console.log(bookId);
-        return bookId;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-}
 
 function placeholderImages() {
     const images = document.querySelectorAll('img');
@@ -280,7 +287,7 @@ function openDetail(cover, titel, bookId, beschrijving, auteur) {
     // }
 
     if (bekijkDetail) {
-        bekijkDetail.href = `https://zoeken.oba.nl/detail/?itemid=%7Coba-catalogus%7C${bookId}`;
+        bekijkDetail.href = bookId;
     }
 
     console.log(chatbot.details);

@@ -87,6 +87,11 @@ main button {
     grid-column: 1 / 6;
 }
 
+.placeholder-loading-svg {
+    grid-column: 3 ;
+    width: 100%;
+}
+
 .section-article {
     .placeholder-loading-img:nth-of-type(1){
         animation-delay: 0s;   
