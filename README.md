@@ -52,6 +52,7 @@ Hieronder staan een aantal problemen en/of fouten waar we van op de hoogte zijn 
  - Titels in chatbot prompt worden (slecht) weergegeven terwijl dit niet zo zou moeten zijn.
  - Filter functie is nog niet geimplementeerd.
  - Laadcirkel staat niet in het midden op mobile.
+ - Resultaten matchen niet met de zoekopdracht en het antwoord van de frontend AI.
 
 
 
