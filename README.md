@@ -45,6 +45,14 @@ Deze versie van het prototype heeft een ingebouwd logging systeem. Dus wanneer j
  - Datum
  - Rating ( 1 tot 5 sterren )
 
+## Known Issues
+Hieronder staan een aantal problemen en/of fouten waar we van op de hoogte zijn maar waar we geen tijd voor hadden om te fixen. Hier vallen ook dingen onder die buiten onze controle lagen.
+
+ - Resultaten cover width onregelmatig door te lange titels
+ - Titels in chatbot prompt worden (slecht) weergegeven terwijl dit niet zo zou moeten zijn.
+ - Filter functie is nog niet geimplementeerd.
+ - Laadcirkel staat niet in het midden op mobile.
+
 
 
 ## Contributies
