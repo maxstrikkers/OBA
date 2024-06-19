@@ -22,6 +22,7 @@ function showTypingBubble() {
     typingBubble.className = "bubble typing";
 
     chatbot.searchbar.disabled = true;
+    chatbot.newchatButton.disabled = true
     chatbot.searchForm.classList.add("disabled");
 
     typingBubble.innerHTML = `
@@ -41,6 +42,7 @@ function showTypingBubble() {
     return typingBubble;
 }
 
+// removes all typing bubbles whenever it is called and enables searching
 function removeTypingBubbles() {
     chatbot.searchbar.disabled = false;
     chatbot.searchForm.classList.remove("disabled");
@@ -50,14 +52,13 @@ function removeTypingBubbles() {
     typingBubbles.forEach(typingBubble => {
         typingBubble.remove();
     });
-
-    // Assuming chatbot is a global object or defined elsewhere in your code
     chatbot.searchbar.disabled = false;
+    chatbot.newchatButton.disabled = false
     chatbot.searchForm.classList.remove("disabled");
 }
 
 
-// Event listener voor het versturen van de formulieren
+// Event listener for sending the searchform
 chatbot.searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const data = {};
@@ -86,6 +87,7 @@ chatbot.searchForm.addEventListener("submit", function (event) {
     submitFormData(url, data);
 });
 
+// create a temporary bubble of your prompt. (it is removed when the data is loaded in and replaced with the actual data)
 function createTempBubbles(form, data) {
     if (form.classList.contains("suggested-form")) {
         const formData = form.querySelector("[type=submit]").value;
@@ -107,6 +109,7 @@ function createTempBubbles(form, data) {
     }
 }
 
+// placeholder results animation
 function placeholderResults() {
     document.querySelector(".empty-state").classList.add("hidden");
 
@@ -215,6 +218,7 @@ let formData = {
     ratings: []
 };
 
+// add rating stars after a prompt
 function addLogging() {
     var form = document.createElement('form');
     form.classList.add('rating-form', 'temporaryBubble', 'left');
@@ -251,19 +255,21 @@ function addLogging() {
 }
 
 
-let dataObject = {}; // Existing global variable
-let currentTimestamp = ''; // Existing global variable
-let nextPromptIndex = 1; // Existing global variable
+let dataObject = {};
+let currentTimestamp = ''; 
+let nextPromptIndex = 1; 
 
-// Assuming data is accessible within the scope of where rating clicks are handled
+
+
 function handleRatingClick(event) {
-    const rating = event.target.value; // Assuming rating is stored in a data attribute
+    const rating = event.target.value; 
     console.log(data)
     const resultsData = data.results;
-    const messageData = data.messages; // Assuming data.messages is accessible here
+    const messageData = data.messages;
     addToDataObject(rating, messageData, resultsData);
 }
 
+// add data to dataobject for logging to server
 function addToDataObject(rating, messageData, resultsData) {
     if (!currentTimestamp) {
         createNewTimestamp(); // Ensure a timestamp is created if it doesn't exist
@@ -315,14 +321,15 @@ function sendLogToServer(logData) {
     });
 }
 
+//creates a new timestamp for logging when clicking into a new chat
 function createNewTimestamp() {
-    currentTimestamp = new Date().toLocaleString('en-GB'); // Create new timestamp
-    dataObject[currentTimestamp] = {}; // Initialize object for new timestamp
-    nextPromptIndex = 1; // Reset prompt index for new timestamp
+    currentTimestamp = new Date().toLocaleString('en-GB'); 
+    dataObject[currentTimestamp] = {}; 
+    nextPromptIndex = 1;
 }
 
 
-
+// change problematic images to placeholders
 function placeholderImages() {
     const images = document.querySelectorAll("img");
     const placeholderImageUrl = "path/to/placeholder.jpg";
@@ -339,7 +346,7 @@ function placeholderImages() {
     });
 }
 
-// Functie om naar de onderkant van het chatvenster te scrollen
+// scroll to bottom of element with id
 function scrollToBottom(elementId) {
     const element = document.getElementById(elementId);
     if (!element) return;
@@ -353,6 +360,7 @@ function scrollToBottom(elementId) {
     });
 }
 
+//open details page and load it dynamically
 function openDetail(cover, titel, ppn, beschrijving, auteur) {
     // Zoek de bestaande elementen in de details sectie
     const imgElement = chatbot.details.querySelector("img.book-detail-cover");
