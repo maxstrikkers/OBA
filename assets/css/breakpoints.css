@@ -1,14 +1,16 @@
 @media (max-width: 576px) {
   .section-article {
     gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   }
 
-  .section-article article img {
-    height: 12rem !important;
+  .section-article article img,
+  .placeholder-loading-img {
+    aspect-ratio: 2 / 3;
   }
 
   .body-wrapper {
-    margin-bottom: 8rem;
+    /* margin-bottom: 8rem; */
   }
 
   .details {
@@ -24,10 +26,13 @@
   .chat,
   .resultaten {
     grid-column: 1 / 3;
-    padding: 0px 2rem;
+    padding: 0px 32px;
   }
 
   .chat {
+    margin-bottom: 1rem;
+    padding: 0;
+    max-height: 40vh;
     form.search-form {
       position: fixed;
       left: 0;
@@ -38,11 +43,15 @@
   }
 
   .body-wrapper {
-    grid-template-rows: max-content calc(
+    /* grid-template-rows: max-content calc(
         100vh - var(--header-height) - var(--header-margin)
-      );
-    height: 100%;
+      ); */
+    /* height: 100%; */
     /* height: calc(100vh - var(--header-height) - var(--header-margin)); */
+  }
+
+  .section-article {
+    /* margin-bottom: 12rem; */
   }
 
   .chat {
@@ -63,23 +72,33 @@
   }
 
   .main-header {
-    background-image: url("../img/nexthybride.png");
+    height: 3rem;
+    margin: 0.5rem;
+    img {
+      height: 100%;
+    }
   }
-
+  .new-chat-button {
+    margin: 0.5rem 1rem;
+  }
   .details {
     grid-column: 1 / 3;
     padding: 2rem;
     margin-bottom: 8rem;
   }
+
+  .placeholder-loading-p {
+    grid-column: 1 / 4;
+  }
+
+  .placeholder-loading-svg {
+    grid-column: 2/3 !important;
+  }
 }
 
 @media (max-width: 992px) {
   .section-article {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .placeholder-loading-img {
-    height: 15rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -118,15 +137,23 @@
 
   .filter-button {
     display: flex;
+    position: absolute;
+    top: 0em;
+    right: 1rem;
+    background-color: white;
   }
 
   .resultaten {
-    padding-right: 2rem;
+    padding: 0 1rem 0 1rem;
   }
-
   .body-wrapper {
     grid-template-columns: 1fr 2fr;
     position: relative;
+    gap: 0;
+  }
+
+  .placeholder-loading-svg {
+    grid-column: 2/4;
   }
 }
 

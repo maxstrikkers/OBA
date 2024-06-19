@@ -16,15 +16,34 @@ main button {
 }
 
 .resultaten {
-  padding: 0 0 0 2rem;
+  padding: 0 1rem 1rem 0;
   width: 100%;
   /* display: none; */
   grid-column: 2 / 3;
   overflow-y: scroll;
+  position: relative;
 
   h2 {
     margin-bottom: 1rem;
     font-size: 2rem;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    position: absolute;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--white);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-purple);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
   }
 }
 
@@ -35,7 +54,7 @@ main button {
 .section-article {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 2rem;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -46,15 +65,23 @@ main button {
 }
 
 .section-article article img {
-  height: 15rem;
+  /* height: 15rem; */
   width: 100%;
   object-fit: cover;
+  aspect-ratio: 2/3;
 }
 
 .section-article h5 {
   font-size: 1rem;
   font-weight: normal;
   text-align: center;
+  text-transform: lowercase;
+  overflow-wrap: word-break;
+  hyphens: auto;
+}
+
+.book-result {
+  cursor: pointer;
 }
 
 .overlay {
@@ -77,8 +104,8 @@ main button {
 }
 
 .placeholder-loading-img {
-  height: 17rem;
   width: 100%;
+  aspect-ratio: 2 / 3;
   background-color: var(--primary-dark-gray);
   opacity: 0.5;
   animation: wave 2s infinite;
@@ -92,8 +119,9 @@ main button {
 }
 
 .placeholder-loading-svg {
-  grid-column: 3;
-  width: 100%;
+  grid-column: 2/5;
+  width: 5rem;
+  justify-self: center;
 }
 
 .section-article {
@@ -146,7 +174,7 @@ main button {
   font-size: 0.9rem;
   font-weight: bold;
   cursor: pointer;
-  border: 1px solid var(--black);
+  border: 1px solid var(--primary-dark-gray);
   border-radius: 50px;
   display: none;
 }
