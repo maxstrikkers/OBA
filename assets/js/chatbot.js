@@ -121,24 +121,31 @@ function placeholderResults() {
     `;
 }
 
-function submitFormData(url, data) {
+// Define data globally
+let data = {};
+
+// Function to submit form data
+function submitFormData(url, formData) {
     const conversationId = sessionStorage.getItem('conversationId');
     if (conversationId) {
-        data.conversationId = conversationId;
+        formData.conversationId = conversationId;
     }
     fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(formData),
     })
     .then((response) => response.json())
-    .then((data) => {
+    .then((responseData) => {
         const existingChats = document.querySelectorAll(".bubble");
         existingChats.forEach((chat) => chat.remove());
 
-        const messageData = data.messages;
+
+        data = responseData;
+
+        const messageData = responseData.messages;
         messageData.forEach((message) => {
             const bubble = document.createElement("div");
             bubble.className = `bubble ${message.class}`;
@@ -151,11 +158,9 @@ function submitFormData(url, data) {
 
         chatbot.searchbar.disabled = false;
         chatbot.searchForm.classList.remove("disabled");
-        console.log("disabled the disable" + chatbot.searchForm)
-
         scrollToBottom("chatbot-main");
 
-        const resultData = data.results;
+        const resultData = responseData.results;
         const resultsSection = document.getElementById("results-section");
 
         resultsSection.innerHTML = "";
@@ -197,16 +202,19 @@ function submitFormData(url, data) {
         showTypingBubble();
         setTimeout(() => {
             addLogging();
-        }, "1500");
+        }, 1500);
 
-        if (data.conversationId) {
-            sessionStorage.setItem('conversationId', data.conversationId);
+        if (responseData.conversationId) {
+            sessionStorage.setItem('conversationId', responseData.conversationId);
         }
     })
     .catch((error) => console.error("Error:", error));
 }
 
-// Add logging review stars in chat
+let formData = {
+    ratings: []
+};
+
 function addLogging() {
     var form = document.createElement('form');
     form.classList.add('rating-form', 'temporaryBubble', 'left');
@@ -239,39 +247,40 @@ function addLogging() {
     ratingInputs.forEach((input) => {
         input.addEventListener('click', handleRatingClick);
     });
-    removeTypingBubbles()
+    removeTypingBubbles();
 }
-
-let formData = {
-    ratings: []
-};
 
 
 let dataObject = {}; // Existing global variable
 let currentTimestamp = ''; // Existing global variable
 let nextPromptIndex = 1; // Existing global variable
 
+// Assuming data is accessible within the scope of where rating clicks are handled
 function handleRatingClick(event) {
     const rating = event.target.value; // Assuming rating is stored in a data attribute
-    // console.log("Clicked rating:", rating);
-    // Further logic to handle the rating, such as sending it to a server or updating UI
-    addToDataObject(event.target.value)
+    console.log(data)
+    const resultsData = data.results;
+    const messageData = data.messages; // Assuming data.messages is accessible here
+    addToDataObject(rating, messageData, resultsData);
 }
 
-function addToDataObject(rating) {
+function addToDataObject(rating, messageData, resultsData) {
     if (!currentTimestamp) {
         createNewTimestamp(); // Ensure a timestamp is created if it doesn't exist
     }
+
+    console.log(messageData)
 
     const promptName = `prompt ${nextPromptIndex}`;
     if (!dataObject[currentTimestamp]) {
         dataObject[currentTimestamp] = {}; // Initialize if not already
     }
     dataObject[currentTimestamp][promptName] = {
-        date: new Date().toLocaleDateString('en-GB'),
-        time: new Date().toLocaleTimeString('en-GB'),
-        conversationhistory: [],
-        results: [],
+        date: new Date().toLocaleDateString('nl-NL'),
+        time: new Date().toLocaleTimeString('nl-NL'),
+        conversationId: sessionStorage.getItem('conversationId'),
+        conversationhistory: messageData,
+        results: resultsData,
         rating: rating.toString()
     };
 
