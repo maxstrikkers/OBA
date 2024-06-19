@@ -1,109 +1,150 @@
 .filter {
-    position: fixed;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 1.88rem;
+  padding: 1.25rem;
+  margin: 1em 2em 1em 1em;
+  background-color: var(--white);
+  border: 1px solid var(--primary-dark-gray);
+  border-radius: 10px;
+  position: relative;
+  transition: 1s ease-in-out;
+  transform: translateX(0%);
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--white);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--primary-purple);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+  }
+
+  input:hover {
+    cursor: pointer;
+  }
+
+  label {
     display: flex;
     flex-direction: column;
-    gap: 1.88rem;
-    padding: 1.25rem;
-    margin-right: 2rem;
-    background-color: var(--white);
-    border: 1px solid var(--primary-dark-gray);
-    border-radius: 10px;
-    max-height: 80vh;
+    gap: 1rem;
+    font-size: 1.63rem;
+    font-weight: bold;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  select {
+    padding: 0.63rem 1rem;
+    border-radius: 5px;
+
+    -webkit-appearance: none;
+    appearance: none;
     position: relative;
-    transition: 1s ease-in-out;
-    transform: translateX(0%);
+    background: url(../img/chevron-black.svg) no-repeat 95% center;
+    background-size: 10px 10px;
 
-    &::-webkit-scrollbar {
-        width: 10px;
+    &:hover {
+      cursor: pointer;
     }
-    
-    &::-webkit-scrollbar-track {
-        background: var(--white);
-    }
-    
-    &::-webkit-scrollbar-thumb {
-        background: var(--primary-red);
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    
-    &::-webkit-scrollbar-thumb:hover {
-        cursor: pointer;
-    }
-    
+  }
 
-    label {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        font-size: 1.63rem;
-        font-weight: bold;
+  fieldset {
+    border: none;
+
+    legend {
+      font-size: 1.25rem;
+      font-weight: bold;
     }
-
-    select {
-        padding: 0.63rem 1rem;
-        border-radius: 5px;
-
-        -webkit-appearance: none;
-        appearance: none;
-        position: relative;
-        background: url(../img/chevron-black.svg) no-repeat 95% center;
-        background-size: 10px 10px;
-    }
-
-    fieldset {
-        border: none;
-
-        legend {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-    }
+  }
 }
 
 .hide-filter {
-    transform: translateX(100%);
-    margin-right: 0px;
-    grid-row-start: 1;
-    grid-column-start: 3;
+  transform: translateX(100%);
+  margin-right: 0px;
+  grid-row-start: 1;
+  grid-column-start: 3;
 }
 
 .show {
-    display: flex !important;
+  display: flex !important;
 }
 
 .bieb-bot {
-    transform: rotate(-90deg);
-    width: 70px;
+  transform: rotate(-90deg);
+  width: 70px;
 }
 
 .checkbox-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 0.63rem;
+
+  label {
     display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 0.63rem;
-    
-    label {
-        display: flex;
-        flex-direction: row;
-        font-size: 1rem;
-        font-weight: normal;
-    }
+    flex-direction: row;
+    font-size: 1rem;
+    font-weight: normal;
+  }
 }
 
 .fold-filter {
-    display: flex;
-    width: fit-content;
-    align-items: center;
-    height: 4rem;
-    position: absolute;
-    left: -1.9rem;
-    border: none;
-    background-color: red;
-    border-radius: 10px 0 0 10px;
-    svg {
-        transform: rotate(-90deg);
-        height: 1em;
-        fill: white;
-    }
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  height: 4rem;
+  position: absolute;
+  left: -1.9rem;
+  border: none;
+  background-color: red;
+  border-radius: 10px 0 0 10px;
+
+  svg {
+    transform: rotate(-90deg);
+    height: 1em;
+    fill: white;
+  }
+}
+
+.filtersearchbutton {
+  background-color: var(--primary-purple);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  box-shadow: -1px 0px 4px rgba(0, 0, 0, 25%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: 0.4s;
+  padding: 1rem 0;
+  margin-top: auto;
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.05;
+  }
+}
+
+.closefilterbutton {
+  display: none;
+  transition: 0.4s;
+  &:hover {
+    cursor: pointer;
+    scale: 1.05;
+  }
 }

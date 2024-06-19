@@ -41,8 +41,9 @@ app.post('/search', async function (req, res) {
     class: "right",
   };
   conversation.push(message);
+  const chatResult = await searchTypesense(message.content, req.body.conversationId);
 
-  const chatResult = await searchTypesense(message.content);
+  const id = chatResult.conversation.conversation_history.id;
 
   const finalBookInfo = await addCoverImageToDocuments(chatResult.results[0].hits);
 
@@ -52,8 +53,18 @@ app.post('/search', async function (req, res) {
   };
   conversation.push(answerMessage);
 
-  res.json({ messages: conversation, results: finalBookInfo });
+  res.json({ messages: conversation, results: finalBookInfo, conversationId: id });
 });
+
+app.post('/log', (req, res) => {
+  const logData = req.body;
+  console.log('Received log:', logData);
+  // Process and store logData as needed (e.g., save to a database)
+  res.sendStatus(200);
+});
+
+
+
 
 // Start server
 app.listen(port, () => {

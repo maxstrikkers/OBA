@@ -6,45 +6,43 @@
             C-0.2,3.4-0.3,1.7,0.7,0.8z"/>
         </svg>
     </button> {% endcomment %}
-    <label>
-        Sorteren
-        <select name="sorteren" id="sorteren">
-            <option>Aanbevolen</option>
-            <option>Meest populair</option>
-            <option>Datum: Oud - Nieuw</option>
-            <option>Datum: Nieuw - Oud</option>
-        </select>
-    </label>
+
+    <button type="button" class="closefilterbutton"><img src="{{ './img/cross.svg' | asset_url }}" alt="Zwarte driehoek naar rechts"></button>
 
     <label>
-        Filter
+        filter
         <select name="categorie" id="categorie">
-            <option>Boeken</option>
-            <option>Films</option>
-            <option>Adtiviteiten</option>
-            <option>CD's</option>
+            <option>alles</option>
+            <option>boeken</option>
+            <option>dvd</option>
+            <option>blu-ray</option>
+            <option>cd</option>
+            <option>activiteiten</option>
+            <option>over oba</option>
         </select>
     </label>
+
     <fieldset>
-        <legend>Fictie / Non Fictie</legend>
+        <legend class="visually-hidden">leesniveau</legend>
         <section class="checkbox-section">
-            <h3 class="visually-hidden">Fictie non fictie sectie</h3>
+            <h3 class="visually-hidden">leesniveau sectie</h3>
+            <h3>fictie</h3>
             <label>
                 <input type="checkbox">
-                Fictie
+                prentenboek baby
             </label>
             <label>
                 <input type="checkbox">
-                Non-Fictie
+                prentenboek tot 4 jaar
             </label>
-
-        </section>
-    </fieldset>
-
-    <fieldset>
-        <legend>Leesniveau</legend>
-        <section class="checkbox-section">
-            <h3 class="visually-hidden">Leesniveau sectie</h3>
+            <label>
+                <input type="checkbox">
+                prentenboek vanaf 4 jaar
+            </label>
+            <label>
+                <input type="checkbox">
+                leren lezen
+            </label>
             <label>
                 <input type="checkbox">
                 A
@@ -61,26 +59,28 @@
                 <input type="checkbox">
                 D
             </label>
+            <label>
+                <input type="checkbox">
+                fictie volwassenen
+            </label>
+            <br>
+            <h3>informatie</h3>
+            <label>
+                <input type="checkbox">
+                informatie tot 9 Jaar
+            </label>
+            <label>
+                <input type="checkbox">
+                informatie ouder dan 9 Jaar
+            </label>
+            <label>
+                <input type="checkbox">
+                informatie volwassenen
+            </label>
         </section>
     </fieldset>
 
-    <fieldset>
-        <legend>Leeftijd</legend>
-        <section class="checkbox-section">
-            <h3 class="visually-hidden">Leeftijd sectie</h3>
-            <label>
-                <input type="checkbox">
-                12 +
-            </label>
-            <label>
-                <input type="checkbox">
-                16 +
-            </label>
-            <label>
-                <input type="checkbox">
-                18 +
-            </label>
-        </section>
-    </fieldset>
+
+    <button class="filtersearchbutton" type="submit">filter nu!</button>
 
 </form>

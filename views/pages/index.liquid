@@ -6,29 +6,15 @@
         {% include './components/chatbot' %}
 
         <section class="resultaten" id="resultaten">
-            <button class="filter-button"><img src="./img/filter-icon.svg" alt="Filter Icon"> Filter / Sorteren</button>
-            <h2>Resultaten</h2>
+            <button class="filter-button"><img src="./img/filter-icon.svg" alt="Filter Icon"> filteren </button>
+            <h2>resultaten</h2>
             {% include './components/resultaten' %}
         </section>
 
-        <section class="details", id="details">
-            {% comment %} <h2 class="detail-resultaten">Resultaten</h2> {% endcomment %}
-            <button aria-label="Terug knop" class="terug" id="terugbutton">
-                <img src="{{ './img/arrow-black.svg' | asset_url }}" alt="Zwarte pijl naar links">
-                Terug
-            </button>
-            <section class="text">
-                <h2 class="titel">Titel</h2>
-                <h3 class="auteur">Auteur</h3>
-                <p class="samenvatting">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe minus alias minima, corrupti ex voluptas consectetur inventore ipsa et iure similique impedit officia rem error necessitatibus! Laudantium nesciunt alias soluta!</p>
-            </section>
-            <a aria-label="Bekijk details knop" class="bekijk-detail" href="">
-                <img src="{{ './img/angle-black.svg' | asset_url }}" alt="Zwarte driehoek naar rechts">
-                Bekijk details
-            </a>
-            <img class="img book-detail-cover" src="{{ './img/no-cover.jpeg' | asset_url }}" alt="Geen cover plaatje">
-        </section>
 
+        {% include './components/details' %}
+
+        
         {% include './includes/filter' %}
 
     </section>
@@ -37,11 +23,3 @@
 
     {% include './includes/scripts' %}
 {% include './includes/footer' %}
-
-<style>
-    @media (max-width: 768px) {
-        .main-header {
-    background-image: url("{{'./img/header-background-mobile-temporary.jpg' | asset_url}}");
-  }
-    }
-</style>
