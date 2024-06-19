@@ -56,6 +56,14 @@ app.post('/search', async function (req, res) {
   res.json({ messages: conversation, results: finalBookInfo, conversationId: id });
 });
 
+app.post('/log', (req, res) => {
+  const logData = req.body;
+  console.log('Received log:', logData);
+  // Process and store logData as needed (e.g., save to a database)
+  res.sendStatus(200); // Send success response
+});
+
+
 
 
 // Start server

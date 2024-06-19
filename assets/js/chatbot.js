@@ -3,11 +3,11 @@ window.onload = function () {
     sessionStorage.removeItem("conversationId");
 };
 
+
 //chatbot component variables
 const chatbot = {
     main: document.getElementById("chatbot-main"),
     searchbar: document.getElementById("search-bar"),
-    // suggestedForm: document.getElementById("suggested-form"),
     searchForm: document.querySelector(".search-form"),
     newchatButton: document.getElementById("new-chat-button"),
     detailterugbutton: document.getElementById("terugbutton"),
@@ -17,16 +17,13 @@ const chatbot = {
 };
 
 // Functie om een typende indicatie te tonen
-
 function showTypingBubble() {
     const typingBubble = document.createElement("div");
     typingBubble.className = "bubble typing";
 
-    // Disable elements while typing bubble is shown
     chatbot.searchbar.disabled = true;
     chatbot.searchForm.classList.add("disabled");
 
-    // Add SVG to the typingBubble
     typingBubble.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
         <circle cx="4" cy="12" r="3" fill="var(--primary-purple)">
@@ -44,6 +41,21 @@ function showTypingBubble() {
     return typingBubble;
 }
 
+function removeTypingBubbles() {
+    chatbot.searchbar.disabled = false;
+    chatbot.searchForm.classList.remove("disabled");
+
+    const typingBubbles = document.querySelectorAll(".bubble.typing");
+
+    typingBubbles.forEach(typingBubble => {
+        typingBubble.remove();
+    });
+
+    // Assuming chatbot is a global object or defined elsewhere in your code
+    chatbot.searchbar.disabled = false;
+    chatbot.searchForm.classList.remove("disabled");
+}
+
 
 // Event listener voor het versturen van de formulieren
 chatbot.searchForm.addEventListener("submit", function (event) {
@@ -55,7 +67,6 @@ chatbot.searchForm.addEventListener("submit", function (event) {
 
     placeholderResults();
 
-    // Verzamelen van bestaande chatbubbels
     const bubbles = document.querySelectorAll(".bubble");
     let bubbleData = [];
     bubbles.forEach((bubble) => {
@@ -97,7 +108,6 @@ function createTempBubbles(form, data) {
 }
 
 function placeholderResults() {
-    //Weghalen van geen resultaten text
     document.querySelector(".empty-state").classList.add("hidden");
 
     document.getElementById("results-section").innerHTML = `
@@ -112,9 +122,9 @@ function placeholderResults() {
 }
 
 function submitFormData(url, data) {
-    const conversationId = sessionStorage.getItem('conversationId'); // Haal de conversationId op uit sessionStorage
+    const conversationId = sessionStorage.getItem('conversationId');
     if (conversationId) {
-        data.conversationId = conversationId; // Voeg conversationId toe aan het data object
+        data.conversationId = conversationId;
     }
     fetch(url, {
         method: "POST",
@@ -123,135 +133,80 @@ function submitFormData(url, data) {
         },
         body: JSON.stringify(data),
     })
-        .then((response) => response.json())
-        .then((data) => {
+    .then((response) => response.json())
+    .then((data) => {
+        const existingChats = document.querySelectorAll(".bubble");
+        existingChats.forEach((chat) => chat.remove());
 
-            //
-            //rating stars
-            //
+        const messageData = data.messages;
+        messageData.forEach((message) => {
+            const bubble = document.createElement("div");
+            bubble.className = `bubble ${message.class}`;
+            bubble.innerHTML = `<p>${message.content}</p>`;
+            chatbot.main.appendChild(bubble);
+        });
 
+        const temporaryElements = document.querySelectorAll(".temporaryBubble");
+        temporaryElements.forEach((element) => element.remove());
 
-            // Example logic to capture user's rating
-            const ratingFormStars = document.querySelectorAll('.rating-form input[type="radio"]');
+        chatbot.searchbar.disabled = false;
+        chatbot.searchForm.classList.remove("disabled");
+        console.log("disabled the disable" + chatbot.searchForm)
 
-            function captureRating() {
-                let rating = 0;
-                let anyChecked = false;
+        scrollToBottom("chatbot-main");
 
-                ratingFormStars.forEach((star, index) => {
-                    if (star.checked) {
-                        anyChecked = true;
-                        rating = index + 1; // Set rating to the position (index + 1) of the checked star
-                    }
-                });
+        const resultData = data.results;
+        const resultsSection = document.getElementById("results-section");
 
-                if (anyChecked) {
-                    addToDataObject(rating);
-                } else {
-                    // console.log("No star checked");
+        resultsSection.innerHTML = "";
+        resultData.forEach((result) => {
+            const article = document.createElement("article");
+            article.classList.add("book-result");
+            const img = document.createElement("img");
+            img.src = result.document.coverUrl;
+            img.alt = "book cover";
+
+            const ppn = result.document.ppn;
+            const bookId = `https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}&authorization=ffbc1ededa6f23371bc40df1864843be`;
+
+            img.addEventListener('load', function () {
+                if (img.naturalWidth == 1 && img.naturalHeight == 1) {
+                    img.src = "./img/no-cover.jpeg";
+                    result.document.coverUrl = "./img/no-cover.jpeg";
                 }
-            }
-            captureRating()
 
-            // Event listener for handling page unload (close, refresh, navigate away)
-            window.addEventListener('beforeunload', function (event) {
-                // Check if any star is checked before unloading
-                let anyChecked = false;
-                ratingFormStars.forEach(star => {
-                    if (star.checked) {
-                        anyChecked = true;
-                    }
-                });
-
-                // If any star is checked, add a new prompt before unloading
-                if (anyChecked) {
-                    addToDataObject(0); // Assuming a default rating of 0 if no star is selected
-                }
+                img.onerror = function () {
+                    img.src = "./img/no-cover.jpeg";
+                };
             });
 
+            article.appendChild(img);
 
-            //
-            // existing chat removal
-            //
+            const h5 = document.createElement("h5");
+            h5.textContent = result.document.titel;
+            article.appendChild(h5);
 
-            const existingChats = document.querySelectorAll(".bubble");
-            existingChats.forEach((chat) => chat.remove());
+            resultsSection.appendChild(article);
 
-            const messageData = data.messages;
-            messageData.forEach((message) => {
-                const bubble = document.createElement("div");
-                bubble.className = `bubble ${message.class}`;
-                bubble.innerHTML = `<p>${message.content}</p>`;
-                chatbot.main.appendChild(bubble);
+            article.addEventListener('click', () => {
+                openDetail(result.document.coverUrl, result.document.titel, bookId, result.document.beschrijving, result.document.auteur);
+                console.log('added eventlistener');
             });
+        });
 
-            const temporaryElements = document.querySelectorAll(".temporaryBubble");
-            temporaryElements.forEach((element) => element.remove());
+        showTypingBubble();
+        setTimeout(() => {
+            addLogging();
+        }, "1500");
 
-            chatbot.searchbar.disabled = false;
-            chatbot.searchForm.classList.remove("disabled");
-
-            scrollToBottom("chatbot-main");
-
-            const resultData = data.results;
-            const resultsSection = document.getElementById("results-section");
-
-            resultsSection.innerHTML = "";
-            resultData.forEach((result) => {
-                const article = document.createElement("article");
-                article.classList.add("book-result");
-                const img = document.createElement("img");
-                img.src = result.document.coverUrl;
-                img.alt = "book cover";
-
-
-                const ppn = result.document.ppn; // Replace with your actual ppn value
-
-                const bookId = `https://zoeken.oba.nl/resolve.ashx?index=ppn&identifiers=${ppn}&authorization=ffbc1ededa6f23371bc40df1864843be`;
-
-
-                img.addEventListener('load', function () {
-
-                    if (img.naturalWidth == 1 && img.naturalHeight == 1) {
-                        img.src = "./img/no-cover.jpeg";
-                        result.document.coverUrl = "./img/no-cover.jpeg";
-                    }
-
-                    img.onerror = function () {
-                        img.src = "./img/no-cover.jpeg";
-                    };
-
-                });
-
-                article.appendChild(img);
-
-                const h5 = document.createElement("h5");
-                h5.textContent = result.document.titel;
-                article.appendChild(h5);
-
-                resultsSection.appendChild(article);
-
-                article.addEventListener('click', () => {
-                    openDetail(result.document.coverUrl, result.document.titel, bookId, result.document.beschrijving, result.document.auteur);
-                    console.log('added eventlistener')
-                });
-
-            });
-
-            showTypingBubble();
-            setTimeout(() => {
-                addLogging();
-            }, "3000");
-
-            if (data.conversationId) {
-                sessionStorage.setItem('conversationId', data.conversationId);
-            }
-        })
-        .catch((error) => console.error("Error:", error));
+        if (data.conversationId) {
+            sessionStorage.setItem('conversationId', data.conversationId);
+        }
+    })
+    .catch((error) => console.error("Error:", error));
 }
 
-//Add logging review stars in chat
-
+// Add logging review stars in chat
 function addLogging() {
     var form = document.createElement('form');
     form.classList.add('rating-form', 'temporaryBubble', 'left');
@@ -259,76 +214,102 @@ function addLogging() {
     var legend = document.createElement('legend');
     legend.textContent = 'Geef dit antwoord een cijfer.';
 
-    // Append legend to fieldset
     fieldset.appendChild(legend);
 
-    // Create and append radio inputs and labels
     for (var i = 1; i <= 5; i++) {
         var input = document.createElement('input');
         input.classList.add("rating-input");
         input.type = 'radio';
+        input.id = 'star' + i;
         input.name = 'rating';
-        input.id = 'rating' + i;
-        input.value = i + ' ster' + (i > 1 ? 'ren' : '');
+        input.value = i;
 
         var label = document.createElement('label');
-        label.htmlFor = 'rating' + i;
-        label.setAttribute('aria-label', i + ' ster' + (i > 1 ? 'ren' : ''));
+        label.classList.add("rating-label");
+        label.htmlFor = 'star' + i;
 
         fieldset.appendChild(input);
         fieldset.appendChild(label);
     }
-    form.appendChild(fieldset);
 
+    form.appendChild(fieldset);
     chatbot.main.appendChild(form);
 
-//
-// Remove typing bubble
-//
-    const typingBubble = document.querySelector(".bubble.typing");
-    if (typingBubble) {
-        typingBubble.remove();
-        chatbot.searchbar.disabled = false;
-        chatbot.searchForm.classList.remove("disabled");
-    }
+    const ratingInputs = document.querySelectorAll(".rating-input");
+    ratingInputs.forEach((input) => {
+        input.addEventListener('click', handleRatingClick);
+    });
+    removeTypingBubbles()
 }
 
-//
-// Add to data object function
-//
+let formData = {
+    ratings: []
+};
 
-let dataObject = {}; 
-let currentTimestamp = ''; 
-let nextPromptIndex = 1;
 
+let dataObject = {}; // Existing global variable
+let currentTimestamp = ''; // Existing global variable
+let nextPromptIndex = 1; // Existing global variable
+
+function handleRatingClick(event) {
+    const rating = event.target.value; // Assuming rating is stored in a data attribute
+    // console.log("Clicked rating:", rating);
+    // Further logic to handle the rating, such as sending it to a server or updating UI
+    addToDataObject(event.target.value)
+}
 
 function addToDataObject(rating) {
-
     if (!currentTimestamp) {
-        createNewTimestamp(); 
+        createNewTimestamp(); // Ensure a timestamp is created if it doesn't exist
     }
 
     const promptName = `prompt ${nextPromptIndex}`;
+    if (!dataObject[currentTimestamp]) {
+        dataObject[currentTimestamp] = {}; // Initialize if not already
+    }
     dataObject[currentTimestamp][promptName] = {
-        date: new Date().toLocaleDateString('en-GB'), 
-        time: new Date().toLocaleTimeString('en-GB'), 
-        conversationhistory: [], 
-        results: [], 
-        rating: rating.toString() 
+        date: new Date().toLocaleDateString('en-GB'),
+        time: new Date().toLocaleTimeString('en-GB'),
+        conversationhistory: [],
+        results: [],
+        rating: rating.toString()
     };
 
-    // console.log(`New prompt ${promptName} added at ${currentTimestamp} with rating ${rating}`);
-    console.log(dataObject);
+    console.log(dataObject); // Debugging
 
-    nextPromptIndex++; 
+    sendLogToServer(dataObject); // Send data to server
+    nextPromptIndex++; // Increment prompt index for next entry
+
+    // Hide rating form after rating is selected
+    const ratingForm = document.querySelector('.rating-form');
+    if (ratingForm) {
+        ratingForm.style.display = 'none';
+    }
 }
 
-// Function to create a new timestamped object in dataObject
+function sendLogToServer(logData) {
+    fetch('/log', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        console.log('Log sent successfully');
+    })
+    .catch(error => {
+        console.error('Error sending log:', error);
+    });
+}
+
 function createNewTimestamp() {
-    currentTimestamp = new Date().toLocaleString('en-GB'); 
-    dataObject[currentTimestamp] = {}; 
-    nextPromptIndex = 1; 
-    // console.log(`New timestamp created: ${currentTimestamp}`);
+    currentTimestamp = new Date().toLocaleString('en-GB'); // Create new timestamp
+    dataObject[currentTimestamp] = {}; // Initialize object for new timestamp
+    nextPromptIndex = 1; // Reset prompt index for new timestamp
 }
 
 

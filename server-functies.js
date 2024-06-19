@@ -73,7 +73,7 @@ function removeDuplicates(searchResults) {
 
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
-  console.log(searchResults)
+  // console.log(searchResults)
 
   // Maak een array van fetch promises
   const fetchPromises = finalResults.map((item) =>
