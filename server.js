@@ -60,7 +60,7 @@ app.post('/log', (req, res) => {
   const logData = req.body;
   console.log('Received log:', logData);
   // Process and store logData as needed (e.g., save to a database)
-  res.sendStatus(200); // Send success response
+  res.sendStatus(200);
 });
 
 

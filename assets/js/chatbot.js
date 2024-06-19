@@ -198,7 +198,7 @@ function submitFormData(url, formData) {
 
             article.addEventListener('click', () => {
                 openDetail(result.document.coverUrl, result.document.titel, bookId, result.document.beschrijving, result.document.auteur);
-                console.log('added eventlistener');
+                // console.log('added eventlistener');
             });
         });
 
@@ -263,7 +263,7 @@ let nextPromptIndex = 1;
 
 function handleRatingClick(event) {
     const rating = event.target.value; 
-    console.log(data)
+    // console.log(data)
     const resultsData = data.results;
     const messageData = data.messages;
     addToDataObject(rating, messageData, resultsData);
@@ -275,7 +275,7 @@ function addToDataObject(rating, messageData, resultsData) {
         createNewTimestamp(); // Ensure a timestamp is created if it doesn't exist
     }
 
-    console.log(messageData)
+    // console.log(messageData)
 
     const promptName = `prompt ${nextPromptIndex}`;
     if (!dataObject[currentTimestamp]) {
@@ -393,7 +393,7 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
         bekijkDetail.href = `https://zoeken.oba.nl/?itemid=%7Coba-catalogus%7C${ppn}`;
     }
 
-    console.log(chatbot.details);
+    // console.log(chatbot.details);
     // Display the details section and hide others
     chatbot.details.style.display = "grid";
     chatbot.filter.style.display = "none";
