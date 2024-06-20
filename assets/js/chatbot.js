@@ -452,6 +452,8 @@ function formatText(text) {
 
     // Voeg een <br> toe voor elk genummerd item
     formattedText = formattedText.replace(/(\d+\..*?)(?=(\s*\d+\.)|$)/g, '<br>$1<br>');
-
+    
+    // Vervang " met <b></b>
+    formattedText = formattedText.replace(/"(.*?)"/g, '<b>$1</b>');
     return formattedText;
 }
