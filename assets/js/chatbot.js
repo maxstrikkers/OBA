@@ -1,6 +1,7 @@
 // Wis de sessionStorage bij het laden van de pagina
 window.onload = function () {
     sessionStorage.removeItem("conversationId");
+    history.replaceState(null, null, window.location.pathname + window.location.search);
 };
 
 
@@ -403,6 +404,8 @@ function openDetail(cover, titel, booklink, beschrijving, auteur) {
     chatbot.resultaten.style.display = "none";
     chatbot.detailterugbutton.addEventListener("click", closeDetail);
 
+    window.location.hash = '#details'
+
     window.addEventListener('popstate', handleBackPress)
 }
 
@@ -411,6 +414,7 @@ function closeDetail() {
     chatbot.filter.style.display = "";
     chatbot.resultaten.style.display = "";
 
+    history.replaceState(null, null, window.location.pathname + window.location.search);
     window.removeEventListener('popstate', handleBackPress)
 }
 
