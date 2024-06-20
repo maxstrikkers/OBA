@@ -3,6 +3,9 @@
 # OBA Laagdrempelig zoeken
 Dit is het Oba laagdrempelig zoeken prototype. Ons prototype is een applicatie waarmee je alle informatie van de OBA kunt opvragen, dit gebeurd doormiddel van een mix tussen een zoekfunctie en een chatbot. Deze zoekfunctie is toegankelijk gemaakt voor zoveel mogenlijk mensen.
 
+## Design Rationale
+Hier vind je de link naar onze [Design Rationale](https://github.com/maxstrikkers/OBA/wiki/Design-rationale).
+
 
 ## Installatie
 Onze applicatie werkt met [Node.js](https://nodejs.org/en/). Dus om te beginnen moet je in een console de juiste folder vinden.
