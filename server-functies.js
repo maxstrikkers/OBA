@@ -12,7 +12,7 @@ async function searchTypesense(query, conversationId = null) {
   });
 
   if (conversationId) {
-    params.append('conversation_id', conversationId);
+    params.append("conversation_id", conversationId);
   }
 
   try {
@@ -49,6 +49,8 @@ async function searchTypesense(query, conversationId = null) {
   }
 }
 
+<<<<<<< HEAD
+=======
 function removeDuplicates(searchResults) {
   const uniqueResults = [];
   const seenPPNs = new Set();
@@ -71,6 +73,7 @@ function removeDuplicates(searchResults) {
 
 
 
+>>>>>>> ffc8904cbf78f93088299273ccfb47e29f615223
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
   // console.log(searchResults)
@@ -96,7 +99,6 @@ async function addCoverImageToDocuments(searchResults) {
   // Return de resultaten
   return finalResults;
 }
-
 
 module.exports = {
   searchTypesense,

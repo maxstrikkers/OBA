@@ -1,13 +1,13 @@
 .main-header {
   position: relative;
-  background-image: url(../img/nexthybride.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right;
-  display: grid;
-  grid-template-columns: 1fr 2fr 0.7fr;
   height: var(--header-height);
   margin: var(--header-margin) 1em var(--header-margin) 1em;
+  display: flex;
+  justify-content: end;
+
+  img {
+    height: 7em;
+  }
 }
 
 .chatbot-icon {

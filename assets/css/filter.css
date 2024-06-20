@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: 1.88rem;
   padding: 1.25rem;
-  margin: 1em 2em 1em 1em;
+  margin: 0 2em 1em 1em;
   background-color: var(--white);
   border: 1px solid var(--primary-dark-gray);
   border-radius: 10px;

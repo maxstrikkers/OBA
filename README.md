@@ -1,3 +1,5 @@
+![3518277 PC laptop on wooden table](https://github.com/maxstrikkers/OBA/assets/91873549/4a5d409d-92db-49d4-9ee9-03293a438bdf)
+
 # OBA Laagdrempelig zoeken
 Dit is het Oba laagdrempelig zoeken prototype. Ons prototype is een applicatie waarmee je alle informatie van de OBA kunt opvragen, dit gebeurd doormiddel van een mix tussen een zoekfunctie en een chatbot. Deze zoekfunctie is toegankelijk gemaakt voor zoveel mogenlijk mensen.
 

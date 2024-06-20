@@ -81,10 +81,20 @@ chatbot.searchForm.addEventListener("submit", function (event) {
         }
     });
 
+<<<<<<< HEAD
+  data.bubbles = bubbleData;
+  const url = this.action;
+  // setTimeout(() => {
+  //   submitFormData(url, data);
+  // }, 6000000);
+  // uncomment this part to style the loading state (comment the line under here)
+  submitFormData(url, data);
+=======
     data.bubbles = bubbleData;
     const url = this.action;
 
     submitFormData(url, data);
+>>>>>>> ffc8904cbf78f93088299273ccfb47e29f615223
 });
 
 // create a temporary bubble of your prompt. (it is removed when the data is loaded in and replaced with the actual data)
@@ -119,9 +129,15 @@ function placeholderResults() {
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
         <article class="placeholder-loading-img"></article>
+<<<<<<< HEAD
+        <p class="placeholder-loading-p">Ik ben bezig met zoeken. een momentje alsjeblieft...</p>
+        <svg class="placeholder-loading-svg" xmlns="http://www.w3.org/2000/svg" width="10em" height="10em" viewBox="0 0 24 24"><path fill="var(--primary-dark-gray" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5"/><path fill="var(--primary-purple)" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
+      `;
+=======
         <p class="placeholder-loading-p">Ik ben bezig met zoeken. Een momentje alsjeblieft...</p>
         <svg class="placeholder-loading-svg" xmlns="http://www.w3.org/2000/svg" width="10em" height="10em" viewBox="0 0 24 24"><path fill="var(--primary-dark-gray" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5"/><path fill="var(--primary-purple)" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate"/></path></svg>
     `;
+>>>>>>> ffc8904cbf78f93088299273ccfb47e29f615223
 }
 
 // Define data globally
