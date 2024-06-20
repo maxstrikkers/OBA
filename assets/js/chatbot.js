@@ -63,6 +63,8 @@ chatbot.searchForm.addEventListener("submit", function (event) {
     event.preventDefault();
     const data = {};
 
+    document.querySelector(".body-wrapper").style.height = "calc(100vh - var(--header-height) - var(--header-margin) * 2)";
+
     createTempBubbles(chatbot.searchForm, data);
     showTypingBubble();
 
