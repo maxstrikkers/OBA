@@ -5,6 +5,11 @@
   display: flex;
   justify-content: end;
 
+  @media (max-width: 768px) {
+    border-bottom: 1px solid lightgray;
+}
+
+
   img {
     height: 7em;
   }
