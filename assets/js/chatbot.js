@@ -402,12 +402,20 @@ function openDetail(cover, titel, booklink, beschrijving, auteur) {
     chatbot.filter.style.display = "none";
     chatbot.resultaten.style.display = "none";
     chatbot.detailterugbutton.addEventListener("click", closeDetail);
+
+    window.addEventListener('popstate', handleBackPress)
 }
 
 function closeDetail() {
     chatbot.details.style.display = "";
     chatbot.filter.style.display = "";
     chatbot.resultaten.style.display = "";
+
+    window.removeEventListener('popstate', handleBackPress)
+}
+
+function handleBackPress(event) {
+    closeDetail()
 }
 
 // Event listener voor de "new chat"-knop om de chat te wissen en opnieuw welkomsberichten te tonen
