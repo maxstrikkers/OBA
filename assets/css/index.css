@@ -1,7 +1,7 @@
 .body-wrapper {
   display: grid;
   grid-template-columns: 3fr 5fr 2fr;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto;
   gap: 3rem;
   height: calc(100vh - var(--header-height) - var(--header-margin) * 2);
   width: 100%;
