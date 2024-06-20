@@ -421,6 +421,7 @@ chatbot.newchatButton.addEventListener("click", function () {
     sessionStorage.removeItem("conversationId");
     toggleSearchHeight("close");
     chatbot.main.innerHTML = "";
+    document.querySelector(".body-wrapper").style.height = "auto"
     document.getElementById("results-section").innerHTML = "";
     document.querySelector(".empty-state").classList.remove("hidden");
 });
