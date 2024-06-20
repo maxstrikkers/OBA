@@ -194,7 +194,7 @@ function submitFormData(url, formData) {
             article.appendChild(img);
 
             const h5 = document.createElement("h5");
-            h5.textContent = result.document.titel;
+            h5.textContent = result.document.titel.length > 40 ? result.document.titel.substring(0, 40) + "..." : result.document.titel;
             article.appendChild(h5);
 
             resultsSection.appendChild(article);
