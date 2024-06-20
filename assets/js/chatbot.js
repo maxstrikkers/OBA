@@ -362,12 +362,12 @@ function scrollToBottom(elementId) {
 }
 
 //open details page and load it dynamically
-function openDetail(cover, titel, ppn, beschrijving, auteur) {
+function openDetail(cover, titel, booklink, beschrijving, auteur) {
     // Zoek de bestaande elementen in de details sectie
     const imgElement = chatbot.details.querySelector("img.book-detail-cover");
     const titleElement = chatbot.details.querySelector("h2");
     const descriptionElement = chatbot.details.querySelector("p");
-    const authorElement = chatbot.details.querySelector("h3");
+    // const authorElement = chatbot.details.querySelector("h3");
     const bekijkDetail = document.querySelector(".bekijk-detail");
 
     // Pas de inhoud van de bestaande elementen aan
@@ -391,7 +391,7 @@ function openDetail(cover, titel, ppn, beschrijving, auteur) {
     // }
 
     if (bekijkDetail) {
-        bekijkDetail.href = `https://zoeken.oba.nl/?itemid=%7Coba-catalogus%7C${ppn}`;
+        bekijkDetail.href = booklink;
     }
 
     // console.log(chatbot.details);
