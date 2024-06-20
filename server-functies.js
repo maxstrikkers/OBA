@@ -49,8 +49,7 @@ async function searchTypesense(query, conversationId = null) {
   }
 }
 
-<<<<<<< HEAD
-=======
+
 function removeDuplicates(searchResults) {
   const uniqueResults = [];
   const seenPPNs = new Set();
@@ -70,10 +69,6 @@ function removeDuplicates(searchResults) {
   return uniqueResults;
 }
 
-
-
-
->>>>>>> ffc8904cbf78f93088299273ccfb47e29f615223
 async function addCoverImageToDocuments(searchResults) {
   let finalResults = searchResults;
   // console.log(searchResults)
