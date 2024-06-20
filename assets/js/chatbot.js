@@ -153,7 +153,7 @@ function submitFormData(url, formData) {
         messageData.forEach((message) => {
             const bubble = document.createElement("div");
             bubble.className = `bubble ${message.class}`;
-            bubble.innerHTML = `<p>${message.content}</p>`;
+            bubble.innerHTML = `<p>${formatText(message.content)}</p>`;
             chatbot.main.appendChild(bubble);
         });
 
@@ -440,3 +440,15 @@ chatbot.searchForm.addEventListener("submit", function () {
     }
 });
 
+function formatText(text) {
+    // Vervang ** met <b> en </b>
+    let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+    
+    // Voeg een <br> toe na de eerste dubbele punt
+    formattedText = formattedText.replace(/(:\s*)/, '$1<br>');
+
+    // Voeg een <br> toe voor elk genummerd item
+    formattedText = formattedText.replace(/(\d+\..*?)(?=(\s*\d+\.)|$)/g, '<br>$1<br>');
+
+    return formattedText;
+}
